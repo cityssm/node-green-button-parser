@@ -1,3 +1,4 @@
+import 'core-js'
 import type { PathLike } from 'node:fs'
 import fs, { type FileHandle } from 'node:fs/promises'
 

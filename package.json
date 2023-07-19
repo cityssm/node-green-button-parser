@@ -26,11 +26,13 @@
     "url": "https://github.com/cityssm/node-green-button-parser/issues"
   },
   "dependencies": {
+    "core-js": "^3.31.1",
     "is-url": "^1.2.4",
     "rss-parser": "^3.13.0",
     "xml2js": "^0.6.0"
   },
   "devDependencies": {
+    "@types/core-js": "^2.5.5",
     "@types/is-url": "^1.2.30",
     "@types/mocha": "^10.0.1",
     "@types/node": "^20.4.2",

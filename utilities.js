@@ -1,3 +1,4 @@
+import 'core-js';
 import fs from 'node:fs/promises';
 export async function fileToBuffer(filePath) {
     return await fs.readFile(filePath);
