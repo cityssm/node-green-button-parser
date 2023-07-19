@@ -4,9 +4,9 @@ import * as greenButtonParser from '../index.js'
 
 describe('greenButtonParser', () => {
   describe('fileToJson', () => {
-    it('Parses customer_8.xml (small file)', async () => {
-      const greenButtonFeed = await greenButtonParser.atomFileToGreenButtonJson(
-        './test/data/customer_8.xml'
+    it('Parses customer_8.xml (URL)', async () => {
+      const greenButtonFeed = await greenButtonParser.atomToGreenButtonJson(
+        'https://raw.githubusercontent.com/cityssm/node-green-button-parser/main/test/data/customer_8.xml'
       )
 
       assert.ok(
@@ -16,7 +16,7 @@ describe('greenButtonParser', () => {
       )
     })
 
-    it('Parses customer_11.xml (big file)', async () => {
+    it('Parses customer_11.xml (File)', async () => {
       const greenButtonFeed = await greenButtonParser.atomFileToGreenButtonJson(
         './test/data/customer_11.xml'
       )
@@ -32,8 +32,6 @@ describe('greenButtonParser', () => {
       const greenButtonFeed = await greenButtonParser.atomFileToGreenButtonJson(
         './test/data/namespace.xml'
       )
-
-      console.log(greenButtonFeed)
 
       assert.ok(
         greenButtonFeed.items.some((possibleItem) => {
