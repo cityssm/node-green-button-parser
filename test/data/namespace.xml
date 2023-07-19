@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:espi="http://naesb.org/espi"  xsi:schemaLocation="http://naesb.org/espi espiDerived.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <id>urn:uuid:9E6FEA24-D374-4E42-BB88-0E7F4AEAE0C0</id>
+  <title>Green Button Subscription Feed</title>
+  <updated>2012-10-24T07:00:00Z</updated>
+  <link rel="self" href="https://services.greenbuttondata.org/DataCustodian/espi/1_1/resource/Subscription/83e269c1"/>
+  <entry xmlns:espi="http://naesb.org/espi" xmlns="http://www.w3.org/2005/Atom">
+    <id>urn:uuid:c8c34b3a-d175-447b-bd00-176f60194de0</id>
+    <link href="https://sandbox.greenbuttonalliance.org:8443/DataCustodian/espi/1_1/resource/Subscription/1/UsagePoint" rel="up"/>
+    <link href="https://sandbox.greenbuttonalliance.org:8443/DataCustodian/espi/1_1/resource/Subscription/1/UsagePoint/1" rel="self"/>
+    <link href="https://sandbox.greenbuttonalliance.org:8443/DataCustodian/espi/1_1/resource/Subscription/1/UsagePoint/1/MeterReading" rel="related"/>
+    <link href="https://sandbox.greenbuttonalliance.org:8443/DataCustodian/espi/1_1/resource/Subscription/1/UsagePoint/1/ElectricPowerUsageSummary" rel="related"/>
+    <link href="https://sandbox.greenbuttonalliance.org:8443/DataCustodian/espi/1_1/resource/LocalTimeParameters/1" rel="related"/>
+    <title>Green Button Sample Data File</title>
+    <content>
+      <espi:UsagePoint>
+        <espi:ServiceCategory>
+          <espi:kind>0</espi:kind>
+        </espi:ServiceCategory>
+      </espi:UsagePoint>
+    </content>
+    <published>2013-09-19T04:00:00Z</published>
+    <updated>2013-09-19T04:00:00Z</updated>
+  </entry>
+</feed>

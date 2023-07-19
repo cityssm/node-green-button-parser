@@ -1,0 +1,41 @@
+{
+  "name": "@cityssm/green-button-parser",
+  "version": "0.1.0",
+  "type": "module",
+  "engines": {
+    "node": "^14.13.1 || >=16.0.0"
+  },
+  "description": "Parse Green Button formatted energy consumption feeds into JSON.",
+  "keywords": [
+    "energy",
+    "green-button"
+  ],
+  "exports": "./index.js",
+  "scripts": {
+    "test": "mocha --timeout 60000",
+    "coverage": "c8 --reporter=lcov --reporter=text --reporter=text-summary mocha --timeout 60000 --exit"
+  },
+  "author": "The Corporation of the City of Sault Ste. Marie",
+  "license": "MIT",
+  "homepage": "https://github.com/cityssm/node-green-button-parser#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cityssm/node-green-button-parser.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cityssm/node-green-button-parser/issues"
+  },
+  "dependencies": {
+    "is-url": "^1.2.4",
+    "rss-parser": "^3.13.0",
+    "xml2js": "^0.6.0"
+  },
+  "devDependencies": {
+    "@types/is-url": "^1.2.30",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^20.4.2",
+    "@types/xml2js": "^0.4.11",
+    "eslint": "^8.45.0",
+    "eslint-config-cityssm": "^0.4.0"
+  }
+}
