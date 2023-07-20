@@ -7,6 +7,8 @@ import { fileToBuffer } from './utilities.js'
 
 export { atomToGreenButtonJson } from './atomToGreenButtonJson.js'
 
+export * as lookups from './lookups.js'
+
 export async function atomFileToGreenButtonJson(
   filePath: PathLike | FileHandle
 ): Promise<GreenButtonJson> {

@@ -4,10 +4,10 @@ import xml2js from 'xml2js'
 
 import type {
   GreenButtonContentType,
-  GreenButtonItem,
+  GreenButtonEntry,
   GreenButtonJson
 } from './types.js'
-import { clearContentJson } from './utilities.js'
+import { cleanContentJson, populateLookupValues } from './utilities.js'
 
 const parser = new Parser()
 
@@ -22,7 +22,7 @@ export async function atomToGreenButtonJson(
     title: atomJson.title ?? '',
     link: atomJson.link ?? '',
     updatedDate: new Date(atomJson.lastBuildDate),
-    items: []
+    entries: []
   }
 
   for (const item of atomJson.items) {
@@ -35,22 +35,21 @@ export async function atomToGreenButtonJson(
       ? contentJson.div
       : contentJson
 
-    clearContentJson(contentJson)
+    cleanContentJson(contentJson)
 
     const contentType = Object.keys(contentJson)[0] as GreenButtonContentType
 
-    const greenButtonItem: GreenButtonItem = Object.assign(
-      {
-        id: item.guid ?? '',
-        title: item.title ?? '',
-        link: item.link ?? '',
-        publishedDate: new Date(item.pubDate ?? ''),
-        contentType
-      },
-      contentJson[contentType]
-    )
+    const greenButtonEntry: GreenButtonEntry = {
+      id: item.guid ?? '',
+      title: item.title ?? '',
+      link: item.link ?? '',
+      publishedDate: new Date(item.pubDate ?? ''),
+      content: Object.assign(contentJson[contentType], { contentType })
+    }
 
-    greenButtonFeed.items.push(greenButtonItem)
+    populateLookupValues(greenButtonEntry.content)
+
+    greenButtonFeed.entries.push(greenButtonEntry)
   }
 
   return greenButtonFeed

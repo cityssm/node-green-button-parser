@@ -1,7 +1,7 @@
 import isUrl from 'is-url';
 import Parser from 'rss-parser';
 import xml2js from 'xml2js';
-import { clearContentJson } from './utilities.js';
+import { cleanContentJson, populateLookupValues } from './utilities.js';
 const parser = new Parser();
 export async function atomToGreenButtonJson(atomXmlOrUrl) {
     const atomJson = isUrl(atomXmlOrUrl)
@@ -11,7 +11,7 @@ export async function atomToGreenButtonJson(atomXmlOrUrl) {
         title: atomJson.title ?? '',
         link: atomJson.link ?? '',
         updatedDate: new Date(atomJson.lastBuildDate),
-        items: []
+        entries: []
     };
     for (const item of atomJson.items) {
         let contentJson = await xml2js.parseStringPromise(item.content ?? '', {
@@ -21,16 +21,17 @@ export async function atomToGreenButtonJson(atomXmlOrUrl) {
         contentJson = Object.hasOwn(contentJson, 'div')
             ? contentJson.div
             : contentJson;
-        clearContentJson(contentJson);
+        cleanContentJson(contentJson);
         const contentType = Object.keys(contentJson)[0];
-        const greenButtonItem = Object.assign({
+        const greenButtonEntry = {
             id: item.guid ?? '',
             title: item.title ?? '',
             link: item.link ?? '',
             publishedDate: new Date(item.pubDate ?? ''),
-            contentType
-        }, contentJson[contentType]);
-        greenButtonFeed.items.push(greenButtonItem);
+            content: Object.assign(contentJson[contentType], { contentType })
+        };
+        populateLookupValues(greenButtonEntry.content);
+        greenButtonFeed.entries.push(greenButtonEntry);
     }
     return greenButtonFeed;
 }
