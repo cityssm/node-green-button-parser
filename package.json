@@ -8,6 +8,8 @@
   "description": "Parse Green Button formatted energy consumption feeds into JSON.",
   "keywords": [
     "energy",
+    "energy-consumption",
+    "energy-usage",
     "green-button",
     "xml-parser"
   ],
