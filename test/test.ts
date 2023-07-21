@@ -1,4 +1,5 @@
 import * as assert from 'node:assert'
+import * as fs from 'node:fs'
 
 import * as greenButtonParser from '../index.js'
 
@@ -11,17 +12,17 @@ describe('greenButtonParser', () => {
 
       assert.ok(
         greenButtonFeed.entries.some((possibleItem) => {
-          console.log(possibleItem)
           return possibleItem.content.contentType === 'IntervalBlock'
         })
       )
     })
   })
 
-  describe('fileToJson', () => {
-    it('Parses customer_11.xml (File)', async () => {
-      const greenButtonFeed = await greenButtonParser.atomFileToGreenButtonJson(
-        './test/data/customer_11.xml'
+  describe('xmlToJson', () => {
+    it('Parses customer_11.xml', async () => {
+      const xml = fs.readFileSync('./test/data/customer_11.xml')
+      const greenButtonFeed = await greenButtonParser.atomToGreenButtonJson(
+        xml as unknown as string
       )
 
       assert.ok(
@@ -32,8 +33,9 @@ describe('greenButtonParser', () => {
     })
 
     it('Parses namespace.xml', async () => {
-      const greenButtonFeed = await greenButtonParser.atomFileToGreenButtonJson(
-        './test/data/namespace.xml'
+      const xml = fs.readFileSync('./test/data/namespace.xml')
+      const greenButtonFeed = await greenButtonParser.atomToGreenButtonJson(
+        xml as unknown as string
       )
 
       assert.ok(

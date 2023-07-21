@@ -1,8 +1,4 @@
 import 'core-js';
-import fs from 'node:fs/promises';
-export async function fileToBuffer(filePath) {
-    return await fs.readFile(filePath);
-}
 const numberRegExp = /^-?(?:\d*\.)?\d+$/;
 export function cleanContentJson(contentJson) {
     for (const key of Object.keys(contentJson)) {

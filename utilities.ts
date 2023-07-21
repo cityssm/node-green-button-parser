@@ -1,12 +1,4 @@
 import 'core-js'
-import type { PathLike } from 'node:fs'
-import fs, { type FileHandle } from 'node:fs/promises'
-
-export async function fileToBuffer(
-  filePath: PathLike | FileHandle
-): Promise<Buffer> {
-  return await fs.readFile(filePath)
-}
 
 const numberRegExp = /^-?(?:\d*\.)?\d+$/
 
