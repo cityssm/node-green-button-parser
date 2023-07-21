@@ -6,8 +6,9 @@ import type {
   GreenButtonContentType,
   GreenButtonEntry,
   GreenButtonJson
-} from './types.js'
-import { cleanContentJson, populateLookupValues } from './utilities.js'
+} from './contentTypes.js'
+import { updateGreenButtonContent } from './contentUpdaters.js'
+import { cleanContentJson } from './utilities.js'
 
 const parser = new Parser()
 
@@ -47,7 +48,7 @@ export async function atomToGreenButtonJson(
       content: Object.assign(contentJson[contentType], { contentType })
     }
 
-    populateLookupValues(greenButtonEntry.content)
+    updateGreenButtonContent(greenButtonEntry.content)
 
     greenButtonFeed.entries.push(greenButtonEntry)
   }

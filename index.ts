@@ -2,7 +2,7 @@ import type { PathLike } from 'node:fs'
 import type { FileHandle } from 'node:fs/promises'
 
 import { atomToGreenButtonJson } from './atomToGreenButtonJson.js'
-import type { GreenButtonJson } from './types.js'
+import type { GreenButtonJson } from './contentTypes.js'
 import { fileToBuffer } from './utilities.js'
 
 export { atomToGreenButtonJson } from './atomToGreenButtonJson.js'

@@ -1,7 +1,8 @@
 import isUrl from 'is-url';
 import Parser from 'rss-parser';
 import xml2js from 'xml2js';
-import { cleanContentJson, populateLookupValues } from './utilities.js';
+import { updateGreenButtonContent } from './contentUpdaters.js';
+import { cleanContentJson } from './utilities.js';
 const parser = new Parser();
 export async function atomToGreenButtonJson(atomXmlOrUrl) {
     const atomJson = isUrl(atomXmlOrUrl)
@@ -30,7 +31,7 @@ export async function atomToGreenButtonJson(atomXmlOrUrl) {
             publishedDate: new Date(item.pubDate ?? ''),
             content: Object.assign(contentJson[contentType], { contentType })
         };
-        populateLookupValues(greenButtonEntry.content);
+        updateGreenButtonContent(greenButtonEntry.content);
         greenButtonFeed.entries.push(greenButtonEntry);
     }
     return greenButtonFeed;
