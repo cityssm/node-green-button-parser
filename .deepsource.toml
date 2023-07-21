@@ -7,4 +7,4 @@ name = "test-coverage"
 name = "javascript"
 
   [analyzers.meta]
-  environment = ["nodejs"]
+  environment = ["nodejs","mocha"]
