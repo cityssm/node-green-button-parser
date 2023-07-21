@@ -37,4 +37,6 @@ const jsonFromFile = await atomFileToGreenButtonJson(
 
 ## Links
 
-[Green Button Alliance](https://www.greenbuttonalliance.org/)
+- [Green Button Alliance](https://www.greenbuttonalliance.org/)
+- [XML XSDs](https://github.com/GreenButtonAlliance/OpenESPI-Common-java/tree/master/src/main/resources/schemas)
+- [XML Format Documentation by UtilityAPI](https://utilityapi.com/docs/greenbutton/xml)
