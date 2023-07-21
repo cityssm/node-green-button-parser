@@ -1,7 +1,8 @@
 // eslint-disable-next-line eslint-comments/disable-enable-pair
 /* eslint-disable @typescript-eslint/indent */
 
-import type * as lookups from './lookups.js'
+import type * as lookups from '../lookups.js'
+
 // eslint-disable-next-line import/namespace
 import type * as objectTypes from './objectTypes.js'
 
@@ -12,6 +13,7 @@ export type GreenButtonContentType =
   | 'Customer'
   | 'CustomerAccount'
   | 'CustomerAgreement'
+  | 'ElectricPowerQualitySummary'
   | 'ElectricPowerUsageSummary'
   | 'EnergyUsageSummary'
   | 'IntervalBlock'
@@ -25,26 +27,12 @@ export type GreenButtonContentType =
   | 'UsagePoint'
   | 'UsageSummary'
 
-export interface GreenButtonJson {
-  title: string
-  updatedDate: Date
-  link: string
-  entries: GreenButtonEntry[]
-}
-
-export interface GreenButtonEntry {
-  id: string
-  title: string
-  link: string
-  publishedDate: Date
-  content: GreenButtonContent
-}
-
-export interface BaseContent {
+interface BaseContent<GreenButtonContentType> {
   contentType: GreenButtonContentType
 }
 
-export interface ApplicationInformationContent extends BaseContent {
+export interface ApplicationInformationContent
+  extends BaseContent<'ApplicationInformation'> {
   contentType: 'ApplicationInformation'
 
   dataCustodianApplicationStatus: keyof typeof lookups.dataCustodianApplicationStatuses
@@ -101,7 +89,7 @@ export interface ApplicationInformationContent extends BaseContent {
   dataCustodianScopeSelectionScreenURI: objectTypes.urlString
 }
 
-export interface AuthorizationContent extends BaseContent {
+export interface AuthorizationContent extends BaseContent<'Authorization'> {
   contentType: 'Authorization'
   authorizedPeriod?: objectTypes.GreenButtonDuration
   publishedPeriod?: objectTypes.GreenButtonDuration
@@ -128,12 +116,12 @@ export interface AuthorizationContent extends BaseContent {
   authorizationURI: objectTypes.urlString
 }
 
-export interface BatchListContent extends BaseContent {
+export interface BatchListContent extends BaseContent<'BatchList'> {
   contentType: 'BatchList'
   resources: objectTypes.urlString[]
 }
 
-export interface CustomerContent extends BaseContent {
+export interface CustomerContent extends BaseContent<'Customer'> {
   contentType: 'Customer'
 
   kind?: keyof typeof lookups.customerKinds
@@ -153,7 +141,7 @@ export interface CustomerContent extends BaseContent {
   customerName?: string
 }
 
-export interface CustomerAccountContent extends BaseContent {
+export interface CustomerAccountContent extends BaseContent<'CustomerAccount'> {
   contentType: 'CustomerAccount'
   type?: string
   authorName?: string
@@ -181,7 +169,8 @@ export interface CustomerAccountContent extends BaseContent {
   accountId?: string
 }
 
-export interface CustomerAgreementContent extends BaseContent {
+export interface CustomerAgreementContent
+  extends BaseContent<'CustomerAgreement'> {
   contentType: 'CustomerAgreement'
   type?: string
   authorName?: string
@@ -209,7 +198,9 @@ export interface CustomerAgreementContent extends BaseContent {
   agreementId?: string
 }
 
-export interface ElectricPowerQualitySummaryContent extends BaseContent {
+export interface ElectricPowerQualitySummaryContent
+  extends BaseContent<'ElectricPowerQualitySummary'> {
+  contentType: 'ElectricPowerQualitySummary'
   summaryInterval: objectTypes.GreenButtonDuration
   flickerPlt?: number
   flickerPst?: number
@@ -225,13 +216,14 @@ export interface ElectricPowerQualitySummaryContent extends BaseContent {
   tempOvervoltage?: number
 }
 
-export interface IntervalBlockContent extends BaseContent {
+export interface IntervalBlockContent extends BaseContent<'IntervalBlock'> {
   contentType: 'IntervalBlock'
   interval: objectTypes.GreenButtonDuration
   IntervalReading: objectTypes.GreenButtonIntervalReading[]
 }
 
-export interface LocalTimeParametersContent extends BaseContent {
+export interface LocalTimeParametersContent
+  extends BaseContent<'LocalTimeParameters'> {
   contentType: 'LocalTimeParameters'
   dstEndRule: string
   dstOffset: number
@@ -239,7 +231,7 @@ export interface LocalTimeParametersContent extends BaseContent {
   tzOffset: number
 }
 
-export interface MeterContent extends BaseContent {
+export interface MeterContent extends BaseContent<'Meter'> {
   contentType: 'Meter'
   type?: string
   utcNumber?: string
@@ -272,11 +264,11 @@ export interface MeterContent extends BaseContent {
   intervalLength?: number
 }
 
-export interface MeterReadingContent extends BaseContent {
+export interface MeterReadingContent extends BaseContent<'MeterReading'> {
   contentType: 'MeterReading'
 }
 
-export interface ReadingTypeContent extends BaseContent {
+export interface ReadingTypeContent extends BaseContent<'ReadingType'> {
   contentType: 'ReadingType'
 
   accumulationBehaviour?: keyof typeof lookups.accumulationBehaviours
@@ -327,7 +319,7 @@ export interface ReadingTypeContent extends BaseContent {
   argument?: number
 }
 
-export interface ServiceLocationContent extends BaseContent {
+export interface ServiceLocationContent extends BaseContent<'ServiceLocation'> {
   contentType: 'ServiceLocation'
   type?: string
   mainAddress?: objectTypes.GreenButtonStreetAddress
@@ -346,14 +338,14 @@ export interface ServiceLocationContent extends BaseContent {
   outageBlock?: string
 }
 
-export interface ServiceStatusContent extends BaseContent {
+export interface ServiceStatusContent extends BaseContent<'ServiceStatus'> {
   contentType: 'ServiceStatus'
 
   currentStatus: keyof typeof lookups.currentStatuses
   currentStatus_value?: (typeof lookups.currentStatuses)[keyof typeof lookups.currentStatuses]
 }
 
-export interface ServiceSupplierContent extends BaseContent {
+export interface ServiceSupplierContent extends BaseContent<'ServiceSupplier'> {
   contentType: 'ServiceSupplier'
   Organisation?: {
     streetAddress?: objectTypes.GreenButtonStreetAddress
@@ -371,12 +363,14 @@ export interface ServiceSupplierContent extends BaseContent {
   effectiveDate?: objectTypes.timestampNumber
 }
 
-// eslint-disable-next-line import/namespace
-export interface UsagePointContent extends BaseContent, objectTypes.GreenButtonUsagePoint {
+export interface UsagePointContent
+  extends BaseContent<'UsagePoint'>,
+    // eslint-disable-next-line import/namespace
+    objectTypes.GreenButtonUsagePoint {
   contentType: 'UsagePoint'
 }
 
-export interface UsageSummaryContent extends BaseContent {
+export interface UsageSummaryContent extends BaseContent<'UsageSummary'> {
   contentType: 'UsageSummary' // | 'EnergyUsageSummary' | 'ElectricPowerUsageSummary'
   billingPeriod: objectTypes.GreenButtonDuration
   statusTimeStamp: objectTypes.timestampNumber

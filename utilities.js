@@ -1,4 +1,3 @@
-import 'core-js';
 const numberRegExp = /^-?(?:\d*\.)?\d+$/;
 export function cleanContentJson(contentJson) {
     for (const key of Object.keys(contentJson)) {

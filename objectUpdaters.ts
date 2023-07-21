@@ -3,7 +3,7 @@ import type {
   GreenButtonCostAdditionalDetail,
   GreenButtonTariffRider,
   GreenButtonUsagePoint
-} from './objectTypes.js'
+} from './types/objectTypes.js'
 
 export function updateTariffRider(tariffRider: GreenButtonTariffRider): void {
   tariffRider.enrollmentStatus_value =

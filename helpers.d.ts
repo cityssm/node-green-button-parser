@@ -1,0 +1,18 @@
+import type { ApplicationInformationEntry, AuthorizationEntry, BatchListEntry, CustomerAccountEntry, CustomerAgreementEntry, CustomerEntry, ElectricPowerQualitySummaryEntry, GreenButtonJson, IntervalBlockEntry, LocalTimeParametersEntry, MeterEntry, MeterReadingEntry, ReadingTypeEntry, ServiceLocationEntry, ServiceStatusEntry, ServiceSupplierEntry, UsagePointEntry, UsageSummaryEntry } from './types/entryTypes.js';
+export declare function getEntriesByContentType(contentType: 'ApplicationInformation', greenButtonJson: GreenButtonJson): ApplicationInformationEntry[];
+export declare function getEntriesByContentType(contentType: 'Authorization', greenButtonJson: GreenButtonJson): AuthorizationEntry[];
+export declare function getEntriesByContentType(contentType: 'BatchList', greenButtonJson: GreenButtonJson): BatchListEntry[];
+export declare function getEntriesByContentType(contentType: 'Customer', greenButtonJson: GreenButtonJson): CustomerEntry[];
+export declare function getEntriesByContentType(contentType: 'CustomerAccount', greenButtonJson: GreenButtonJson): CustomerAccountEntry[];
+export declare function getEntriesByContentType(contentType: 'CustomerAgreement', greenButtonJson: GreenButtonJson): CustomerAgreementEntry[];
+export declare function getEntriesByContentType(contentType: 'ElectricPowerQualitySummary', greenButtonJson: GreenButtonJson): ElectricPowerQualitySummaryEntry[];
+export declare function getEntriesByContentType(contentType: 'IntervalBlock', greenButtonJson: GreenButtonJson): IntervalBlockEntry[];
+export declare function getEntriesByContentType(contentType: 'LocalTimeParameters', greenButtonJson: GreenButtonJson): LocalTimeParametersEntry[];
+export declare function getEntriesByContentType(contentType: 'Meter', greenButtonJson: GreenButtonJson): MeterEntry[];
+export declare function getEntriesByContentType(contentType: 'MeterReading', greenButtonJson: GreenButtonJson): MeterReadingEntry[];
+export declare function getEntriesByContentType(contentType: 'ReadingType', greenButtonJson: GreenButtonJson): ReadingTypeEntry[];
+export declare function getEntriesByContentType(contentType: 'ServiceLocation', greenButtonJson: GreenButtonJson): ServiceLocationEntry[];
+export declare function getEntriesByContentType(contentType: 'ServiceStatus', greenButtonJson: GreenButtonJson): ServiceStatusEntry[];
+export declare function getEntriesByContentType(contentType: 'ServiceSupplier', greenButtonJson: GreenButtonJson): ServiceSupplierEntry[];
+export declare function getEntriesByContentType(contentType: 'UsagePoint', greenButtonJson: GreenButtonJson): UsagePointEntry[];
+export declare function getEntriesByContentType(contentType: 'UsageSummary', greenButtonJson: GreenButtonJson): UsageSummaryEntry[];

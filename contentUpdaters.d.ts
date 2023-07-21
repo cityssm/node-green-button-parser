@@ -1,2 +1,2 @@
-import type { GreenButtonContent } from './contentTypes.js';
+import type { GreenButtonContent } from './types/contentTypes.js';
 export declare function updateGreenButtonContent(content: GreenButtonContent): void;

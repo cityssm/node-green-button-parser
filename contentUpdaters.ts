@@ -1,3 +1,9 @@
+import * as lookups from './lookups.js'
+import {
+  updateCostAdditionalDetail,
+  updateTariffRider,
+  updateUsagePoint
+} from './objectUpdaters.js'
 import type {
   ApplicationInformationContent,
   AuthorizationContent,
@@ -6,6 +12,7 @@ import type {
   CustomerAgreementContent,
   CustomerContent,
   GreenButtonContent,
+  GreenButtonContentType,
   IntervalBlockContent,
   MeterContent,
   ReadingTypeContent,
@@ -14,13 +21,7 @@ import type {
   ServiceSupplierContent,
   UsagePointContent,
   UsageSummaryContent
-} from './contentTypes.js'
-import * as lookups from './lookups.js'
-import {
-  updateCostAdditionalDetail,
-  updateTariffRider,
-  updateUsagePoint
-} from './objectUpdaters.js'
+} from './types/contentTypes.js'
 
 function updateApplicationInformationContent(
   content: ApplicationInformationContent
@@ -251,8 +252,6 @@ function updateUsagePointContent(content: UsagePointContent): void {
 }
 
 function updateUsageSummaryContent(content: UsageSummaryContent): void {
-  content.contentType = 'UsageSummary'
-
   if (content.costAdditionalDetailsLastPeriod !== undefined) {
     if (!Array.isArray(content.costAdditionalDetailsLastPeriod)) {
       content.costAdditionalDetailsLastPeriod = [
@@ -292,65 +291,70 @@ function updateUsageSummaryContent(content: UsageSummaryContent): void {
 }
 
 export function updateGreenButtonContent(content: GreenButtonContent): void {
+  // Fix renamed types
+  if (
+    (content.contentType as GreenButtonContentType) === 'EnergyUsageSummary' ||
+    (content.contentType as GreenButtonContentType) ===
+      'ElectricPowerUsageSummary'
+  ) {
+    content.contentType = 'UsageSummary'
+  }
+
   switch (content.contentType) {
     case 'ApplicationInformation': {
-      updateApplicationInformationContent(
-        content as ApplicationInformationContent
-      )
+      updateApplicationInformationContent(content)
       break
     }
     case 'Authorization': {
-      updateAuthorizationContent(content as AuthorizationContent)
+      updateAuthorizationContent(content)
       break
     }
     case 'BatchList': {
-      updateBatchListContent(content as BatchListContent)
+      updateBatchListContent(content)
       break
     }
     case 'Customer': {
-      updateCustomerContent(content as CustomerContent)
+      updateCustomerContent(content)
       break
     }
     case 'CustomerAccount': {
-      updateCustomerAccountContent(content as CustomerAccountContent)
+      updateCustomerAccountContent(content)
       break
     }
     case 'CustomerAgreement': {
-      updateCustomerAgreementContent(content as CustomerAgreementContent)
+      updateCustomerAgreementContent(content)
       break
     }
     case 'IntervalBlock': {
-      updateIntervalBlockContent(content as IntervalBlockContent)
+      updateIntervalBlockContent(content)
       break
     }
     case 'Meter': {
-      updateMeterContent(content as MeterContent)
+      updateMeterContent(content)
       break
     }
     case 'ReadingType': {
-      updateReadingTypeContent(content as ReadingTypeContent)
+      updateReadingTypeContent(content)
       break
     }
     case 'ServiceLocation': {
-      updateServiceLocationContent(content as ServiceLocationContent)
+      updateServiceLocationContent(content)
       break
     }
     case 'ServiceStatus': {
-      updateServiceStatusContent(content as ServiceStatusContent)
+      updateServiceStatusContent(content)
       break
     }
     case 'ServiceSupplier': {
-      updateServiceSupplierContent(content as ServiceSupplierContent)
+      updateServiceSupplierContent(content)
       break
     }
     case 'UsagePoint': {
-      updateUsagePointContent(content as UsagePointContent)
+      updateUsagePointContent(content)
       break
     }
-    case 'UsageSummary':
-    case 'EnergyUsageSummary':
-    case 'ElectricPowerUsageSummary': {
-      updateUsageSummaryContent(content as UsageSummaryContent)
+    case 'UsageSummary': {
+      updateUsageSummaryContent(content)
       break
     }
   }

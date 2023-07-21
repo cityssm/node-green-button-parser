@@ -1,3 +1,4 @@
+import 'core-js';
 import isUrl from 'is-url';
 import Parser from 'rss-parser';
 import xml2js from 'xml2js';

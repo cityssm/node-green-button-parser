@@ -5,9 +5,8 @@ describe('greenButtonParser', () => {
     describe('urlToJson', () => {
         it('Parses customer_8.xml (URL)', async () => {
             const greenButtonFeed = await greenButtonParser.atomToGreenButtonJson('https://raw.githubusercontent.com/cityssm/node-green-button-parser/main/test/data/customer_8.xml');
-            assert.ok(greenButtonFeed.entries.some((possibleItem) => {
-                return possibleItem.content.contentType === 'IntervalBlock';
-            }));
+            const intervalBlockEntries = greenButtonParser.helpers.getEntriesByContentType('IntervalBlock', greenButtonFeed);
+            assert.ok(intervalBlockEntries[0].content.contentType === 'IntervalBlock');
         });
     });
     describe('xmlToJson', () => {

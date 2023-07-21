@@ -1,13 +1,12 @@
+import 'core-js'
+
 import isUrl from 'is-url'
 import Parser from 'rss-parser'
 import xml2js from 'xml2js'
 
-import type {
-  GreenButtonContentType,
-  GreenButtonEntry,
-  GreenButtonJson
-} from './contentTypes.js'
 import { updateGreenButtonContent } from './contentUpdaters.js'
+import type { GreenButtonContentType } from './types/contentTypes.js'
+import type { GreenButtonEntry, GreenButtonJson } from './types/entryTypes.js'
 import { cleanContentJson } from './utilities.js'
 
 const parser = new Parser()

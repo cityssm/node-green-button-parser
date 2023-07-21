@@ -1,5 +1,3 @@
-import 'core-js'
-
 const numberRegExp = /^-?(?:\d*\.)?\d+$/
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

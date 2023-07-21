@@ -174,7 +174,6 @@ function updateUsagePointContent(content) {
     updateUsagePoint(content);
 }
 function updateUsageSummaryContent(content) {
-    content.contentType = 'UsageSummary';
     if (content.costAdditionalDetailsLastPeriod !== undefined) {
         if (!Array.isArray(content.costAdditionalDetailsLastPeriod)) {
             content.costAdditionalDetailsLastPeriod = [
@@ -207,6 +206,11 @@ function updateUsageSummaryContent(content) {
     }
 }
 export function updateGreenButtonContent(content) {
+    if (content.contentType === 'EnergyUsageSummary' ||
+        content.contentType ===
+            'ElectricPowerUsageSummary') {
+        content.contentType = 'UsageSummary';
+    }
     switch (content.contentType) {
         case 'ApplicationInformation': {
             updateApplicationInformationContent(content);
@@ -260,9 +264,7 @@ export function updateGreenButtonContent(content) {
             updateUsagePointContent(content);
             break;
         }
-        case 'UsageSummary':
-        case 'EnergyUsageSummary':
-        case 'ElectricPowerUsageSummary': {
+        case 'UsageSummary': {
             updateUsageSummaryContent(content);
             break;
         }

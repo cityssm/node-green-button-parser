@@ -1,23 +1,10 @@
-import type * as lookups from './lookups.js';
+import type * as lookups from '../lookups.js';
 import type * as objectTypes from './objectTypes.js';
-export type GreenButtonContentType = 'ApplicationInformation' | 'Authorization' | 'BatchList' | 'Customer' | 'CustomerAccount' | 'CustomerAgreement' | 'ElectricPowerUsageSummary' | 'EnergyUsageSummary' | 'IntervalBlock' | 'LocalTimeParameters' | 'Meter' | 'MeterReading' | 'ReadingType' | 'ServiceLocation' | 'ServiceStatus' | 'ServiceSupplier' | 'UsagePoint' | 'UsageSummary';
-export interface GreenButtonJson {
-    title: string;
-    updatedDate: Date;
-    link: string;
-    entries: GreenButtonEntry[];
-}
-export interface GreenButtonEntry {
-    id: string;
-    title: string;
-    link: string;
-    publishedDate: Date;
-    content: GreenButtonContent;
-}
-export interface BaseContent {
+export type GreenButtonContentType = 'ApplicationInformation' | 'Authorization' | 'BatchList' | 'Customer' | 'CustomerAccount' | 'CustomerAgreement' | 'ElectricPowerQualitySummary' | 'ElectricPowerUsageSummary' | 'EnergyUsageSummary' | 'IntervalBlock' | 'LocalTimeParameters' | 'Meter' | 'MeterReading' | 'ReadingType' | 'ServiceLocation' | 'ServiceStatus' | 'ServiceSupplier' | 'UsagePoint' | 'UsageSummary';
+interface BaseContent<GreenButtonContentType> {
     contentType: GreenButtonContentType;
 }
-export interface ApplicationInformationContent extends BaseContent {
+export interface ApplicationInformationContent extends BaseContent<'ApplicationInformation'> {
     contentType: 'ApplicationInformation';
     dataCustodianApplicationStatus: keyof typeof lookups.dataCustodianApplicationStatuses;
     dataCustodianApplicationStatusValue?: (typeof lookups.dataCustodianApplicationStatuses)[keyof typeof lookups.dataCustodianApplicationStatuses];
@@ -62,7 +49,7 @@ export interface ApplicationInformationContent extends BaseContent {
     dataCustodianId: string;
     dataCustodianScopeSelectionScreenURI: objectTypes.urlString;
 }
-export interface AuthorizationContent extends BaseContent {
+export interface AuthorizationContent extends BaseContent<'Authorization'> {
     contentType: 'Authorization';
     authorizedPeriod?: objectTypes.GreenButtonDuration;
     publishedPeriod?: objectTypes.GreenButtonDuration;
@@ -81,11 +68,11 @@ export interface AuthorizationContent extends BaseContent {
     resourceURI: objectTypes.urlString;
     authorizationURI: objectTypes.urlString;
 }
-export interface BatchListContent extends BaseContent {
+export interface BatchListContent extends BaseContent<'BatchList'> {
     contentType: 'BatchList';
     resources: objectTypes.urlString[];
 }
-export interface CustomerContent extends BaseContent {
+export interface CustomerContent extends BaseContent<'Customer'> {
     contentType: 'Customer';
     kind?: keyof typeof lookups.customerKinds;
     kind_value?: (typeof lookups.customerKinds)[keyof typeof lookups.customerKinds];
@@ -102,7 +89,7 @@ export interface CustomerContent extends BaseContent {
     locale?: string;
     customerName?: string;
 }
-export interface CustomerAccountContent extends BaseContent {
+export interface CustomerAccountContent extends BaseContent<'CustomerAccount'> {
     contentType: 'CustomerAccount';
     type?: string;
     authorName?: string;
@@ -129,7 +116,7 @@ export interface CustomerAccountContent extends BaseContent {
     };
     accountId?: string;
 }
-export interface CustomerAgreementContent extends BaseContent {
+export interface CustomerAgreementContent extends BaseContent<'CustomerAgreement'> {
     contentType: 'CustomerAgreement';
     type?: string;
     authorName?: string;
@@ -154,7 +141,8 @@ export interface CustomerAgreementContent extends BaseContent {
     futureStatus?: objectTypes.GreenButtonStatus;
     agreementId?: string;
 }
-export interface ElectricPowerQualitySummaryContent extends BaseContent {
+export interface ElectricPowerQualitySummaryContent extends BaseContent<'ElectricPowerQualitySummary'> {
+    contentType: 'ElectricPowerQualitySummary';
     summaryInterval: objectTypes.GreenButtonDuration;
     flickerPlt?: number;
     flickerPst?: number;
@@ -169,19 +157,19 @@ export interface ElectricPowerQualitySummaryContent extends BaseContent {
     supplyVoltageVariations?: number;
     tempOvervoltage?: number;
 }
-export interface IntervalBlockContent extends BaseContent {
+export interface IntervalBlockContent extends BaseContent<'IntervalBlock'> {
     contentType: 'IntervalBlock';
     interval: objectTypes.GreenButtonDuration;
     IntervalReading: objectTypes.GreenButtonIntervalReading[];
 }
-export interface LocalTimeParametersContent extends BaseContent {
+export interface LocalTimeParametersContent extends BaseContent<'LocalTimeParameters'> {
     contentType: 'LocalTimeParameters';
     dstEndRule: string;
     dstOffset: number;
     dstStartRule: string;
     tzOffset: number;
 }
-export interface MeterContent extends BaseContent {
+export interface MeterContent extends BaseContent<'Meter'> {
     contentType: 'Meter';
     type?: string;
     utcNumber?: string;
@@ -213,10 +201,10 @@ export interface MeterContent extends BaseContent {
     MeterMultipliers?: objectTypes.GreenButtonMeterMultiplier[];
     intervalLength?: number;
 }
-export interface MeterReadingContent extends BaseContent {
+export interface MeterReadingContent extends BaseContent<'MeterReading'> {
     contentType: 'MeterReading';
 }
-export interface ReadingTypeContent extends BaseContent {
+export interface ReadingTypeContent extends BaseContent<'ReadingType'> {
     contentType: 'ReadingType';
     accumulationBehaviour?: keyof typeof lookups.accumulationBehaviours;
     accumulationBehaviour_value?: (typeof lookups.accumulationBehaviours)[keyof typeof lookups.accumulationBehaviours];
@@ -249,7 +237,7 @@ export interface ReadingTypeContent extends BaseContent {
     measuringPeriod_value?: (typeof lookups.measuringPeriods)[keyof typeof lookups.measuringPeriods];
     argument?: number;
 }
-export interface ServiceLocationContent extends BaseContent {
+export interface ServiceLocationContent extends BaseContent<'ServiceLocation'> {
     contentType: 'ServiceLocation';
     type?: string;
     mainAddress?: objectTypes.GreenButtonStreetAddress;
@@ -267,12 +255,12 @@ export interface ServiceLocationContent extends BaseContent {
     UsagePoints?: objectTypes.GreenButtonUsagePoint[];
     outageBlock?: string;
 }
-export interface ServiceStatusContent extends BaseContent {
+export interface ServiceStatusContent extends BaseContent<'ServiceStatus'> {
     contentType: 'ServiceStatus';
     currentStatus: keyof typeof lookups.currentStatuses;
     currentStatus_value?: (typeof lookups.currentStatuses)[keyof typeof lookups.currentStatuses];
 }
-export interface ServiceSupplierContent extends BaseContent {
+export interface ServiceSupplierContent extends BaseContent<'ServiceSupplier'> {
     contentType: 'ServiceSupplier';
     Organisation?: {
         streetAddress?: objectTypes.GreenButtonStreetAddress;
@@ -287,10 +275,10 @@ export interface ServiceSupplierContent extends BaseContent {
     issuerIdentificationNumber?: string;
     effectiveDate?: objectTypes.timestampNumber;
 }
-export interface UsagePointContent extends BaseContent, objectTypes.GreenButtonUsagePoint {
+export interface UsagePointContent extends BaseContent<'UsagePoint'>, objectTypes.GreenButtonUsagePoint {
     contentType: 'UsagePoint';
 }
-export interface UsageSummaryContent extends BaseContent {
+export interface UsageSummaryContent extends BaseContent<'UsageSummary'> {
     contentType: 'UsageSummary';
     billingPeriod: objectTypes.GreenButtonDuration;
     statusTimeStamp: objectTypes.timestampNumber;
@@ -325,3 +313,4 @@ export interface UsageSummaryContent extends BaseContent {
     };
 }
 export type GreenButtonContent = ApplicationInformationContent | AuthorizationContent | BatchListContent | CustomerContent | CustomerAccountContent | CustomerAgreementContent | ElectricPowerQualitySummaryContent | IntervalBlockContent | LocalTimeParametersContent | MeterContent | MeterReadingContent | ReadingTypeContent | ServiceLocationContent | ServiceStatusContent | ServiceSupplierContent | UsagePointContent | UsageSummaryContent;
+export {};
