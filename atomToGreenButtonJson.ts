@@ -5,7 +5,7 @@ import Parser from 'rss-parser'
 import xml2js from 'xml2js'
 
 import { updateGreenButtonContent } from './contentUpdaters.js'
-import type { GreenButtonContent, GreenButtonContentType, IntervalBlockContent, IntervalBlockContentData } from './types/contentTypes.js'
+import type { GreenButtonContentType, IntervalBlockContentData } from './types/contentTypes.js'
 import type { GreenButtonEntry, GreenButtonJson } from './types/entryTypes.js'
 import { cleanContentJson } from './utilities.js'
 
