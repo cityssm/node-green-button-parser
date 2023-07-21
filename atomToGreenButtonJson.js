@@ -29,7 +29,7 @@ export async function atomToGreenButtonJson(atomXmlOrUrl) {
         if (contentType === 'IntervalBlock') {
             content = {
                 contentType: 'IntervalBlock',
-                intervals: Array.isArray(content) ? content : [content]
+                intervalBlocks: (Array.isArray(content) ? content : [content])
             };
         }
         else if (contentType === 'MeterReading') {

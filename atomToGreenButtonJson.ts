@@ -5,7 +5,7 @@ import Parser from 'rss-parser'
 import xml2js from 'xml2js'
 
 import { updateGreenButtonContent } from './contentUpdaters.js'
-import type { GreenButtonContentType } from './types/contentTypes.js'
+import type { GreenButtonContent, GreenButtonContentType, IntervalBlockContent, IntervalBlockContentData } from './types/contentTypes.js'
 import type { GreenButtonEntry, GreenButtonJson } from './types/entryTypes.js'
 import { cleanContentJson } from './utilities.js'
 
@@ -44,7 +44,7 @@ export async function atomToGreenButtonJson(
     if (contentType === 'IntervalBlock') {
       content = {
         contentType: 'IntervalBlock',
-        intervals: Array.isArray(content) ? content : [content]
+        intervalBlocks: (Array.isArray(content) ? content : [content]) as IntervalBlockContentData[]
       }
     } else if (contentType === 'MeterReading') {
       content = {

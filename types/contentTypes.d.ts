@@ -157,10 +157,13 @@ export interface ElectricPowerQualitySummaryContent extends BaseContent<'Electri
     supplyVoltageVariations?: number;
     tempOvervoltage?: number;
 }
-export interface IntervalBlockContent extends BaseContent<'IntervalBlock'> {
-    contentType: 'IntervalBlock';
+export interface IntervalBlockContentData {
     interval: objectTypes.GreenButtonDuration;
     IntervalReading: objectTypes.GreenButtonIntervalReading[];
+}
+export interface IntervalBlockContent extends BaseContent<'IntervalBlock'> {
+    contentType: 'IntervalBlock';
+    intervalBlocks: IntervalBlockContentData[];
 }
 export interface LocalTimeParametersContent extends BaseContent<'LocalTimeParameters'> {
     contentType: 'LocalTimeParameters';

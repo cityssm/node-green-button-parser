@@ -135,7 +135,7 @@ function updateCustomerAgreementContent(
 }
 
 function updateIntervalBlockContent(content: IntervalBlockContent): void {
-  for (const interval of content.intervals) {
+  for (const interval of content.intervalBlocks) {
     if (!Array.isArray(interval.IntervalReading)) {
       interval.IntervalReading = [interval.IntervalReading]
     }
