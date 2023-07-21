@@ -135,20 +135,22 @@ function updateCustomerAgreementContent(
 }
 
 function updateIntervalBlockContent(content: IntervalBlockContent): void {
-  if (!Array.isArray(content.IntervalReading)) {
-    content.IntervalReading = [content.IntervalReading]
-  }
+  for (const interval of content.intervals) {
+    if (!Array.isArray(interval.IntervalReading)) {
+      interval.IntervalReading = [interval.IntervalReading]
+    }
 
-  for (const reading of content.IntervalReading) {
-    if (reading.ReadingQuality !== undefined) {
-      if (!Array.isArray(reading.ReadingQuality)) {
-        reading.ReadingQuality = [reading.ReadingQuality]
-      }
+    for (const reading of interval.IntervalReading) {
+      if (reading.ReadingQuality !== undefined) {
+        if (!Array.isArray(reading.ReadingQuality)) {
+          reading.ReadingQuality = [reading.ReadingQuality]
+        }
 
-      reading.ReadingQuality_values = []
+        reading.ReadingQuality_values = []
 
-      for (const quality of reading.ReadingQuality) {
-        reading.ReadingQuality_values.push(lookups.readingQualities[quality])
+        for (const quality of reading.ReadingQuality) {
+          reading.ReadingQuality_values.push(lookups.readingQualities[quality])
+        }
       }
     }
   }

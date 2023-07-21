@@ -10,10 +10,11 @@ describe('greenButtonParser', () => {
         'https://raw.githubusercontent.com/cityssm/node-green-button-parser/main/test/data/customer_8.xml'
       )
 
-      const intervalBlockEntries = greenButtonParser.helpers.getEntriesByContentType(
-        'IntervalBlock',
-        greenButtonFeed
-      )
+      const intervalBlockEntries =
+        greenButtonParser.helpers.getEntriesByContentType(
+          'IntervalBlock',
+          greenButtonFeed
+        )
 
       assert.ok(intervalBlockEntries[0].content.contentType === 'IntervalBlock')
     })
@@ -45,5 +46,20 @@ describe('greenButtonParser', () => {
         })
       )
     })
+
+    /*
+    it('Parses electric.xml', async () => {
+      const xml = fs.readFileSync('./test/data/_private/electric.xml')
+      const greenButtonFeed = await greenButtonParser.atomToGreenButtonJson(
+        xml as unknown as string
+      )
+
+      assert.ok(
+        greenButtonFeed.entries.some((possibleItem) => {
+          return possibleItem.content.contentType === 'IntervalBlock'
+        })
+      )
+    })
+    */
   })
 })

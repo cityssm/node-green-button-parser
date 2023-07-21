@@ -39,14 +39,28 @@ export async function atomToGreenButtonJson(
 
     const contentType = Object.keys(contentJson)[0] as GreenButtonContentType
 
+    let content = contentJson[contentType]
+
+    if (contentType === 'IntervalBlock') {
+      content = {
+        contentType: 'IntervalBlock',
+        intervals: Array.isArray(content) ? content : [content]
+      }
+    } else if (contentType === 'MeterReading') {
+      content = {
+        contentType: 'MeterReading'
+      }
+    } else {
+      content.contentType = contentType
+    }
+
     const greenButtonEntry: GreenButtonEntry = {
       id: item.guid ?? '',
       title: item.title ?? '',
       link: item.link ?? '',
       publishedDate: new Date(item.pubDate ?? ''),
-      content: Object.assign(contentJson[contentType], { contentType })
+      content
     }
-
     updateGreenButtonContent(greenButtonEntry.content)
 
     greenButtonFeed.entries.push(greenButtonEntry)
