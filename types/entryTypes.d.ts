@@ -1,5 +1,6 @@
 import type { ApplicationInformationContent, AuthorizationContent, BatchListContent, CustomerAccountContent, CustomerAgreementContent, CustomerContent, ElectricPowerQualitySummaryContent, IntervalBlockContent, LocalTimeParametersContent, MeterContent, MeterReadingContent, ReadingTypeContent, ServiceLocationContent, ServiceStatusContent, ServiceSupplierContent, UsagePointContent, UsageSummaryContent } from './contentTypes.js';
 export interface GreenButtonJson {
+    id: string;
     title: string;
     updatedDate: Date;
     link: string;

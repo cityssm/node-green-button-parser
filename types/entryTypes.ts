@@ -19,6 +19,7 @@ import type {
 } from './contentTypes.js'
 
 export interface GreenButtonJson {
+  id: string
   title: string
   updatedDate: Date
   link: string

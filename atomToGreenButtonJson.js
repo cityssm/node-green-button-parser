@@ -4,15 +4,20 @@ import Parser from 'rss-parser';
 import xml2js from 'xml2js';
 import { updateGreenButtonContent } from './contentUpdaters.js';
 import { cleanContentJson } from './utilities.js';
-const parser = new Parser();
+const parser = new Parser({
+    customFields: {
+        feed: ['id', 'updated']
+    }
+});
 export async function atomToGreenButtonJson(atomXmlOrUrl) {
     const atomJson = isUrl(atomXmlOrUrl)
         ? await parser.parseURL(atomXmlOrUrl)
         : await parser.parseString(atomXmlOrUrl);
     const greenButtonFeed = {
+        id: atomJson.id,
         title: atomJson.title ?? '',
         link: atomJson.link ?? '',
-        updatedDate: new Date(atomJson.lastBuildDate),
+        updatedDate: new Date(atomJson.updated),
         entries: []
     };
     for (const item of atomJson.items) {
@@ -29,7 +34,9 @@ export async function atomToGreenButtonJson(atomXmlOrUrl) {
         if (contentType === 'IntervalBlock') {
             content = {
                 contentType: 'IntervalBlock',
-                intervalBlocks: (Array.isArray(content) ? content : [content])
+                intervalBlocks: (Array.isArray(content)
+                    ? content
+                    : [content])
             };
         }
         else if (contentType === 'MeterReading') {
@@ -41,7 +48,7 @@ export async function atomToGreenButtonJson(atomXmlOrUrl) {
             content.contentType = contentType;
         }
         const greenButtonEntry = {
-            id: item.guid ?? '',
+            id: item.id ?? '',
             title: item.title ?? '',
             link: item.link ?? '',
             publishedDate: new Date(item.pubDate ?? ''),

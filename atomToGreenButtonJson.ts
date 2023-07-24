@@ -5,11 +5,18 @@ import Parser from 'rss-parser'
 import xml2js from 'xml2js'
 
 import { updateGreenButtonContent } from './contentUpdaters.js'
-import type { GreenButtonContentType, IntervalBlockContentData } from './types/contentTypes.js'
+import type {
+  GreenButtonContentType,
+  IntervalBlockContentData
+} from './types/contentTypes.js'
 import type { GreenButtonEntry, GreenButtonJson } from './types/entryTypes.js'
 import { cleanContentJson } from './utilities.js'
 
-const parser = new Parser()
+const parser = new Parser({
+  customFields: {
+    feed: ['id', 'updated']
+  }
+})
 
 export async function atomToGreenButtonJson(
   atomXmlOrUrl: string
@@ -19,9 +26,10 @@ export async function atomToGreenButtonJson(
     : await parser.parseString(atomXmlOrUrl)
 
   const greenButtonFeed: GreenButtonJson = {
+    id: atomJson.id,
     title: atomJson.title ?? '',
     link: atomJson.link ?? '',
-    updatedDate: new Date(atomJson.lastBuildDate),
+    updatedDate: new Date(atomJson.updated),
     entries: []
   }
 
@@ -44,7 +52,9 @@ export async function atomToGreenButtonJson(
     if (contentType === 'IntervalBlock') {
       content = {
         contentType: 'IntervalBlock',
-        intervalBlocks: (Array.isArray(content) ? content : [content]) as IntervalBlockContentData[]
+        intervalBlocks: (Array.isArray(content)
+          ? content
+          : [content]) as IntervalBlockContentData[]
       }
     } else if (contentType === 'MeterReading') {
       content = {
@@ -55,7 +65,7 @@ export async function atomToGreenButtonJson(
     }
 
     const greenButtonEntry: GreenButtonEntry = {
-      id: item.guid ?? '',
+      id: item.id ?? '',
       title: item.title ?? '',
       link: item.link ?? '',
       publishedDate: new Date(item.pubDate ?? ''),
