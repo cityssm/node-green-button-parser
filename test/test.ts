@@ -48,10 +48,15 @@ describe('greenButtonParser', () => {
     })
 
     /*
-    it('Parses electric.xml', async () => {
+    it('Parses _private/electric.xml', async () => {
       const xml = fs.readFileSync('./test/data/_private/electric.xml')
       const greenButtonFeed = await greenButtonParser.atomToGreenButtonJson(
         xml as unknown as string
+      )
+
+      fs.writeFileSync(
+        './test/data/_private/electric.json',
+        JSON.stringify(greenButtonFeed, undefined, 2)
       )
 
       assert.ok(
