@@ -61,8 +61,10 @@ export interface GreenButtonTelephoneNumber {
 }
 export interface GreenButtonSummaryMeasurement {
     powerOfTenMultiplier?: keyof typeof lookups.powerOfTenMultipliers;
+    powerOfTenMultiplier_value?: (typeof lookups.powerOfTenMultipliers)[keyof typeof lookups.powerOfTenMultipliers];
     timeStamp?: timestampNumber;
     uom?: keyof typeof lookups.unitsOfMeasurement;
+    uom_value?: (typeof lookups.unitsOfMeasurement)[keyof typeof lookups.unitsOfMeasurement];
     value?: number;
     readingTypeRef?: urlString;
 }
@@ -113,12 +115,14 @@ export interface GreenButtonTariffRider {
 }
 export interface GreenButtonPNode {
     apnodeType: keyof typeof lookups.pnodeTypes;
+    apnodeType_value?: (typeof lookups.pnodeTypes)[keyof typeof lookups.pnodeTypes];
     ref: string;
     startEffectiveDate?: timestampNumber;
     endEffectiveDate?: timestampNumber;
 }
 export interface GreenButtonAggregateNode {
     anodeType: keyof typeof lookups.anodeTypes;
+    anodeType_value?: (typeof lookups.anodeTypes)[keyof typeof lookups.anodeTypes];
     ref: string;
     startEffectiveDate?: timestampNumber;
     endEffectiveDate?: timestampNumber;
@@ -139,8 +143,10 @@ export interface GreenButtonUsagePoint {
         };
     };
     amiBillingReady?: keyof typeof lookups.amiBillingReadyStatuses;
+    amiBillingReady_value?: (typeof lookups.amiBillingReadyStatuses)[keyof typeof lookups.amiBillingReadyStatuses];
     checkBilling?: booleanString;
     connectionState?: keyof typeof lookups.connectionStates;
+    connectionState_value?: (typeof lookups.connectionStates)[keyof typeof lookups.connectionStates];
     estimatedLoad?: GreenButtonSummaryMeasurement;
     grounded?: booleanString;
     isSdp?: booleanString;
@@ -149,6 +155,7 @@ export interface GreenButtonUsagePoint {
     nominalServiceVoltage?: GreenButtonSummaryMeasurement;
     outageRegion?: string;
     phaseCode?: keyof typeof lookups.phaseCodes;
+    phaseCode_value?: (typeof lookups.phaseCodes)[keyof typeof lookups.phaseCodes];
     ratedCurrent?: GreenButtonSummaryMeasurement;
     ratedPower?: GreenButtonSummaryMeasurement;
     readCycle?: string;
@@ -156,7 +163,7 @@ export interface GreenButtonUsagePoint {
     serviceDeliveryRemark?: string;
     servicePriority?: string;
     pnodeRefs?: {
-        pnodeRef: GreenButtonPNode | GreenButtonPNode[];
+        pnodeRef: GreenButtonPNode[];
     };
     aggregateNodeRefs?: {
         aggregateNodeRef: GreenButtonAggregateNode | GreenButtonAggregateNode[];

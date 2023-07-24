@@ -1,6 +1,7 @@
 import * as lookups from './lookups.js'
 import {
   updateCostAdditionalDetail,
+  updateSummaryMeasurement,
   updateTariffRider,
   updateUsagePoint
 } from './objectUpdaters.js'
@@ -119,6 +120,9 @@ function updateCustomerAgreementContent(
         program.enrollmentStatus_value =
           lookups.enrollmentStatuses[program.enrollmentStatus]
       }
+
+      updateSummaryMeasurement(program.capacityReservationLevel)
+      updateSummaryMeasurement(program.DRProgramNomination)
     }
   }
 
@@ -214,6 +218,10 @@ function updateReadingTypeContent(content: ReadingTypeContent): void {
     content.timeAttribute_value = lookups.timeAttributes[content.timeAttribute]
   }
 
+  if (content.uom !== undefined) {
+    content.uom_value = lookups.unitsOfMeasurement[content.uom]
+  }
+
   if (content.measuringPeriod !== undefined) {
     content.measuringPeriod_value =
       lookups.measuringPeriods[content.measuringPeriod]
@@ -270,10 +278,22 @@ function updateUsageSummaryContent(content: UsageSummaryContent): void {
     content.currency_value = lookups.currencies[content.currency]
   }
 
+  updateSummaryMeasurement(content.overallConsumptionLastPeriod)
+  updateSummaryMeasurement(content.currentBillingPeriodOverAllConsumption)
+  updateSummaryMeasurement(content.currentDayLastYearNetConsumption)
+  updateSummaryMeasurement(content.currentDayNetConsumption)
+  updateSummaryMeasurement(content.currentDayOverallConsumption)
+  updateSummaryMeasurement(content.peakDemand)
+  updateSummaryMeasurement(content.previousDayLastYearOverallConsumption)
+  updateSummaryMeasurement(content.previousDayNetConsumption)
+  updateSummaryMeasurement(content.previousDayOverallConsumption)
+
   if (content.qualityOfReading !== undefined) {
     content.qualityOfReading_value =
       lookups.readingQualities[content.qualityOfReading]
   }
+
+  updateSummaryMeasurement(content.ratchetDemand)
 
   if (content.commodity !== undefined) {
     content.commodity_value = lookups.commodities[content.commodity]
