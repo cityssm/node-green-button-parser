@@ -117,7 +117,7 @@ export declare const accumulationBehaviours: Readonly<{
     10: "Time Delay";
     12: "Instantaneous";
     13: "Latching Quantity";
-    14: "BoundedQuantity";
+    14: "Bounded Quantity";
 }>;
 export declare const commodities: Readonly<{
     0: "None";

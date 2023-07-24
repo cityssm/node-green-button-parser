@@ -165,7 +165,7 @@ export const accumulationBehaviours = Object.freeze({
   10: 'Time Delay',
   12: 'Instantaneous',
   13: 'Latching Quantity',
-  14: 'BoundedQuantity'
+  14: 'Bounded Quantity'
 })
 
 export const commodities = Object.freeze({
