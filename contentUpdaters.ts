@@ -24,6 +24,7 @@ import type {
   UsagePointContent,
   UsageSummaryContent
 } from './types/entryTypes.js'
+import { ensureArray } from './utilities.js'
 
 function updateApplicationInformationContent(
   content?: ApplicationInformationContent
@@ -52,22 +53,17 @@ function updateApplicationInformationContent(
       lookups.thirdPartyApplicationUses[content.thirdPartyApplicationUse]
   }
 
-  if (!Array.isArray(content.grant_types)) {
-    content.grant_types = [content.grant_types]
-  }
+  ensureArray(content, 'contacts')
+  ensureArray(content, 'scope')
 
-  if (content.contacts !== undefined && !Array.isArray(content.contacts)) {
-    content.contacts = [content.contacts]
-  }
+  if (content.grant_types !== undefined) {
+    ensureArray(content, 'grant_types')
 
-  if (!Array.isArray(content.scope)) {
-    content.scope = [content.scope]
-  }
+    content.grant_types_values = []
 
-  content.grant_types_values = []
-
-  for (const grantType of content.grant_types) {
-    content.grant_types_values.push(lookups.grantTypes[grantType])
+    for (const grantType of content.grant_types) {
+      content.grant_types_values.push(lookups.grantTypes[grantType])
+    }
   }
 
   content.response_types_value = lookups.responseTypes[content.response_types]
@@ -96,9 +92,7 @@ function updateBatchListContent(content?: BatchListContent): void {
     return
   }
 
-  if (!Array.isArray(content.resources)) {
-    content.resources = [content.resources]
-  }
+  ensureArray(content, 'resources')
 }
 
 function updateCustomerContent(content?: CustomerContent): void {
@@ -117,9 +111,7 @@ function updateCustomerAccountContent(content?: CustomerAccountContent): void {
   }
 
   if (content.notifications !== undefined) {
-    if (!Array.isArray(content.notifications)) {
-      content.notifications = [content.notifications]
-    }
+    ensureArray(content, 'notifications')
 
     for (const notification of content.notifications) {
       notification.methodKind_value =
@@ -136,9 +128,7 @@ function updateCustomerAgreementContent(
   }
 
   if (content.DemandResponseProgram !== undefined) {
-    if (!Array.isArray(content.DemandResponseProgram)) {
-      content.DemandResponseProgram = [content.DemandResponseProgram]
-    }
+    ensureArray(content, 'DemandResponseProgram')
 
     for (const program of content.DemandResponseProgram) {
       if (program.enrollmentStatus !== undefined) {
@@ -151,12 +141,7 @@ function updateCustomerAgreementContent(
     }
   }
 
-  if (
-    content.PricingStructures !== undefined &&
-    !Array.isArray(content.PricingStructures)
-  ) {
-    content.PricingStructures = [content.PricingStructures]
-  }
+  ensureArray(content, 'PricingStructures')
 
   if (content.currency !== undefined) {
     content.currency_value = lookups.currencies[content.currency]
@@ -168,18 +153,11 @@ function updateIntervalBlockContent(content?: IntervalBlockContent): void {
     return
   }
 
-  if (
-    content.IntervalReading !== undefined &&
-    !Array.isArray(content.IntervalReading)
-  ) {
-    content.IntervalReading = [content.IntervalReading]
-  }
+  ensureArray(content, 'IntervalReading')
 
   for (const reading of content.IntervalReading ?? []) {
     if (reading.ReadingQuality !== undefined) {
-      if (!Array.isArray(reading.ReadingQuality)) {
-        reading.ReadingQuality = [reading.ReadingQuality]
-      }
+      ensureArray(reading, 'ReadingQuality')
 
       reading.ReadingQuality_values = []
 
@@ -196,9 +174,7 @@ function updateMeterContent(content?: MeterContent): void {
   }
 
   if (content.MeterMultipliers !== undefined) {
-    if (!Array.isArray(content.MeterMultipliers)) {
-      content.MeterMultipliers = [content.MeterMultipliers]
-    }
+    ensureArray(content, 'MeterMultipliers')
 
     for (const multiplier of content.MeterMultipliers) {
       if (multiplier.kind !== undefined) {
@@ -271,17 +247,10 @@ function updateServiceLocationContent(content?: ServiceLocationContent): void {
     return
   }
 
-  if (
-    content.positionPoints !== undefined &&
-    !Array.isArray(content.positionPoints)
-  ) {
-    content.positionPoints = [content.positionPoints]
-  }
+  ensureArray(content, 'positionPoints')
 
   if (content.UsagePoints !== undefined) {
-    if (!Array.isArray(content.UsagePoints)) {
-      content.UsagePoints = [content.UsagePoints]
-    }
+    ensureArray(content, 'UsagePoints')
 
     for (const usagePoint of content.UsagePoints) {
       updateUsagePoint(usagePoint)
@@ -321,11 +290,7 @@ function updateUsageSummaryContent(content?: UsageSummaryContent): void {
   }
 
   if (content.costAdditionalDetailsLastPeriod !== undefined) {
-    if (!Array.isArray(content.costAdditionalDetailsLastPeriod)) {
-      content.costAdditionalDetailsLastPeriod = [
-        content.costAdditionalDetailsLastPeriod
-      ]
-    }
+    ensureArray(content, 'costAdditionalDetailsLastPeriod')
 
     for (const additionalDetail of content.costAdditionalDetailsLastPeriod) {
       updateCostAdditionalDetail(additionalDetail)
@@ -358,11 +323,7 @@ function updateUsageSummaryContent(content?: UsageSummaryContent): void {
   }
 
   if (content.tariffRiderRefs?.tariffRiderRef !== undefined) {
-    if (!Array.isArray(content.tariffRiderRefs.tariffRiderRef)) {
-      content.tariffRiderRefs.tariffRiderRef = [
-        content.tariffRiderRefs.tariffRiderRef
-      ]
-    }
+    ensureArray(content.tariffRiderRefs, 'tariffRiderRef')
 
     for (const tariffRider of content.tariffRiderRefs.tariffRiderRef) {
       updateTariffRider(tariffRider)

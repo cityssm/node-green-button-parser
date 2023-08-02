@@ -6,4 +6,5 @@ type XmlProperty = string[] | Array<{
     _: string;
 }>;
 export declare function getFirstXmlString(xmlProperty?: XmlProperty): string;
+export declare function ensureArray(object: any, objectKey: string): void;
 export {};

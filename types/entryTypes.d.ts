@@ -75,7 +75,7 @@ export interface ApplicationInformationContent {
     contacts?: string[];
     token_endpoint_auth_method: string;
     scope: string[];
-    grant_types: Array<keyof typeof lookups.grantTypes>;
+    grant_types?: Array<keyof typeof lookups.grantTypes>;
     grant_types_values?: Array<(typeof lookups.grantTypes)[keyof typeof lookups.grantTypes]>;
     response_types: keyof typeof lookups.responseTypes;
     response_types_value?: (typeof lookups.responseTypes)[keyof typeof lookups.responseTypes];

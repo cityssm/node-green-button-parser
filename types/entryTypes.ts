@@ -95,7 +95,7 @@ export interface ApplicationInformationContent {
   token_endpoint_auth_method: string
   scope: string[]
 
-  grant_types: Array<keyof typeof lookups.grantTypes>
+  grant_types?: Array<keyof typeof lookups.grantTypes>
   grant_types_values?: Array<
     (typeof lookups.grantTypes)[keyof typeof lookups.grantTypes]
   >

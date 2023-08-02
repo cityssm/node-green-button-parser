@@ -184,7 +184,7 @@ export interface GreenButtonUsagePoint {
     tariffProfile?: string
     customerAgreement?: string
     tariffRiderRefs?: {
-      tariffRiderRef?: GreenButtonTariffRider | GreenButtonTariffRider[]
+      tariffRiderRef?: GreenButtonTariffRider[]
     }
   }
 

@@ -1,4 +1,5 @@
 import * as lookups from './lookups.js';
+import { ensureArray } from './utilities.js';
 export function updateSummaryMeasurement(measurement) {
     if (measurement === undefined) {
         return;
@@ -22,11 +23,7 @@ export function updateUsagePoint(usagePoint) {
     }
     if (usagePoint.ServiceDeliveryPoint?.tariffRiderRefs?.tariffRiderRef !==
         undefined) {
-        if (!Array.isArray(usagePoint.ServiceDeliveryPoint.tariffRiderRefs.tariffRiderRef)) {
-            usagePoint.ServiceDeliveryPoint.tariffRiderRefs.tariffRiderRef = [
-                usagePoint.ServiceDeliveryPoint.tariffRiderRefs.tariffRiderRef
-            ];
-        }
+        ensureArray(usagePoint.ServiceDeliveryPoint.tariffRiderRefs, 'tariffRiderRef');
         for (const tariffRider of usagePoint.ServiceDeliveryPoint.tariffRiderRefs
             .tariffRiderRef) {
             updateTariffRider(tariffRider);
@@ -48,19 +45,13 @@ export function updateUsagePoint(usagePoint) {
     updateSummaryMeasurement(usagePoint.ratedCurrent);
     updateSummaryMeasurement(usagePoint.ratedPower);
     if (usagePoint.pnodeRefs !== undefined) {
-        if (!Array.isArray(usagePoint.pnodeRefs.pnodeRef)) {
-            usagePoint.pnodeRefs.pnodeRef = [usagePoint.pnodeRefs.pnodeRef];
-        }
+        ensureArray(usagePoint.pnodeRefs, 'pnodeRef');
         for (const pnode of usagePoint.pnodeRefs.pnodeRef) {
             pnode.apnodeType_value = lookups.pnodeTypes[pnode.apnodeType];
         }
     }
     if (usagePoint.aggregateNodeRefs !== undefined) {
-        if (!Array.isArray(usagePoint.aggregateNodeRefs.aggregateNodeRef)) {
-            usagePoint.aggregateNodeRefs.aggregateNodeRef = [
-                usagePoint.aggregateNodeRefs.aggregateNodeRef
-            ];
-        }
+        ensureArray(usagePoint.aggregateNodeRefs, 'aggregateNodeRef');
         for (const anode of usagePoint.aggregateNodeRefs.aggregateNodeRef) {
             anode.anodeType_value = lookups.anodeTypes[anode.anodeType];
         }

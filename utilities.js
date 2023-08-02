@@ -47,3 +47,8 @@ export function getFirstXmlString(xmlProperty) {
     }
     return first._;
 }
+export function ensureArray(object, objectKey) {
+    if (object[objectKey] !== undefined && !Array.isArray(object[objectKey])) {
+        object[objectKey] = [object[objectKey]];
+    }
+}

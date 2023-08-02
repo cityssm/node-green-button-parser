@@ -5,6 +5,7 @@ import type {
   GreenButtonTariffRider,
   GreenButtonUsagePoint
 } from './types/objectTypes.js'
+import { ensureArray } from './utilities.js'
 
 export function updateSummaryMeasurement(
   measurement?: GreenButtonSummaryMeasurement
@@ -38,15 +39,10 @@ export function updateUsagePoint(usagePoint: GreenButtonUsagePoint): void {
     usagePoint.ServiceDeliveryPoint?.tariffRiderRefs?.tariffRiderRef !==
     undefined
   ) {
-    if (
-      !Array.isArray(
-        usagePoint.ServiceDeliveryPoint.tariffRiderRefs.tariffRiderRef
-      )
-    ) {
-      usagePoint.ServiceDeliveryPoint.tariffRiderRefs.tariffRiderRef = [
-        usagePoint.ServiceDeliveryPoint.tariffRiderRefs.tariffRiderRef
-      ]
-    }
+    ensureArray(
+      usagePoint.ServiceDeliveryPoint.tariffRiderRefs,
+      'tariffRiderRef'
+    )
 
     for (const tariffRider of usagePoint.ServiceDeliveryPoint.tariffRiderRefs
       .tariffRiderRef) {
@@ -75,9 +71,7 @@ export function updateUsagePoint(usagePoint: GreenButtonUsagePoint): void {
   updateSummaryMeasurement(usagePoint.ratedPower)
 
   if (usagePoint.pnodeRefs !== undefined) {
-    if (!Array.isArray(usagePoint.pnodeRefs.pnodeRef)) {
-      usagePoint.pnodeRefs.pnodeRef = [usagePoint.pnodeRefs.pnodeRef]
-    }
+    ensureArray(usagePoint.pnodeRefs, 'pnodeRef')
 
     for (const pnode of usagePoint.pnodeRefs.pnodeRef) {
       pnode.apnodeType_value = lookups.pnodeTypes[pnode.apnodeType]
@@ -85,11 +79,7 @@ export function updateUsagePoint(usagePoint: GreenButtonUsagePoint): void {
   }
 
   if (usagePoint.aggregateNodeRefs !== undefined) {
-    if (!Array.isArray(usagePoint.aggregateNodeRefs.aggregateNodeRef)) {
-      usagePoint.aggregateNodeRefs.aggregateNodeRef = [
-        usagePoint.aggregateNodeRefs.aggregateNodeRef
-      ]
-    }
+    ensureArray(usagePoint.aggregateNodeRefs, 'aggregateNodeRef')
 
     for (const anode of usagePoint.aggregateNodeRefs.aggregateNodeRef) {
       anode.anodeType_value = lookups.anodeTypes[anode.anodeType]

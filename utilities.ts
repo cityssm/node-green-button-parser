@@ -69,3 +69,10 @@ export function getFirstXmlString(xmlProperty?: XmlProperty): string {
 
   return first._
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function ensureArray(object: any, objectKey: string): void {
+  if (object[objectKey] !== undefined && !Array.isArray(object[objectKey])) {
+    object[objectKey] = [object[objectKey]]
+  }
+}
