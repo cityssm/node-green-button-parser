@@ -69,6 +69,15 @@ export interface GreenButtonTelephoneNumber {
   ituPhone?: string
 }
 
+export interface GreenButtonContactInfo {
+  streetAddress?: GreenButtonStreetAddress
+  postalAddress?: GreenButtonStreetAddress
+  phone1?: GreenButtonTelephoneNumber
+  phone2?: GreenButtonTelephoneNumber
+  electronicAddress?: GreenButtonElectronicAddress
+  organisationName?: string
+}
+
 export interface GreenButtonSummaryMeasurement {
   powerOfTenMultiplier?: keyof typeof lookups.powerOfTenMultipliers
   powerOfTenMultiplier_value?: (typeof lookups.powerOfTenMultipliers)[keyof typeof lookups.powerOfTenMultipliers]

@@ -172,14 +172,7 @@ export interface CustomerAccountContent {
   budgetBill?: string
   lastBillAmount?: number
   notifications?: objectTypes.GreenButtonCustomerAccountNotification[]
-  contactInfo?: {
-    streetAddress?: objectTypes.GreenButtonStreetAddress
-    postalAddress?: objectTypes.GreenButtonStreetAddress
-    phone1?: objectTypes.GreenButtonTelephoneNumber
-    phone2?: objectTypes.GreenButtonTelephoneNumber
-    electronicAddress?: objectTypes.GreenButtonElectronicAddress
-    organisationName?: string
-  }
+  contactInfo?: objectTypes.GreenButtonContactInfo
   accountId?: string
 }
 
@@ -346,14 +339,7 @@ export interface ServiceStatusContent {
 }
 
 export interface ServiceSupplierContent {
-  Organisation?: {
-    streetAddress?: objectTypes.GreenButtonStreetAddress
-    postalAddress?: objectTypes.GreenButtonStreetAddress
-    phone1?: objectTypes.GreenButtonTelephoneNumber
-    phone2?: objectTypes.GreenButtonTelephoneNumber
-    electronicAddress?: objectTypes.GreenButtonElectronicAddress
-    organisationName?: string
-  }
+  Organisation?: objectTypes.GreenButtonContactInfo
 
   kind?: keyof typeof lookups.serviceSupplierKinds
   kind_value?: (typeof lookups.serviceSupplierKinds)[keyof typeof lookups.serviceSupplierKinds]
