@@ -1,70 +1,44 @@
 import * as assert from 'node:assert'
 import * as fs from 'node:fs'
 
+import {
+  getEntriesByContentType,
+  getReadingTypeEntryFromIntervalBlockEntry
+} from '../helpers.js'
 import * as greenButtonParser from '../index.js'
 
 describe('greenButtonParser', () => {
-  describe('urlToJson', () => {
-    it('Parses customer_8.xml (URL)', async () => {
-      const greenButtonFeed = await greenButtonParser.atomToGreenButtonJson(
-        'https://raw.githubusercontent.com/cityssm/node-green-button-parser/main/test/data/customer_8.xml'
-      )
+  it('Parses namespace.xml, should strip off namespace prefixes', async () => {
+    const xml = fs.readFileSync('./test/data/namespace.xml')
+    const greenButtonJson = await greenButtonParser.atomToGreenButtonJson(
+      xml as unknown as string
+    )
 
-      const intervalBlockEntries =
-        greenButtonParser.helpers.getEntriesByContentType(
-          'IntervalBlock',
-          greenButtonFeed
-        )
-
-      assert.ok(intervalBlockEntries[0].content.contentType === 'IntervalBlock')
-    })
+    assert.ok(
+      greenButtonJson.entries.some((possibleItem) => {
+        return Object.hasOwn(possibleItem.content, 'UsagePoint')
+      })
+    )
   })
 
-  describe('xmlToJson', () => {
-    it('Parses customer_11.xml', async () => {
-      const xml = fs.readFileSync('./test/data/customer_11.xml')
-      const greenButtonFeed = await greenButtonParser.atomToGreenButtonJson(
-        xml as unknown as string
-      )
+  it('Parses intervals_APUC000000_electric.xml', async () => {
+    const xml = fs.readFileSync('./test/data/intervals_APUC000000_electric.xml')
+    const greenButtonJson = await greenButtonParser.atomToGreenButtonJson(
+      xml as unknown as string
+    )
 
-      assert.ok(
-        greenButtonFeed.entries.some((possibleItem) => {
-          return possibleItem.content.contentType === 'IntervalBlock'
-        })
-      )
-    })
+    const intervalBlockEntries = getEntriesByContentType(
+      greenButtonJson,
+      'IntervalBlock'
+    )
 
-    it('Parses namespace.xml', async () => {
-      const xml = fs.readFileSync('./test/data/namespace.xml')
-      const greenButtonFeed = await greenButtonParser.atomToGreenButtonJson(
-        xml as unknown as string
-      )
+    assert.ok(intervalBlockEntries.length > 0)
 
-      assert.ok(
-        greenButtonFeed.entries.some((possibleItem) => {
-          return possibleItem.content.contentType === 'UsagePoint'
-        })
-      )
-    })
+    const readingTypeEntry = getReadingTypeEntryFromIntervalBlockEntry(
+      greenButtonJson,
+      intervalBlockEntries[0]
+    )
 
-    /*
-    it('Parses _private/electric.xml', async () => {
-      const xml = fs.readFileSync('./test/data/_private/electric.xml')
-      const greenButtonFeed = await greenButtonParser.atomToGreenButtonJson(
-        xml as unknown as string
-      )
-
-      fs.writeFileSync(
-        './test/data/_private/electric.json',
-        JSON.stringify(greenButtonFeed, undefined, 2)
-      )
-
-      assert.ok(
-        greenButtonFeed.entries.some((possibleItem) => {
-          return possibleItem.content.contentType === 'IntervalBlock'
-        })
-      )
-    })
-    */
+    assert.ok(readingTypeEntry !== undefined)
   })
 })

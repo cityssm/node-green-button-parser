@@ -1,6 +1,10 @@
+import 'core-js';
 import * as lookups from './lookups.js';
 import { updateCostAdditionalDetail, updateSummaryMeasurement, updateTariffRider, updateUsagePoint } from './objectUpdaters.js';
 function updateApplicationInformationContent(content) {
+    if (content === undefined) {
+        return;
+    }
     content.dataCustodianApplicationStatusValue =
         lookups.dataCustodianApplicationStatuses[content.dataCustodianApplicationStatus];
     if (content.thirdPartyApplicationStatus !== undefined) {
@@ -31,6 +35,9 @@ function updateApplicationInformationContent(content) {
     content.response_types_value = lookups.responseTypes[content.response_types];
 }
 function updateAuthorizationContent(content) {
+    if (content === undefined) {
+        return;
+    }
     content.status_value = lookups.authorizationStatuses[content.status];
     if (content.grant_type !== undefined) {
         content.grant_type_value = lookups.grantTypes[content.grant_type];
@@ -41,16 +48,25 @@ function updateAuthorizationContent(content) {
     }
 }
 function updateBatchListContent(content) {
+    if (content === undefined) {
+        return;
+    }
     if (!Array.isArray(content.resources)) {
         content.resources = [content.resources];
     }
 }
 function updateCustomerContent(content) {
+    if (content === undefined) {
+        return;
+    }
     if (content.kind !== undefined) {
         content.kind_value = lookups.customerKinds[content.kind];
     }
 }
 function updateCustomerAccountContent(content) {
+    if (content === undefined) {
+        return;
+    }
     if (content.notifications !== undefined) {
         if (!Array.isArray(content.notifications)) {
             content.notifications = [content.notifications];
@@ -62,6 +78,9 @@ function updateCustomerAccountContent(content) {
     }
 }
 function updateCustomerAgreementContent(content) {
+    if (content === undefined) {
+        return;
+    }
     if (content.DemandResponseProgram !== undefined) {
         if (!Array.isArray(content.DemandResponseProgram)) {
             content.DemandResponseProgram = [content.DemandResponseProgram];
@@ -84,24 +103,29 @@ function updateCustomerAgreementContent(content) {
     }
 }
 function updateIntervalBlockContent(content) {
-    for (const interval of content.intervalBlocks) {
-        if (!Array.isArray(interval.IntervalReading)) {
-            interval.IntervalReading = [interval.IntervalReading];
-        }
-        for (const reading of interval.IntervalReading) {
-            if (reading.ReadingQuality !== undefined) {
-                if (!Array.isArray(reading.ReadingQuality)) {
-                    reading.ReadingQuality = [reading.ReadingQuality];
-                }
-                reading.ReadingQuality_values = [];
-                for (const quality of reading.ReadingQuality) {
-                    reading.ReadingQuality_values.push(lookups.readingQualities[quality]);
-                }
+    if (content === undefined) {
+        return;
+    }
+    if (content.IntervalReading !== undefined &&
+        !Array.isArray(content.IntervalReading)) {
+        content.IntervalReading = [content.IntervalReading];
+    }
+    for (const reading of content.IntervalReading ?? []) {
+        if (reading.ReadingQuality !== undefined) {
+            if (!Array.isArray(reading.ReadingQuality)) {
+                reading.ReadingQuality = [reading.ReadingQuality];
+            }
+            reading.ReadingQuality_values = [];
+            for (const quality of reading.ReadingQuality) {
+                reading.ReadingQuality_values.push(lookups.readingQualities[quality]);
             }
         }
     }
 }
 function updateMeterContent(content) {
+    if (content === undefined) {
+        return;
+    }
     if (content.MeterMultipliers !== undefined) {
         if (!Array.isArray(content.MeterMultipliers)) {
             content.MeterMultipliers = [content.MeterMultipliers];
@@ -114,6 +138,9 @@ function updateMeterContent(content) {
     }
 }
 function updateReadingTypeContent(content) {
+    if (content === undefined) {
+        return;
+    }
     if (content.accumulationBehaviour !== undefined) {
         content.accumulationBehaviour_value =
             lookups.accumulationBehaviours[content.accumulationBehaviour];
@@ -156,6 +183,9 @@ function updateReadingTypeContent(content) {
     }
 }
 function updateServiceLocationContent(content) {
+    if (content === undefined) {
+        return;
+    }
     if (content.positionPoints !== undefined &&
         !Array.isArray(content.positionPoints)) {
         content.positionPoints = [content.positionPoints];
@@ -170,17 +200,29 @@ function updateServiceLocationContent(content) {
     }
 }
 function updateServiceStatusContent(content) {
+    if (content === undefined) {
+        return;
+    }
     content.currentStatus_value = lookups.currentStatuses[content.currentStatus];
 }
 function updateServiceSupplierContent(content) {
+    if (content === undefined) {
+        return;
+    }
     if (content.kind !== undefined) {
         content.kind_value = lookups.serviceSupplierKinds[content.kind];
     }
 }
 function updateUsagePointContent(content) {
+    if (content === undefined) {
+        return;
+    }
     updateUsagePoint(content);
 }
 function updateUsageSummaryContent(content) {
+    if (content === undefined) {
+        return;
+    }
     if (content.costAdditionalDetailsLastPeriod !== undefined) {
         if (!Array.isArray(content.costAdditionalDetailsLastPeriod)) {
             content.costAdditionalDetailsLastPeriod = [
@@ -222,68 +264,29 @@ function updateUsageSummaryContent(content) {
         }
     }
 }
-export function updateGreenButtonContent(content) {
-    if (content.contentType === 'EnergyUsageSummary' ||
-        content.contentType ===
-            'ElectricPowerUsageSummary') {
-        content.contentType = 'UsageSummary';
+export function updateGreenButtonContent(entryContent) {
+    if (entryContent.EnergyUsageSummary !== undefined) {
+        entryContent.UsageSummary = entryContent.EnergyUsageSummary;
+        delete entryContent.EnergyUsageSummary;
     }
-    switch (content.contentType) {
-        case 'ApplicationInformation': {
-            updateApplicationInformationContent(content);
-            break;
-        }
-        case 'Authorization': {
-            updateAuthorizationContent(content);
-            break;
-        }
-        case 'BatchList': {
-            updateBatchListContent(content);
-            break;
-        }
-        case 'Customer': {
-            updateCustomerContent(content);
-            break;
-        }
-        case 'CustomerAccount': {
-            updateCustomerAccountContent(content);
-            break;
-        }
-        case 'CustomerAgreement': {
-            updateCustomerAgreementContent(content);
-            break;
-        }
-        case 'IntervalBlock': {
-            updateIntervalBlockContent(content);
-            break;
-        }
-        case 'Meter': {
-            updateMeterContent(content);
-            break;
-        }
-        case 'ReadingType': {
-            updateReadingTypeContent(content);
-            break;
-        }
-        case 'ServiceLocation': {
-            updateServiceLocationContent(content);
-            break;
-        }
-        case 'ServiceStatus': {
-            updateServiceStatusContent(content);
-            break;
-        }
-        case 'ServiceSupplier': {
-            updateServiceSupplierContent(content);
-            break;
-        }
-        case 'UsagePoint': {
-            updateUsagePointContent(content);
-            break;
-        }
-        case 'UsageSummary': {
-            updateUsageSummaryContent(content);
-            break;
-        }
+    if (entryContent.ElectricPowerUsageSummary !== undefined) {
+        entryContent.UsageSummary = entryContent.ElectricPowerUsageSummary;
+        delete entryContent.ElectricPowerUsageSummary;
     }
+    updateApplicationInformationContent(entryContent.ApplicationInformation);
+    updateAuthorizationContent(entryContent.Authorization);
+    updateBatchListContent(entryContent.BatchList);
+    updateCustomerContent(entryContent.Customer);
+    updateCustomerAccountContent(entryContent.CustomerAccount);
+    updateCustomerAgreementContent(entryContent.CustomerAgreement);
+    for (const block of entryContent.IntervalBlock ?? []) {
+        updateIntervalBlockContent(block);
+    }
+    updateMeterContent(entryContent.Meter);
+    updateReadingTypeContent(entryContent.ReadingType);
+    updateServiceLocationContent(entryContent.ServiceLocation);
+    updateServiceStatusContent(entryContent.ServiceStatus);
+    updateServiceSupplierContent(entryContent.ServiceSupplier);
+    updateUsagePointContent(entryContent.UsagePoint);
+    updateUsageSummaryContent(entryContent.UsageSummary);
 }

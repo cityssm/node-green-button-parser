@@ -1,58 +1,35 @@
 import 'core-js';
-import isUrl from 'is-url';
-import Parser from 'rss-parser';
 import xml2js from 'xml2js';
 import { updateGreenButtonContent } from './contentUpdaters.js';
-import { cleanContentJson } from './utilities.js';
-const parser = new Parser({
-    customFields: {
-        feed: ['id', 'updated']
-    }
-});
-export async function atomToGreenButtonJson(atomXmlOrUrl) {
-    const atomJson = isUrl(atomXmlOrUrl)
-        ? await parser.parseURL(atomXmlOrUrl)
-        : await parser.parseString(atomXmlOrUrl);
+import { atomLinksToGreenButtonLinks, cleanContentJson, getFirstXmlString } from './utilities.js';
+const parserOptions = {
+    tagNameProcessors: [xml2js.processors.stripPrefix]
+};
+export async function atomToGreenButtonJson(atomXml) {
+    const atomJson = (await xml2js.parseStringPromise(atomXml, parserOptions));
     const greenButtonFeed = {
-        id: atomJson.id,
-        title: atomJson.title ?? '',
-        link: atomJson.link ?? '',
-        updatedDate: new Date(atomJson.updated),
+        id: getFirstXmlString(atomJson.feed.id),
+        title: getFirstXmlString(atomJson.feed.title),
+        links: atomLinksToGreenButtonLinks(atomJson.feed.link),
+        updatedDate: atomJson.feed.updated !== undefined && atomJson.feed.updated.length > 0
+            ? new Date(atomJson.feed.updated[0])
+            : undefined,
         entries: []
     };
-    for (const item of atomJson.items) {
-        let contentJson = await xml2js.parseStringPromise(item.content ?? '', {
-            ignoreAttrs: true,
-            tagNameProcessors: [xml2js.processors.stripPrefix]
-        });
-        contentJson = Object.hasOwn(contentJson, 'div')
-            ? contentJson.div
-            : contentJson;
-        cleanContentJson(contentJson);
-        const contentType = Object.keys(contentJson)[0];
-        let content = contentJson[contentType];
-        if (contentType === 'IntervalBlock') {
-            content = {
-                contentType: 'IntervalBlock',
-                intervalBlocks: (Array.isArray(content)
-                    ? content
-                    : [content])
-            };
-        }
-        else if (contentType === 'MeterReading') {
-            content = {
-                contentType: 'MeterReading'
-            };
-        }
-        else {
-            content.contentType = contentType;
-        }
+    for (const item of atomJson.feed.entry ?? []) {
+        const content = item.content[0];
+        cleanContentJson(content);
         const greenButtonEntry = {
-            id: item.id ?? '',
-            title: item.title ?? '',
-            link: item.link ?? '',
-            publishedDate: new Date(item.pubDate ?? ''),
-            content
+            id: getFirstXmlString(item.id),
+            title: getFirstXmlString(item.title),
+            links: atomLinksToGreenButtonLinks(item.link),
+            publishedDate: item.published === undefined
+                ? undefined
+                : new Date(item.published),
+            updatedDate: item.updated === undefined
+                ? undefined
+                : new Date(item.updated),
+            content: content
         };
         updateGreenButtonContent(greenButtonEntry.content);
         greenButtonFeed.entries.push(greenButtonEntry);

@@ -1,3 +1,5 @@
+import 'core-js'
+
 import * as lookups from './lookups.js'
 import {
   updateCostAdditionalDetail,
@@ -12,8 +14,7 @@ import type {
   CustomerAccountContent,
   CustomerAgreementContent,
   CustomerContent,
-  GreenButtonContent,
-  GreenButtonContentType,
+  GreenButtonEntryContent,
   IntervalBlockContent,
   MeterContent,
   ReadingTypeContent,
@@ -22,11 +23,15 @@ import type {
   ServiceSupplierContent,
   UsagePointContent,
   UsageSummaryContent
-} from './types/contentTypes.js'
+} from './types/entryTypes.js'
 
 function updateApplicationInformationContent(
-  content: ApplicationInformationContent
+  content?: ApplicationInformationContent
 ): void {
+  if (content === undefined) {
+    return
+  }
+
   content.dataCustodianApplicationStatusValue =
     lookups.dataCustodianApplicationStatuses[
       content.dataCustodianApplicationStatus
@@ -68,7 +73,11 @@ function updateApplicationInformationContent(
   content.response_types_value = lookups.responseTypes[content.response_types]
 }
 
-function updateAuthorizationContent(content: AuthorizationContent): void {
+function updateAuthorizationContent(content?: AuthorizationContent): void {
+  if (content === undefined) {
+    return
+  }
+
   content.status_value = lookups.authorizationStatuses[content.status]
 
   if (content.grant_type !== undefined) {
@@ -82,19 +91,31 @@ function updateAuthorizationContent(content: AuthorizationContent): void {
   }
 }
 
-function updateBatchListContent(content: BatchListContent): void {
+function updateBatchListContent(content?: BatchListContent): void {
+  if (content === undefined) {
+    return
+  }
+
   if (!Array.isArray(content.resources)) {
     content.resources = [content.resources]
   }
 }
 
-function updateCustomerContent(content: CustomerContent): void {
+function updateCustomerContent(content?: CustomerContent): void {
+  if (content === undefined) {
+    return
+  }
+
   if (content.kind !== undefined) {
     content.kind_value = lookups.customerKinds[content.kind]
   }
 }
 
-function updateCustomerAccountContent(content: CustomerAccountContent): void {
+function updateCustomerAccountContent(content?: CustomerAccountContent): void {
+  if (content === undefined) {
+    return
+  }
+
   if (content.notifications !== undefined) {
     if (!Array.isArray(content.notifications)) {
       content.notifications = [content.notifications]
@@ -108,8 +129,12 @@ function updateCustomerAccountContent(content: CustomerAccountContent): void {
 }
 
 function updateCustomerAgreementContent(
-  content: CustomerAgreementContent
+  content?: CustomerAgreementContent
 ): void {
+  if (content === undefined) {
+    return
+  }
+
   if (content.DemandResponseProgram !== undefined) {
     if (!Array.isArray(content.DemandResponseProgram)) {
       content.DemandResponseProgram = [content.DemandResponseProgram]
@@ -138,29 +163,38 @@ function updateCustomerAgreementContent(
   }
 }
 
-function updateIntervalBlockContent(content: IntervalBlockContent): void {
-  for (const interval of content.intervalBlocks) {
-    if (!Array.isArray(interval.IntervalReading)) {
-      interval.IntervalReading = [interval.IntervalReading]
-    }
+function updateIntervalBlockContent(content?: IntervalBlockContent): void {
+  if (content === undefined) {
+    return
+  }
 
-    for (const reading of interval.IntervalReading) {
-      if (reading.ReadingQuality !== undefined) {
-        if (!Array.isArray(reading.ReadingQuality)) {
-          reading.ReadingQuality = [reading.ReadingQuality]
-        }
+  if (
+    content.IntervalReading !== undefined &&
+    !Array.isArray(content.IntervalReading)
+  ) {
+    content.IntervalReading = [content.IntervalReading]
+  }
 
-        reading.ReadingQuality_values = []
+  for (const reading of content.IntervalReading ?? []) {
+    if (reading.ReadingQuality !== undefined) {
+      if (!Array.isArray(reading.ReadingQuality)) {
+        reading.ReadingQuality = [reading.ReadingQuality]
+      }
 
-        for (const quality of reading.ReadingQuality) {
-          reading.ReadingQuality_values.push(lookups.readingQualities[quality])
-        }
+      reading.ReadingQuality_values = []
+
+      for (const quality of reading.ReadingQuality) {
+        reading.ReadingQuality_values.push(lookups.readingQualities[quality])
       }
     }
   }
 }
 
-function updateMeterContent(content: MeterContent): void {
+function updateMeterContent(content?: MeterContent): void {
+  if (content === undefined) {
+    return
+  }
+
   if (content.MeterMultipliers !== undefined) {
     if (!Array.isArray(content.MeterMultipliers)) {
       content.MeterMultipliers = [content.MeterMultipliers]
@@ -174,7 +208,11 @@ function updateMeterContent(content: MeterContent): void {
   }
 }
 
-function updateReadingTypeContent(content: ReadingTypeContent): void {
+function updateReadingTypeContent(content?: ReadingTypeContent): void {
+  if (content === undefined) {
+    return
+  }
+
   if (content.accumulationBehaviour !== undefined) {
     content.accumulationBehaviour_value =
       lookups.accumulationBehaviours[content.accumulationBehaviour]
@@ -228,7 +266,11 @@ function updateReadingTypeContent(content: ReadingTypeContent): void {
   }
 }
 
-function updateServiceLocationContent(content: ServiceLocationContent): void {
+function updateServiceLocationContent(content?: ServiceLocationContent): void {
+  if (content === undefined) {
+    return
+  }
+
   if (
     content.positionPoints !== undefined &&
     !Array.isArray(content.positionPoints)
@@ -247,21 +289,37 @@ function updateServiceLocationContent(content: ServiceLocationContent): void {
   }
 }
 
-function updateServiceStatusContent(content: ServiceStatusContent): void {
+function updateServiceStatusContent(content?: ServiceStatusContent): void {
+  if (content === undefined) {
+    return
+  }
+
   content.currentStatus_value = lookups.currentStatuses[content.currentStatus]
 }
 
-function updateServiceSupplierContent(content: ServiceSupplierContent): void {
+function updateServiceSupplierContent(content?: ServiceSupplierContent): void {
+  if (content === undefined) {
+    return
+  }
+
   if (content.kind !== undefined) {
     content.kind_value = lookups.serviceSupplierKinds[content.kind]
   }
 }
 
-function updateUsagePointContent(content: UsagePointContent): void {
+function updateUsagePointContent(content?: UsagePointContent): void {
+  if (content === undefined) {
+    return
+  }
+
   updateUsagePoint(content)
 }
 
-function updateUsageSummaryContent(content: UsageSummaryContent): void {
+function updateUsageSummaryContent(content?: UsageSummaryContent): void {
+  if (content === undefined) {
+    return
+  }
+
   if (content.costAdditionalDetailsLastPeriod !== undefined) {
     if (!Array.isArray(content.costAdditionalDetailsLastPeriod)) {
       content.costAdditionalDetailsLastPeriod = [
@@ -312,72 +370,41 @@ function updateUsageSummaryContent(content: UsageSummaryContent): void {
   }
 }
 
-export function updateGreenButtonContent(content: GreenButtonContent): void {
-  // Fix renamed types
-  if (
-    (content.contentType as GreenButtonContentType) === 'EnergyUsageSummary' ||
-    (content.contentType as GreenButtonContentType) ===
-      'ElectricPowerUsageSummary'
-  ) {
-    content.contentType = 'UsageSummary'
+export function updateGreenButtonContent(
+  entryContent: GreenButtonEntryContent
+): void {
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+
+  // Fix renamed EnergyUsageSummary
+  if ((entryContent as any).EnergyUsageSummary !== undefined) {
+    entryContent.UsageSummary = (entryContent as any).EnergyUsageSummary
+    delete (entryContent as any).EnergyUsageSummary
   }
 
-  switch (content.contentType) {
-    case 'ApplicationInformation': {
-      updateApplicationInformationContent(content)
-      break
-    }
-    case 'Authorization': {
-      updateAuthorizationContent(content)
-      break
-    }
-    case 'BatchList': {
-      updateBatchListContent(content)
-      break
-    }
-    case 'Customer': {
-      updateCustomerContent(content)
-      break
-    }
-    case 'CustomerAccount': {
-      updateCustomerAccountContent(content)
-      break
-    }
-    case 'CustomerAgreement': {
-      updateCustomerAgreementContent(content)
-      break
-    }
-    case 'IntervalBlock': {
-      updateIntervalBlockContent(content)
-      break
-    }
-    case 'Meter': {
-      updateMeterContent(content)
-      break
-    }
-    case 'ReadingType': {
-      updateReadingTypeContent(content)
-      break
-    }
-    case 'ServiceLocation': {
-      updateServiceLocationContent(content)
-      break
-    }
-    case 'ServiceStatus': {
-      updateServiceStatusContent(content)
-      break
-    }
-    case 'ServiceSupplier': {
-      updateServiceSupplierContent(content)
-      break
-    }
-    case 'UsagePoint': {
-      updateUsagePointContent(content)
-      break
-    }
-    case 'UsageSummary': {
-      updateUsageSummaryContent(content)
-      break
-    }
+  // Fix renamed ElectricPowerUsageSummary
+  if ((entryContent as any).ElectricPowerUsageSummary !== undefined) {
+    entryContent.UsageSummary = (entryContent as any).ElectricPowerUsageSummary
+    delete (entryContent as any).ElectricPowerUsageSummary
   }
+
+  /* eslint-enable @typescript-eslint/no-explicit-any */
+
+  updateApplicationInformationContent(entryContent.ApplicationInformation)
+  updateAuthorizationContent(entryContent.Authorization)
+  updateBatchListContent(entryContent.BatchList)
+  updateCustomerContent(entryContent.Customer)
+  updateCustomerAccountContent(entryContent.CustomerAccount)
+  updateCustomerAgreementContent(entryContent.CustomerAgreement)
+
+  for (const block of entryContent.IntervalBlock ?? []) {
+    updateIntervalBlockContent(block)
+  }
+
+  updateMeterContent(entryContent.Meter)
+  updateReadingTypeContent(entryContent.ReadingType)
+  updateServiceLocationContent(entryContent.ServiceLocation)
+  updateServiceStatusContent(entryContent.ServiceStatus)
+  updateServiceSupplierContent(entryContent.ServiceSupplier)
+  updateUsagePointContent(entryContent.UsagePoint)
+  updateUsageSummaryContent(entryContent.UsageSummary)
 }

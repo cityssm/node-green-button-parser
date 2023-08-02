@@ -18,13 +18,7 @@ npm install @cityssm/green-button-parser
 ```javascript
 import { atomToGreenButtonJson } from '@cityssm/green-button-parser'
 
-// Use a URL
-const jsonFromURL = await atomToGreenButtonJson(
-  'https://example.com/greenButton.xml'
-)
-
-// Use text
-const jsonFromText = await atomToGreenButtonJson('<feed> ... </feed>')
+const jsonFromXml = await atomToGreenButtonJson('<feed> ... </feed>')
 ```
 
 ## Helpful Links

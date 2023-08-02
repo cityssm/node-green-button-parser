@@ -166,7 +166,7 @@ export interface GreenButtonUsagePoint {
         pnodeRef: GreenButtonPNode[];
     };
     aggregateNodeRefs?: {
-        aggregateNodeRef: GreenButtonAggregateNode | GreenButtonAggregateNode[];
+        aggregateNodeRef: GreenButtonAggregateNode[];
     };
 }
 export interface GreenButtonCostAdditionalDetail {
