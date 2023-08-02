@@ -1,16 +1,16 @@
-import * as assert from 'node:assert'
-import * as fs from 'node:fs'
+import assert from 'node:assert'
+import fs from 'node:fs'
 
 import {
   getEntriesByContentType,
   getReadingTypeEntryFromIntervalBlockEntry
 } from '../helpers.js'
-import * as greenButtonParser from '../index.js'
+import { atomToGreenButtonJson } from '../index.js'
 
 describe('greenButtonParser', () => {
   it('Parses namespace.xml, should strip off namespace prefixes', async () => {
     const xml = fs.readFileSync('./test/data/namespace.xml')
-    const greenButtonJson = await greenButtonParser.atomToGreenButtonJson(
+    const greenButtonJson = await atomToGreenButtonJson(
       xml as unknown as string
     )
 
@@ -23,7 +23,7 @@ describe('greenButtonParser', () => {
 
   it('Parses intervals_APUC000000_electric.xml', async () => {
     const xml = fs.readFileSync('./test/data/intervals_APUC000000_electric.xml')
-    const greenButtonJson = await greenButtonParser.atomToGreenButtonJson(
+    const greenButtonJson = await atomToGreenButtonJson(
       xml as unknown as string
     )
 
