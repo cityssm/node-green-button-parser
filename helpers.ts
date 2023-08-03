@@ -183,3 +183,9 @@ export function getReadingTypeEntryFromIntervalBlockEntry(
     }
   }
 }
+
+export default {
+  getEntriesByContentType,
+  getEntriesByLink,
+  getReadingTypeEntryFromIntervalBlockEntry
+}

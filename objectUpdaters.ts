@@ -1,4 +1,7 @@
-import * as lookups from './lookups.js'
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable import/no-named-as-default-member */
+
+import lookups from './lookups.js'
 import type {
   GreenButtonCostAdditionalDetail,
   GreenButtonSummaryMeasurement,

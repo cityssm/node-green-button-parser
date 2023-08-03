@@ -1,7 +1,7 @@
 // eslint-disable-next-line eslint-comments/disable-enable-pair
 /* eslint-disable @typescript-eslint/indent */
 
-import type * as lookups from '../lookups.js'
+import type lookups from '../lookups.js'
 
 export type booleanString = 'true' | 'false'
 export type timestampNumber = number

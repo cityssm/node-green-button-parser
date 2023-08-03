@@ -39,3 +39,8 @@ export function getReadingTypeEntryFromIntervalBlockEntry(greenButtonJson, entry
         }
     }
 }
+export default {
+    getEntriesByContentType,
+    getEntriesByLink,
+    getReadingTypeEntryFromIntervalBlockEntry
+};

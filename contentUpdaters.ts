@@ -1,6 +1,9 @@
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable import/no-named-as-default-member */
+
 import 'core-js'
 
-import * as lookups from './lookups.js'
+import lookups from './lookups.js'
 import {
   updateCostAdditionalDetail,
   updateSummaryMeasurement,

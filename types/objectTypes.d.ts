@@ -1,4 +1,4 @@
-import type * as lookups from '../lookups.js';
+import type lookups from '../lookups.js';
 export type booleanString = 'true' | 'false';
 export type timestampNumber = number;
 export type urlString = `http://${string}` | `https://${string}`;

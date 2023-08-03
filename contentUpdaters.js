@@ -1,5 +1,5 @@
 import 'core-js';
-import * as lookups from './lookups.js';
+import lookups from './lookups.js';
 import { updateCostAdditionalDetail, updateSummaryMeasurement, updateTariffRider, updateUsagePoint } from './objectUpdaters.js';
 import { ensureArray } from './utilities.js';
 function updateApplicationInformationContent(content) {

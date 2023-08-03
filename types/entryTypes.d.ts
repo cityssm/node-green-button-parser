@@ -1,4 +1,4 @@
-import type * as lookups from '../lookups.js';
+import type lookups from '../lookups.js';
 import type * as objectTypes from './objectTypes.js';
 export interface GreenButtonJson {
     id: string;

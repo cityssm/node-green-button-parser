@@ -1,7 +1,7 @@
 // eslint-disable-next-line eslint-comments/disable-enable-pair
 /* eslint-disable @typescript-eslint/indent */
 
-import type * as lookups from '../lookups.js'
+import type lookups from '../lookups.js'
 
 // eslint-disable-next-line import/namespace
 import type * as objectTypes from './objectTypes.js'

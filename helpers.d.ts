@@ -18,3 +18,9 @@ export declare function getEntriesByContentType(greenButtonJson: GreenButtonJson
 export declare function getEntriesByContentType(greenButtonJson: GreenButtonJson, contentType: 'UsageSummary'): GreenButtonEntryWithUsageSummaryContent[];
 export declare function getEntriesByLink(greenButtonJson: GreenButtonJson, link: string, relationship: keyof GreenButtonLinks): GreenButtonEntry[];
 export declare function getReadingTypeEntryFromIntervalBlockEntry(greenButtonJson: GreenButtonJson, entryWithIntevalBlock: GreenButtonEntryWithIntervalBlockContent): GreenButtonEntryWithReadingTypeContent | undefined;
+declare const _default: {
+    getEntriesByContentType: typeof getEntriesByContentType;
+    getEntriesByLink: typeof getEntriesByLink;
+    getReadingTypeEntryFromIntervalBlockEntry: typeof getReadingTypeEntryFromIntervalBlockEntry;
+};
+export default _default;

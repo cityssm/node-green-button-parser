@@ -1,4 +1,4 @@
-import * as lookups from './lookups.js';
+import lookups from './lookups.js';
 import { ensureArray } from './utilities.js';
 export function updateSummaryMeasurement(measurement) {
     if (measurement === undefined) {
