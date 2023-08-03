@@ -10,7 +10,7 @@ export async function atomToGreenButtonJson(atomXml) {
     const greenButtonFeed = {
         id: getFirstXmlString(atomJson.feed.id),
         title: getFirstXmlString(atomJson.feed.title),
-        links: atomLinksToGreenButtonLinks(atomJson.feed.link),
+        links: atomLinksToGreenButtonLinks(atomJson.feed.link ?? [], false),
         updatedDate: atomJson.feed.updated !== undefined && atomJson.feed.updated.length > 0
             ? new Date(atomJson.feed.updated[0])
             : undefined,
@@ -22,7 +22,7 @@ export async function atomToGreenButtonJson(atomXml) {
         const greenButtonEntry = {
             id: getFirstXmlString(item.id),
             title: getFirstXmlString(item.title),
-            links: atomLinksToGreenButtonLinks(item.link),
+            links: atomLinksToGreenButtonLinks(item.link ?? [], true),
             publishedDate: item.published === undefined
                 ? undefined
                 : new Date(item.published),

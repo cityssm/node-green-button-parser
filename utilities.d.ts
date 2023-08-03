@@ -1,7 +1,7 @@
 import type { AtomJsonLink } from './types/atomTypes.js';
 import type { GreenButtonLinks } from './types/entryTypes.js';
 export declare function cleanContentJson(contentJson: any): void;
-export declare function atomLinksToGreenButtonLinks(atomLinks?: AtomJsonLink[]): GreenButtonLinks;
+export declare function atomLinksToGreenButtonLinks(atomLinks: AtomJsonLink[], includeSelfUid: boolean): GreenButtonLinks;
 type XmlProperty = string[] | Array<{
     _: string;
 }>;

@@ -20,7 +20,7 @@ export function cleanContentJson(contentJson) {
         }
     }
 }
-export function atomLinksToGreenButtonLinks(atomLinks) {
+export function atomLinksToGreenButtonLinks(atomLinks, includeSelfUid) {
     const linksJson = {
         related: []
     };
@@ -31,6 +31,9 @@ export function atomLinksToGreenButtonLinks(atomLinks) {
         else {
             linksJson[atomLink.$.rel] = atomLink.$.href;
         }
+    }
+    if (includeSelfUid && linksJson.self !== undefined) {
+        linksJson.selfUid = linksJson.self.slice(linksJson.self.lastIndexOf('/') + 1);
     }
     if (linksJson.related?.length === 0) {
         delete linksJson.related;

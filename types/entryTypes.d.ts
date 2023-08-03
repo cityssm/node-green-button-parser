@@ -36,6 +36,7 @@ export interface GreenButtonEntryContent {
 }
 export interface GreenButtonLinks {
     self?: string;
+    selfUid?: string;
     up?: string;
     related?: string[];
 }
@@ -100,6 +101,7 @@ export interface AuthorizationContent {
     error_uri?: objectTypes.urlString;
     resourceURI: objectTypes.urlString;
     authorizationURI: objectTypes.urlString;
+    customerResourceURI: objectTypes.urlString;
 }
 export interface BatchListContent {
     resources: objectTypes.urlString[];
