@@ -14,7 +14,13 @@
     "green-button",
     "xml-parser"
   ],
-  "exports": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./index.js": "./index.js",
+    "./helpers.js": "./helpers.js",
+    "./lookups.js": "./lookups.js",
+    "./types/*.js": "./types/*.js"
+  },
   "scripts": {
     "test": "mocha --timeout 60000",
     "coverage": "c8 --reporter=lcov --reporter=text --reporter=text-summary mocha --timeout 60000 --exit"
