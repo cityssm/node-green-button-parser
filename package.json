@@ -16,9 +16,13 @@
   ],
   "exports": {
     ".": "./index.js",
+    "./index": "./index.js",
     "./index.js": "./index.js",
+    "./helpers": "./helpers.js",
     "./helpers.js": "./helpers.js",
+    "./lookups": "./lookups.js",
     "./lookups.js": "./lookups.js",
+    "./types/*": "./types/*.js",
     "./types/*.js": "./types/*.js"
   },
   "scripts": {
