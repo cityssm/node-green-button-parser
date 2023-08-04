@@ -41,4 +41,18 @@ describe('greenButtonParser', () => {
 
     assert.ok(readingTypeEntry !== undefined)
   })
+
+  it('Parses entryOnly.xml', async () => {
+    const xml = fs.readFileSync('./test/data/entryOnly.xml')
+    const greenButtonJson = await atomToGreenButtonJson(
+      xml as unknown as string
+    )
+
+    const authorizationEntries = getEntriesByContentType(
+      greenButtonJson,
+      'Authorization'
+    )
+
+    assert.ok(authorizationEntries.length > 0)
+  })
 })

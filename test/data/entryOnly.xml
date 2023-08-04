@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+    <id>urn:uuid:00000000-0000-0000-0000-000000000000</id>
+    <link rel="self" href="https://example.com/DataCustodian/espi/1_1/resource/Authorization/xxxxxx" type="espi-entry/Authorization"/>    
+    <link rel="up" href="https://example.com/DataCustodian/espi/1_1/resource/Authorization" type="espi-feed/Authorization"/>
+    <link rel="related" href="https://cert.greenbuttonalliance.org/certificate/00000000-0000-0000-0000-000000000000" type="text/html"/>      
+    <published>2023-08-01T15:37:11.141716Z</published>
+    <updated>2023-08-01T15:37:37.062382Z</updated>
+    <title>Authorization</title>
+    <content>
+        <Authorization xmlns="http://naesb.org/espi" xmlns:espi="http://naesb.org/espi">
+            <authorizedPeriod>
+                <duration>202551769</duration>
+                <start>1690904231</start>
+            </authorizedPeriod>
+            <publishedPeriod>
+                <duration>202551769</duration>
+                <start>1690904231</start>
+            </publishedPeriod>
+            <status>1</status>
+            <expires_at>1893456000</expires_at>
+            <scope>FB=1</scope>
+            <token_type>Bearer</token_type>
+            <resourceURI>https://utilityapi.com/DataCustodian/espi/1_1/resource/Batch/Subscription/xxxxxx</resourceURI>
+            <authorizationURI>https://utilityapi.com/DataCustodian/espi/1_1/resource/Authorization/xxxxxx</authorizationURI>
+            <customerResourceURI>https://utilityapi.com/DataCustodian/espi/1_1/resource/Batch/RetailCustomer/xxxxxx</customerResourceURI>    
+        </Authorization>
+    </content>
+</entry>

@@ -7,16 +7,37 @@ const parserOptions = {
 };
 export async function atomToGreenButtonJson(atomXml) {
     const atomJson = (await xml2js.parseStringPromise(atomXml, parserOptions));
-    const greenButtonFeed = {
-        id: getFirstXmlString(atomJson.feed.id),
-        title: getFirstXmlString(atomJson.feed.title),
-        links: atomLinksToGreenButtonLinks(atomJson.feed.link ?? [], false),
-        updatedDate: atomJson.feed.updated !== undefined && atomJson.feed.updated.length > 0
-            ? new Date(atomJson.feed.updated[0])
-            : undefined,
-        entries: []
-    };
-    for (const item of atomJson.feed.entry ?? []) {
+    let greenButtonFeed;
+    let atomJsonEntries = [];
+    if (atomJson.entry !== undefined) {
+        greenButtonFeed = {
+            id: getFirstXmlString(atomJson.entry.id),
+            title: getFirstXmlString(atomJson.entry.title),
+            links: atomLinksToGreenButtonLinks(atomJson.entry.link ?? [], false),
+            updatedDate: atomJson.entry.updated !== undefined &&
+                atomJson.entry.updated.length > 0
+                ? new Date(atomJson.entry.updated[0])
+                : undefined,
+            entries: []
+        };
+        atomJsonEntries = [atomJson.entry];
+    }
+    else if (atomJson.feed !== undefined) {
+        greenButtonFeed = {
+            id: getFirstXmlString(atomJson.feed.id),
+            title: getFirstXmlString(atomJson.feed.title),
+            links: atomLinksToGreenButtonLinks(atomJson.feed.link ?? [], false),
+            updatedDate: atomJson.feed.updated !== undefined && atomJson.feed.updated.length > 0
+                ? new Date(atomJson.feed.updated[0])
+                : undefined,
+            entries: []
+        };
+        atomJsonEntries = atomJson.feed.entry ?? [];
+    }
+    else {
+        throw new Error('Invalid Green Button XML');
+    }
+    for (const item of atomJsonEntries) {
         const content = item.content[0];
         cleanContentJson(content);
         const greenButtonEntry = {

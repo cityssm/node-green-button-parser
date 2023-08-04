@@ -1,12 +1,13 @@
 import type { GreenButtonContent, GreenButtonContentType } from './entryTypes.js';
 export interface AtomJson {
-    feed: {
+    feed?: {
         id?: string[];
         title?: string[];
         updated?: string[];
         link?: AtomJsonLink[];
         entry?: AtomJsonEntry[];
     };
+    entry?: AtomJsonEntry;
 }
 export interface AtomJsonLink {
     $: {
