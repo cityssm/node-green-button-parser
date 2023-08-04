@@ -7,6 +7,7 @@
   },
   "description": "Parse Green Button formatted energy consumption feeds into JSON.",
   "keywords": [
+    "download-my-data",
     "energy",
     "energy-consumption",
     "energy-usage",
