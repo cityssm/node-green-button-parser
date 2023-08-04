@@ -10,7 +10,7 @@ Parse Green Button® formatted energy consumption feeds into JSON.
 ## Features
 
 - Fully typed output.
-- Support for Green Button® XML contained full feeds and single entries.
+- Support for Green Button® XML containing full feeds and single entries.
 - Enumerated values translated to meaningful text.
 - Helpful functions to link things together.
 
