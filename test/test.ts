@@ -3,7 +3,8 @@ import fs from 'node:fs'
 
 import {
   getEntriesByContentType,
-  getReadingTypeEntryFromIntervalBlockEntry
+  getReadingTypeEntryFromIntervalBlockEntry,
+  getUsagePointEntryFromIntervalBlockEntry
 } from '../helpers.js'
 import { atomToGreenButtonJson } from '../index.js'
 
@@ -40,6 +41,13 @@ describe('greenButtonParser', () => {
     )
 
     assert.ok(readingTypeEntry !== undefined)
+
+    const usagePointEntry = getUsagePointEntryFromIntervalBlockEntry(
+      greenButtonJson,
+      intervalBlockEntries[0]
+    )
+
+    assert.ok(usagePointEntry !== undefined)
   })
 
   it('Parses entryOnly.xml', async () => {

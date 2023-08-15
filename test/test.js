@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import fs from 'node:fs';
-import { getEntriesByContentType, getReadingTypeEntryFromIntervalBlockEntry } from '../helpers.js';
+import { getEntriesByContentType, getReadingTypeEntryFromIntervalBlockEntry, getUsagePointEntryFromIntervalBlockEntry } from '../helpers.js';
 import { atomToGreenButtonJson } from '../index.js';
 describe('greenButtonParser', () => {
     it('Parses namespace.xml, should strip off namespace prefixes', async () => {
@@ -17,6 +17,8 @@ describe('greenButtonParser', () => {
         assert.ok(intervalBlockEntries.length > 0);
         const readingTypeEntry = getReadingTypeEntryFromIntervalBlockEntry(greenButtonJson, intervalBlockEntries[0]);
         assert.ok(readingTypeEntry !== undefined);
+        const usagePointEntry = getUsagePointEntryFromIntervalBlockEntry(greenButtonJson, intervalBlockEntries[0]);
+        assert.ok(usagePointEntry !== undefined);
     });
     it('Parses entryOnly.xml', async () => {
         const xml = fs.readFileSync('./test/data/entryOnly.xml');

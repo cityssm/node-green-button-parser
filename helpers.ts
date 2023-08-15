@@ -143,13 +143,13 @@ export function getEntriesByLink(
   return entries
 }
 
-export function getReadingTypeEntryFromIntervalBlockEntry(
+export function getMeterReadingEntryFromIntervalBlockEntry(
   greenButtonJson: GreenButtonJson,
-  entryWithIntevalBlock: GreenButtonEntryWithIntervalBlockContent
-): GreenButtonEntryWithReadingTypeContent | undefined {
+  entryWithIntervalBlock: GreenButtonEntryWithIntervalBlockContent
+): GreenButtonEntryWithMeterReadingContent | undefined {
   const possibleMeterReadingEntries = getEntriesByLink(
     greenButtonJson,
-    entryWithIntevalBlock.links.up ?? '',
+    entryWithIntervalBlock.links.up ?? '',
     'related'
   )
 
@@ -163,25 +163,92 @@ export function getReadingTypeEntryFromIntervalBlockEntry(
     return undefined
   }
 
-  for (const meterReadingEntry of meterReadingEntries) {
-    for (const relatedLink of meterReadingEntry.links.related ?? []) {
-      const possibleReadingTypeEntries = getEntriesByLink(
-        greenButtonJson,
-        relatedLink,
-        'self'
-      )
+  return meterReadingEntries[0] as GreenButtonEntryWithMeterReadingContent
+}
 
-      const readingTypeEntries = possibleReadingTypeEntries.filter(
-        (possibleEntry) => {
-          return possibleEntry.content.ReadingType !== undefined
-        }
-      )
+export function getReadingTypeEntryFromMeterReadingEntry(
+  greenButtonJson: GreenButtonJson,
+  entryWithMeterReading: GreenButtonEntryWithMeterReadingContent
+): GreenButtonEntryWithReadingTypeContent | undefined {
+  for (const relatedLink of entryWithMeterReading.links.related ?? []) {
+    const possibleReadingTypeEntries = getEntriesByLink(
+      greenButtonJson,
+      relatedLink,
+      'self'
+    )
 
-      if (readingTypeEntries.length > 0) {
-        return readingTypeEntries[0] as GreenButtonEntryWithReadingTypeContent
+    const readingTypeEntries = possibleReadingTypeEntries.filter(
+      (possibleEntry) => {
+        return possibleEntry.content.ReadingType !== undefined
       }
+    )
+
+    if (readingTypeEntries.length > 0) {
+      return readingTypeEntries[0] as GreenButtonEntryWithReadingTypeContent
     }
   }
+
+  return undefined
+}
+
+export function getReadingTypeEntryFromIntervalBlockEntry(
+  greenButtonJson: GreenButtonJson,
+  entryWithIntervalBlock: GreenButtonEntryWithIntervalBlockContent
+): GreenButtonEntryWithReadingTypeContent | undefined {
+  const meterReadingEntry = getMeterReadingEntryFromIntervalBlockEntry(
+    greenButtonJson,
+    entryWithIntervalBlock
+  )
+
+  if (meterReadingEntry === undefined) {
+    return undefined
+  }
+
+  return getReadingTypeEntryFromMeterReadingEntry(
+    greenButtonJson,
+    meterReadingEntry
+  )
+}
+
+export function getUsagePointEntryFromMeterReadingEntry(
+  greenButtonJson: GreenButtonJson,
+  entryWithMeterReading: GreenButtonEntryWithMeterReadingContent
+): GreenButtonEntryWithUsagePointContent | undefined {
+  const possibleUsagePointEntries = getEntriesByLink(
+    greenButtonJson,
+    entryWithMeterReading.links.up ?? '',
+    'related'
+  )
+
+  const usagePointEntries = possibleUsagePointEntries.filter(
+    (possibleEntry) => {
+      return possibleEntry.content.UsagePoint !== undefined
+    }
+  )
+
+  if (usagePointEntries.length > 0) {
+    return usagePointEntries[0] as GreenButtonEntryWithUsagePointContent
+  }
+  return undefined
+}
+
+export function getUsagePointEntryFromIntervalBlockEntry(
+  greenButtonJson: GreenButtonJson,
+  entryWithIntervalBlock: GreenButtonEntryWithIntervalBlockContent
+): GreenButtonEntryWithUsagePointContent | undefined {
+  const meterReadingEntry = getMeterReadingEntryFromIntervalBlockEntry(
+    greenButtonJson,
+    entryWithIntervalBlock
+  )
+
+  if (meterReadingEntry === undefined) {
+    return undefined
+  }
+
+  return getUsagePointEntryFromMeterReadingEntry(
+    greenButtonJson,
+    meterReadingEntry
+  )
 }
 
 export default {
