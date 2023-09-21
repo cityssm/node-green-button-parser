@@ -122,6 +122,7 @@ export interface AuthorizationContent {
   grant_type_value?: (typeof lookups.grantTypes)[keyof typeof lookups.grantTypes]
 
   scope: string
+  scope_functionBlock: objectTypes.GreenButtonFunctionBlock
 
   token_type: keyof typeof lookups.tokenTypes
   token_type_value: (typeof lookups.tokenTypes)[keyof typeof lookups.tokenTypes]

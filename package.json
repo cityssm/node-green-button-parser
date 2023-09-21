@@ -1,6 +1,6 @@
 {
   "name": "@cityssm/green-button-parser",
-  "version": "0.6.1",
+  "version": "0.7.0",
   "type": "module",
   "engines": {
     "node": "^14.13.1 || >=16.0.0"
@@ -41,15 +41,15 @@
     "url": "https://github.com/cityssm/node-green-button-parser/issues"
   },
   "dependencies": {
-    "core-js": "^3.32.0",
+    "core-js": "^3.32.2",
     "xml2js": "^0.6.2"
   },
   "devDependencies": {
-    "@types/core-js": "^2.5.5",
+    "@types/core-js": "^2.5.6",
     "@types/mocha": "^10.0.1",
-    "@types/node": "^20.5.0",
-    "@types/xml2js": "^0.4.11",
-    "eslint": "^8.47.0",
+    "@types/node": "^20.6.3",
+    "@types/xml2js": "^0.4.12",
+    "eslint": "^8.49.0",
     "eslint-config-cityssm": "^0.4.0"
   }
 }

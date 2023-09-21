@@ -25,6 +25,9 @@ or with Green Button® formatted XML.
 see the
 [City of Sault Ste. Marie's Green Button® Subscriber](https://github.com/cityssm/node-green-button-subscriber).
 
+💡 If you are looking for a full application to report on energy usage,
+see [EMILE (Energy Monitoring in Less Effort)](https://github.com/cityssm/EMILE).
+
 ## Installation
 
 ```sh

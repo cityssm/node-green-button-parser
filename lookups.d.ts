@@ -96,7 +96,7 @@ export declare const readingQualities: Readonly<{
     16: "Other";
     17: "Validated";
     18: "Verified";
-    19: "Revenue-quality";
+    19: "Revenue Quality";
 }>;
 export declare const meterMultiplierKinds: Readonly<{
     kH: "Meter watt-hour constant";
@@ -732,7 +732,7 @@ declare const _default: {
         16: "Other";
         17: "Validated";
         18: "Verified";
-        19: "Revenue-quality";
+        19: "Revenue Quality";
     }>;
     meterMultiplierKinds: Readonly<{
         kH: "Meter watt-hour constant";

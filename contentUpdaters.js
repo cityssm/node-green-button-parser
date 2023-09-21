@@ -1,6 +1,6 @@
 import 'core-js';
 import lookups from './lookups.js';
-import { updateCostAdditionalDetail, updateSummaryMeasurement, updateTariffRider, updateUsagePoint } from './objectUpdaters.js';
+import { parseAuthorizationScope, updateCostAdditionalDetail, updateSummaryMeasurement, updateTariffRider, updateUsagePoint } from './objectUpdaters.js';
 import { ensureArray } from './utilities.js';
 function updateApplicationInformationContent(content) {
     if (content === undefined) {
@@ -43,6 +43,7 @@ function updateAuthorizationContent(content) {
     if (content.error !== undefined) {
         content.error_value = lookups.authorizationErrors[content.error];
     }
+    content.scope_functionBlock = parseAuthorizationScope(content.scope);
 }
 function updateBatchListContent(content) {
     if (content === undefined) {

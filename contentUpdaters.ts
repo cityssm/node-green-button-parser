@@ -5,6 +5,7 @@ import 'core-js'
 
 import lookups from './lookups.js'
 import {
+  parseAuthorizationScope,
   updateCostAdditionalDetail,
   updateSummaryMeasurement,
   updateTariffRider,
@@ -88,6 +89,8 @@ function updateAuthorizationContent(content?: AuthorizationContent): void {
   if (content.error !== undefined) {
     content.error_value = lookups.authorizationErrors[content.error]
   }
+
+  content.scope_functionBlock = parseAuthorizationScope(content.scope)
 }
 
 function updateBatchListContent(content?: BatchListContent): void {
