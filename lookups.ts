@@ -3,15 +3,15 @@
  */
 
 export const dataCustodianApplicationStatuses = Object.freeze({
-  1: 'Under Review',
-  2: 'In Production',
+  1: 'Review',
+  2: 'Production (Live)',
   3: 'On Hold',
   4: 'Revoked'
 })
 
 export const thirdPartyApplicationStatuses = Object.freeze({
   1: 'Development',
-  2: 'Review / Test',
+  2: 'ReviewTest',
   3: 'Production',
   4: 'Retired'
 })
@@ -24,11 +24,11 @@ export const thirdPartyApplicationTypes = Object.freeze({
 })
 
 export const thirdPartyApplicationUses = Object.freeze({
-  1: 'Energy Management',
+  1: 'EnergyManagement',
   2: 'Comparisons',
   3: 'Government',
   4: 'Academic',
-  5: 'Law Enforcement'
+  5: 'LawEnforcement'
 })
 
 export const grantTypes = Object.freeze({
@@ -110,7 +110,7 @@ export const notificationMethodKinds = Object.freeze({
  */
 
 export const enrollmentStatuses = Object.freeze({
-  unenrolled: 'Not currently enrolled',
+  unenrolled: 'Currently not enrolled',
   enrolled: 'Currently enrolled',
   enrolledPending: 'Currently pending enrollment'
 })
@@ -492,19 +492,27 @@ export const serviceCategoryKinds = Object.freeze({
 })
 
 export const amiBillingReadyStatuses = Object.freeze({
-  amiCapable: 'Ami Capable',
-  amiDisabled: 'Ami Disabled',
-  billingApproved: 'Billing Approved',
-  enabled: 'Enabled',
-  nonAmi: 'Non Ami',
-  nonMetered: 'Non Metered',
-  operable: 'Operable'
+  amiCapable:
+    'Usage point is equipped with an AMI capable meter that is not yet currently equipped with a communications module.',
+  amiDisabled:
+    'Usage point is equipped with an AMI capable meter; however, the AMI functionality has been disabled or is not being used.',
+  billingApproved:
+    'Usage point is equipped with an operating AMI capable meter and accuracy has been certified for billing purposes.',
+  enabled:
+    'Usage point is equipped with an AMI capable meter having communications capability.',
+  nonAmi: 'Usage point is equipped with a non AMI capable meter.',
+  nonMetered: 'Usage point is not currently equipped with a meter.',
+  operable:
+    'Usage point is equipped with an AMI capable meter that is functioning and communicating with the AMI network.'
 })
 
 export const connectionStates = Object.freeze({
-  connected: 'Connected',
-  logicallyDisconnected: 'Logically Disconnected',
-  physicallyDisconnected: 'Physically Disconnected'
+  connected:
+    'The usage point is connected to the network and able to receive or send the applicable commodity (electricity, gas, water, etc.).',
+  logicallyDisconnected:
+    'The usage point has been disconnected through operation of a disconnect function within the meter present at the usage point. The usage point is unable to receive or send the applicable commodity (electricity, gas, water, etc.) A logical disconnect can often be achieved without utilising a field crew.',
+  physicallyDisconnected:
+    'The usage point has been disconnected from the network at a point upstream of the meter. The usage point is unable to receive or send the applicable commodity (electricity, gas, water, etc.). A physical disconnect is often achieved by utilising a field crew.'
 })
 
 export const pnodeTypes = Object.freeze({
@@ -704,19 +712,19 @@ export const unitsOfMeasurement = Object.freeze({
 })
 
 export const currencies = Object.freeze({
-  840: 'US dollar (USD)',
-  978: 'European Euro (EUR)',
-  36: 'Australian Dollar (AUD)',
-  124: 'Canadian Dollar (CAD)',
-  756: 'Swiss Franc (CHF)',
-  156: 'Chinese Yuan Renminbi (CNY)',
-  208: 'Danish Crown (DKK)',
-  826: 'British Pound (GBP)',
-  392: 'Japanese Yen (JPY)',
-  578: 'Norwegian Crown (NOK)',
-  643: 'Russian Ruble (RUB)',
-  752: 'Swedish Crown (SEK)',
-  356: 'Indian Rupee (INR)',
+  840: 'USD',
+  978: 'EUR',
+  36: 'AUD',
+  124: 'CAD',
+  756: 'CHF',
+  156: 'CNY',
+  208: 'DKK',
+  826: 'GBP',
+  392: 'JPY',
+  578: 'NOK',
+  643: 'RUB',
+  752: 'SEK',
+  356: 'INR',
   0: 'Other'
 })
 
