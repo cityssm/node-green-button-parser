@@ -1,3 +1,6 @@
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable @typescript-eslint/indent */
+
 import type {
   GreenButtonContentType,
   GreenButtonEntry,
@@ -210,13 +213,15 @@ export function getReadingTypeEntryFromIntervalBlockEntry(
   )
 }
 
-export function getUsagePointEntryFromMeterReadingEntry(
+export function getUsagePointEntryFromEntry(
   greenButtonJson: GreenButtonJson,
-  entryWithMeterReading: GreenButtonEntryWithMeterReadingContent
+  entry:
+    | GreenButtonEntryWithMeterReadingContent
+    | GreenButtonEntryWithUsageSummaryContent
 ): GreenButtonEntryWithUsagePointContent | undefined {
   const possibleUsagePointEntries = getEntriesByLink(
     greenButtonJson,
-    entryWithMeterReading.links.up ?? '',
+    entry.links.up ?? '',
     'related'
   )
 
@@ -245,10 +250,7 @@ export function getUsagePointEntryFromIntervalBlockEntry(
     return undefined
   }
 
-  return getUsagePointEntryFromMeterReadingEntry(
-    greenButtonJson,
-    meterReadingEntry
-  )
+  return getUsagePointEntryFromEntry(greenButtonJson, meterReadingEntry)
 }
 
 export default {

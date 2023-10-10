@@ -20,7 +20,7 @@ export declare function getEntriesByLink(greenButtonJson: GreenButtonJson, link:
 export declare function getMeterReadingEntryFromIntervalBlockEntry(greenButtonJson: GreenButtonJson, entryWithIntervalBlock: GreenButtonEntryWithIntervalBlockContent): GreenButtonEntryWithMeterReadingContent | undefined;
 export declare function getReadingTypeEntryFromMeterReadingEntry(greenButtonJson: GreenButtonJson, entryWithMeterReading: GreenButtonEntryWithMeterReadingContent): GreenButtonEntryWithReadingTypeContent | undefined;
 export declare function getReadingTypeEntryFromIntervalBlockEntry(greenButtonJson: GreenButtonJson, entryWithIntervalBlock: GreenButtonEntryWithIntervalBlockContent): GreenButtonEntryWithReadingTypeContent | undefined;
-export declare function getUsagePointEntryFromMeterReadingEntry(greenButtonJson: GreenButtonJson, entryWithMeterReading: GreenButtonEntryWithMeterReadingContent): GreenButtonEntryWithUsagePointContent | undefined;
+export declare function getUsagePointEntryFromEntry(greenButtonJson: GreenButtonJson, entry: GreenButtonEntryWithMeterReadingContent | GreenButtonEntryWithUsageSummaryContent): GreenButtonEntryWithUsagePointContent | undefined;
 export declare function getUsagePointEntryFromIntervalBlockEntry(greenButtonJson: GreenButtonJson, entryWithIntervalBlock: GreenButtonEntryWithIntervalBlockContent): GreenButtonEntryWithUsagePointContent | undefined;
 declare const _default: {
     getEntriesByContentType: typeof getEntriesByContentType;

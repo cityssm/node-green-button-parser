@@ -48,8 +48,8 @@ export function getReadingTypeEntryFromIntervalBlockEntry(greenButtonJson, entry
     }
     return getReadingTypeEntryFromMeterReadingEntry(greenButtonJson, meterReadingEntry);
 }
-export function getUsagePointEntryFromMeterReadingEntry(greenButtonJson, entryWithMeterReading) {
-    const possibleUsagePointEntries = getEntriesByLink(greenButtonJson, entryWithMeterReading.links.up ?? '', 'related');
+export function getUsagePointEntryFromEntry(greenButtonJson, entry) {
+    const possibleUsagePointEntries = getEntriesByLink(greenButtonJson, entry.links.up ?? '', 'related');
     const usagePointEntries = possibleUsagePointEntries.filter((possibleEntry) => {
         return possibleEntry.content.UsagePoint !== undefined;
     });
@@ -63,7 +63,7 @@ export function getUsagePointEntryFromIntervalBlockEntry(greenButtonJson, entryW
     if (meterReadingEntry === undefined) {
         return undefined;
     }
-    return getUsagePointEntryFromMeterReadingEntry(greenButtonJson, meterReadingEntry);
+    return getUsagePointEntryFromEntry(greenButtonJson, meterReadingEntry);
 }
 export default {
     getEntriesByContentType,
