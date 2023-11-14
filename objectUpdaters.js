@@ -1,4 +1,4 @@
-import lookups from './lookups.js';
+import { amiBillingReadyStatuses, anodeTypes, connectionStates, costDetailItemKinds, enrollmentStatuses, phaseCodes, pnodeTypes, powerOfTenMultipliers, serviceCategoryKinds, unitsOfMeasurement } from './lookups.js';
 import { ensureArray } from './utilities.js';
 export function updateSummaryMeasurement(measurement) {
     if (measurement === undefined) {
@@ -6,20 +6,20 @@ export function updateSummaryMeasurement(measurement) {
     }
     if (measurement.powerOfTenMultiplier !== undefined) {
         measurement.powerOfTenMultiplier_value =
-            lookups.powerOfTenMultipliers[measurement.powerOfTenMultiplier];
+            powerOfTenMultipliers[measurement.powerOfTenMultiplier];
     }
     if (measurement.uom !== undefined) {
-        measurement.uom_value = lookups.unitsOfMeasurement[measurement.uom];
+        measurement.uom_value = unitsOfMeasurement[measurement.uom];
     }
 }
 export function updateTariffRider(tariffRider) {
     tariffRider.enrollmentStatus_value =
-        lookups.enrollmentStatuses[tariffRider.enrollmentStatus];
+        enrollmentStatuses[tariffRider.enrollmentStatus];
 }
 export function updateUsagePoint(usagePoint) {
     if (usagePoint.ServiceCategory !== undefined) {
         usagePoint.ServiceCategory.kind_value =
-            lookups.serviceCategoryKinds[usagePoint.ServiceCategory.kind];
+            serviceCategoryKinds[usagePoint.ServiceCategory.kind];
     }
     if (usagePoint.ServiceDeliveryPoint?.tariffRiderRefs?.tariffRiderRef !==
         undefined) {
@@ -31,35 +31,35 @@ export function updateUsagePoint(usagePoint) {
     }
     if (usagePoint.amiBillingReady !== undefined) {
         usagePoint.amiBillingReady_value =
-            lookups.amiBillingReadyStatuses[usagePoint.amiBillingReady];
+            amiBillingReadyStatuses[usagePoint.amiBillingReady];
     }
     if (usagePoint.connectionState !== undefined) {
         usagePoint.connectionState_value =
-            lookups.connectionStates[usagePoint.connectionState];
+            connectionStates[usagePoint.connectionState];
     }
     updateSummaryMeasurement(usagePoint.estimatedLoad);
     updateSummaryMeasurement(usagePoint.nominalServiceVoltage);
     if (usagePoint.phaseCode !== undefined) {
-        usagePoint.phaseCode_value = lookups.phaseCodes[usagePoint.phaseCode];
+        usagePoint.phaseCode_value = phaseCodes[usagePoint.phaseCode];
     }
     updateSummaryMeasurement(usagePoint.ratedCurrent);
     updateSummaryMeasurement(usagePoint.ratedPower);
     if (usagePoint.pnodeRefs !== undefined) {
         ensureArray(usagePoint.pnodeRefs, 'pnodeRef');
         for (const pnode of usagePoint.pnodeRefs.pnodeRef) {
-            pnode.apnodeType_value = lookups.pnodeTypes[pnode.apnodeType];
+            pnode.apnodeType_value = pnodeTypes[pnode.apnodeType];
         }
     }
     if (usagePoint.aggregateNodeRefs !== undefined) {
         ensureArray(usagePoint.aggregateNodeRefs, 'aggregateNodeRef');
         for (const anode of usagePoint.aggregateNodeRefs.aggregateNodeRef) {
-            anode.anodeType_value = lookups.anodeTypes[anode.anodeType];
+            anode.anodeType_value = anodeTypes[anode.anodeType];
         }
     }
 }
 export function updateCostAdditionalDetail(additionalDetail) {
     additionalDetail.itemKind_value =
-        lookups.costDetailItemKinds[additionalDetail.itemKind];
+        costDetailItemKinds[additionalDetail.itemKind];
     updateSummaryMeasurement(additionalDetail.measurement);
     updateSummaryMeasurement(additionalDetail.unitCost);
     updateSummaryMeasurement(additionalDetail.itemPeriod);

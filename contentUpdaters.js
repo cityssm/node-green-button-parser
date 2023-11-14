@@ -1,4 +1,4 @@
-import lookups from './lookups.js';
+import { accumulationBehaviours, authorizationErrors, authorizationStatuses, commodities, currencies, currentStatuses, customerKinds, dataCustodianApplicationStatuses, dataQualifiers, enrollmentStatuses, flowDirections, grantTypes, measuringPeriods, meterMultiplierKinds, notificationMethodKinds, phaseCodes, powerOfTenMultipliers, readingQualities, readingTypeKinds, responseTypes, serviceSupplierKinds, thirdPartyApplicationStatuses, thirdPartyApplicationTypes, thirdPartyApplicationUses, timeAttributes, unitsOfMeasurement } from './lookups.js';
 import { parseAuthorizationScope, updateCostAdditionalDetail, updateSummaryMeasurement, updateTariffRider, updateUsagePoint } from './objectUpdaters.js';
 import { ensureArray } from './utilities.js';
 function updateApplicationInformationContent(content) {
@@ -6,18 +6,18 @@ function updateApplicationInformationContent(content) {
         return;
     }
     content.dataCustodianApplicationStatusValue =
-        lookups.dataCustodianApplicationStatuses[content.dataCustodianApplicationStatus];
+        dataCustodianApplicationStatuses[content.dataCustodianApplicationStatus];
     if (content.thirdPartyApplicationStatus !== undefined) {
         content.thirdPartyApplicationStatus_value =
-            lookups.thirdPartyApplicationStatuses[content.thirdPartyApplicationStatus];
+            thirdPartyApplicationStatuses[content.thirdPartyApplicationStatus];
     }
     if (content.thirdPartyApplicationType !== undefined) {
         content.thirdPartyApplicationType_value =
-            lookups.thirdPartyApplicationTypes[content.thirdPartyApplicationType];
+            thirdPartyApplicationTypes[content.thirdPartyApplicationType];
     }
     if (content.thirdPartyApplicationUse !== undefined) {
         content.thirdPartyApplicationUse_value =
-            lookups.thirdPartyApplicationUses[content.thirdPartyApplicationUse];
+            thirdPartyApplicationUses[content.thirdPartyApplicationUse];
     }
     ensureArray(content, 'contacts');
     ensureArray(content, 'scope');
@@ -25,22 +25,22 @@ function updateApplicationInformationContent(content) {
         ensureArray(content, 'grant_types');
         content.grant_types_values = [];
         for (const grantType of content.grant_types) {
-            content.grant_types_values.push(lookups.grantTypes[grantType]);
+            content.grant_types_values.push(grantTypes[grantType]);
         }
     }
-    content.response_types_value = lookups.responseTypes[content.response_types];
+    content.response_types_value = responseTypes[content.response_types];
 }
 function updateAuthorizationContent(content) {
     if (content === undefined) {
         return;
     }
-    content.status_value = lookups.authorizationStatuses[content.status];
+    content.status_value = authorizationStatuses[content.status];
     if (content.grant_type !== undefined) {
-        content.grant_type_value = lookups.grantTypes[content.grant_type];
+        content.grant_type_value = grantTypes[content.grant_type];
     }
-    content.token_type_value = lookups.grantTypes[content.token_type];
+    content.token_type_value = grantTypes[content.token_type];
     if (content.error !== undefined) {
-        content.error_value = lookups.authorizationErrors[content.error];
+        content.error_value = authorizationErrors[content.error];
     }
     content.scope_functionBlock = parseAuthorizationScope(content.scope);
 }
@@ -55,7 +55,7 @@ function updateCustomerContent(content) {
         return;
     }
     if (content.kind !== undefined) {
-        content.kind_value = lookups.customerKinds[content.kind];
+        content.kind_value = customerKinds[content.kind];
     }
 }
 function updateCustomerAccountContent(content) {
@@ -66,7 +66,7 @@ function updateCustomerAccountContent(content) {
         ensureArray(content, 'notifications');
         for (const notification of content.notifications) {
             notification.methodKind_value =
-                lookups.notificationMethodKinds[notification.methodKind];
+                notificationMethodKinds[notification.methodKind];
         }
     }
 }
@@ -79,7 +79,7 @@ function updateCustomerAgreementContent(content) {
         for (const program of content.DemandResponseProgram) {
             if (program.enrollmentStatus !== undefined) {
                 program.enrollmentStatus_value =
-                    lookups.enrollmentStatuses[program.enrollmentStatus];
+                    enrollmentStatuses[program.enrollmentStatus];
             }
             updateSummaryMeasurement(program.capacityReservationLevel);
             updateSummaryMeasurement(program.DRProgramNomination);
@@ -87,7 +87,7 @@ function updateCustomerAgreementContent(content) {
     }
     ensureArray(content, 'PricingStructures');
     if (content.currency !== undefined) {
-        content.currency_value = lookups.currencies[content.currency];
+        content.currency_value = currencies[content.currency];
     }
 }
 function updateIntervalBlockContent(content) {
@@ -100,7 +100,7 @@ function updateIntervalBlockContent(content) {
             ensureArray(reading, 'ReadingQuality');
             reading.ReadingQuality_values = [];
             for (const quality of reading.ReadingQuality) {
-                reading.ReadingQuality_values.push(lookups.readingQualities[quality]);
+                reading.ReadingQuality_values.push(readingQualities[quality]);
             }
         }
     }
@@ -113,7 +113,7 @@ function updateMeterContent(content) {
         ensureArray(content, 'MeterMultipliers');
         for (const multiplier of content.MeterMultipliers) {
             if (multiplier.kind !== undefined) {
-                multiplier.kind_value = lookups.meterMultiplierKinds[multiplier.kind];
+                multiplier.kind_value = meterMultiplierKinds[multiplier.kind];
             }
         }
     }
@@ -124,43 +124,41 @@ function updateReadingTypeContent(content) {
     }
     if (content.accumulationBehaviour !== undefined) {
         content.accumulationBehaviour_value =
-            lookups.accumulationBehaviours[content.accumulationBehaviour];
+            accumulationBehaviours[content.accumulationBehaviour];
     }
     if (content.commodity !== undefined) {
-        content.commodity_value = lookups.commodities[content.commodity];
+        content.commodity_value = commodities[content.commodity];
     }
     if (content.currency !== undefined) {
-        content.currency_value = lookups.currencies[content.currency];
+        content.currency_value = currencies[content.currency];
     }
     if (content.dataQualifier !== undefined) {
-        content.dataQualifier_value = lookups.dataQualifiers[content.dataQualifier];
+        content.dataQualifier_value = dataQualifiers[content.dataQualifier];
     }
     if (content.defaultQuality !== undefined) {
-        content.defaultQuality_value =
-            lookups.readingQualities[content.defaultQuality];
+        content.defaultQuality_value = readingQualities[content.defaultQuality];
     }
     if (content.flowDirection !== undefined) {
-        content.flowDirection_value = lookups.flowDirections[content.flowDirection];
+        content.flowDirection_value = flowDirections[content.flowDirection];
     }
     if (content.kind !== undefined) {
-        content.kind_value = lookups.readingTypeKinds[content.kind];
+        content.kind_value = readingTypeKinds[content.kind];
     }
     if (content.phase !== undefined) {
-        content.phase_value = lookups.phaseCodes[content.phase];
+        content.phase_value = phaseCodes[content.phase];
     }
     if (content.powerOfTenMultiplier !== undefined) {
         content.powerOfTenMultiplier_value =
-            lookups.powerOfTenMultipliers[content.powerOfTenMultiplier];
+            powerOfTenMultipliers[content.powerOfTenMultiplier];
     }
     if (content.timeAttribute !== undefined) {
-        content.timeAttribute_value = lookups.timeAttributes[content.timeAttribute];
+        content.timeAttribute_value = timeAttributes[content.timeAttribute];
     }
     if (content.uom !== undefined) {
-        content.uom_value = lookups.unitsOfMeasurement[content.uom];
+        content.uom_value = unitsOfMeasurement[content.uom];
     }
     if (content.measuringPeriod !== undefined) {
-        content.measuringPeriod_value =
-            lookups.measuringPeriods[content.measuringPeriod];
+        content.measuringPeriod_value = measuringPeriods[content.measuringPeriod];
     }
 }
 function updateServiceLocationContent(content) {
@@ -179,14 +177,14 @@ function updateServiceStatusContent(content) {
     if (content === undefined) {
         return;
     }
-    content.currentStatus_value = lookups.currentStatuses[content.currentStatus];
+    content.currentStatus_value = currentStatuses[content.currentStatus];
 }
 function updateServiceSupplierContent(content) {
     if (content === undefined) {
         return;
     }
     if (content.kind !== undefined) {
-        content.kind_value = lookups.serviceSupplierKinds[content.kind];
+        content.kind_value = serviceSupplierKinds[content.kind];
     }
 }
 function updateUsagePointContent(content) {
@@ -206,7 +204,7 @@ function updateUsageSummaryContent(content) {
         }
     }
     if (content.currency !== undefined) {
-        content.currency_value = lookups.currencies[content.currency];
+        content.currency_value = currencies[content.currency];
     }
     updateSummaryMeasurement(content.overallConsumptionLastPeriod);
     updateSummaryMeasurement(content.currentBillingPeriodOverAllConsumption);
@@ -218,12 +216,11 @@ function updateUsageSummaryContent(content) {
     updateSummaryMeasurement(content.previousDayNetConsumption);
     updateSummaryMeasurement(content.previousDayOverallConsumption);
     if (content.qualityOfReading !== undefined) {
-        content.qualityOfReading_value =
-            lookups.readingQualities[content.qualityOfReading];
+        content.qualityOfReading_value = readingQualities[content.qualityOfReading];
     }
     updateSummaryMeasurement(content.ratchetDemand);
     if (content.commodity !== undefined) {
-        content.commodity_value = lookups.commodities[content.commodity];
+        content.commodity_value = commodities[content.commodity];
     }
     if (content.tariffRiderRefs?.tariffRiderRef !== undefined) {
         ensureArray(content.tariffRiderRefs, 'tariffRiderRef');

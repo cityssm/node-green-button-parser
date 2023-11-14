@@ -1,7 +1,18 @@
 // eslint-disable-next-line eslint-comments/disable-enable-pair
 /* eslint-disable import/no-named-as-default-member */
 
-import lookups from './lookups.js'
+import {
+  amiBillingReadyStatuses,
+  anodeTypes,
+  connectionStates,
+  costDetailItemKinds,
+  enrollmentStatuses,
+  phaseCodes,
+  pnodeTypes,
+  powerOfTenMultipliers,
+  serviceCategoryKinds,
+  unitsOfMeasurement
+} from './lookups.js'
 import type {
   GreenButtonCostAdditionalDetail,
   GreenButtonFunctionBlock,
@@ -20,23 +31,23 @@ export function updateSummaryMeasurement(
 
   if (measurement.powerOfTenMultiplier !== undefined) {
     measurement.powerOfTenMultiplier_value =
-      lookups.powerOfTenMultipliers[measurement.powerOfTenMultiplier]
+      powerOfTenMultipliers[measurement.powerOfTenMultiplier]
   }
 
   if (measurement.uom !== undefined) {
-    measurement.uom_value = lookups.unitsOfMeasurement[measurement.uom]
+    measurement.uom_value = unitsOfMeasurement[measurement.uom]
   }
 }
 
 export function updateTariffRider(tariffRider: GreenButtonTariffRider): void {
   tariffRider.enrollmentStatus_value =
-    lookups.enrollmentStatuses[tariffRider.enrollmentStatus]
+    enrollmentStatuses[tariffRider.enrollmentStatus]
 }
 
 export function updateUsagePoint(usagePoint: GreenButtonUsagePoint): void {
   if (usagePoint.ServiceCategory !== undefined) {
     usagePoint.ServiceCategory.kind_value =
-      lookups.serviceCategoryKinds[usagePoint.ServiceCategory.kind]
+      serviceCategoryKinds[usagePoint.ServiceCategory.kind]
   }
 
   if (
@@ -56,19 +67,19 @@ export function updateUsagePoint(usagePoint: GreenButtonUsagePoint): void {
 
   if (usagePoint.amiBillingReady !== undefined) {
     usagePoint.amiBillingReady_value =
-      lookups.amiBillingReadyStatuses[usagePoint.amiBillingReady]
+      amiBillingReadyStatuses[usagePoint.amiBillingReady]
   }
 
   if (usagePoint.connectionState !== undefined) {
     usagePoint.connectionState_value =
-      lookups.connectionStates[usagePoint.connectionState]
+      connectionStates[usagePoint.connectionState]
   }
 
   updateSummaryMeasurement(usagePoint.estimatedLoad)
   updateSummaryMeasurement(usagePoint.nominalServiceVoltage)
 
   if (usagePoint.phaseCode !== undefined) {
-    usagePoint.phaseCode_value = lookups.phaseCodes[usagePoint.phaseCode]
+    usagePoint.phaseCode_value = phaseCodes[usagePoint.phaseCode]
   }
 
   updateSummaryMeasurement(usagePoint.ratedCurrent)
@@ -78,7 +89,7 @@ export function updateUsagePoint(usagePoint: GreenButtonUsagePoint): void {
     ensureArray(usagePoint.pnodeRefs, 'pnodeRef')
 
     for (const pnode of usagePoint.pnodeRefs.pnodeRef) {
-      pnode.apnodeType_value = lookups.pnodeTypes[pnode.apnodeType]
+      pnode.apnodeType_value = pnodeTypes[pnode.apnodeType]
     }
   }
 
@@ -86,7 +97,7 @@ export function updateUsagePoint(usagePoint: GreenButtonUsagePoint): void {
     ensureArray(usagePoint.aggregateNodeRefs, 'aggregateNodeRef')
 
     for (const anode of usagePoint.aggregateNodeRefs.aggregateNodeRef) {
-      anode.anodeType_value = lookups.anodeTypes[anode.anodeType]
+      anode.anodeType_value = anodeTypes[anode.anodeType]
     }
   }
 }
@@ -95,7 +106,7 @@ export function updateCostAdditionalDetail(
   additionalDetail: GreenButtonCostAdditionalDetail
 ): void {
   additionalDetail.itemKind_value =
-    lookups.costDetailItemKinds[additionalDetail.itemKind]
+    costDetailItemKinds[additionalDetail.itemKind]
 
   updateSummaryMeasurement(additionalDetail.measurement)
   updateSummaryMeasurement(additionalDetail.unitCost)
