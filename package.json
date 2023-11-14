@@ -19,6 +19,8 @@
     ".": "./index.js",
     "./index": "./index.js",
     "./index.js": "./index.js",
+    "./functionBlockBuilder": "./functionBlockBuilder.js",
+    "./functionBlockBuilder.js": "./functionBlockBuilder.js",
     "./helpers": "./helpers.js",
     "./helpers.js": "./helpers.js",
     "./lookups": "./lookups.js",
