@@ -16,5 +16,5 @@
   },
   "compileOnSave": true,
   "buildOnSave": true,
-  "exclude": ["node_modules/*", "public-typescript/*"]
+  "exclude": ["node_modules/*"]
 }
