@@ -1,4 +1,3 @@
-import 'core-js';
 import lookups from './lookups.js';
 import { parseAuthorizationScope, updateCostAdditionalDetail, updateSummaryMeasurement, updateTariffRider, updateUsagePoint } from './objectUpdaters.js';
 import { ensureArray } from './utilities.js';
