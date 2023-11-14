@@ -6,7 +6,10 @@ import {
   getReadingTypeEntryFromIntervalBlockEntry,
   getUsagePointEntryFromIntervalBlockEntry
 } from '../helpers.js'
-import { atomToGreenButtonJson } from '../index.js'
+import {
+  atomToGreenButtonJson,
+  GreenButtonFunctionBlockBuilder
+} from '../index.js'
 
 describe('greenButtonParser', () => {
   it('Parses namespace.xml, should strip off namespace prefixes', async () => {
@@ -62,5 +65,49 @@ describe('greenButtonParser', () => {
     )
 
     assert.ok(authorizationEntries.length > 0)
+  })
+})
+
+describe('GreenButtonFunctionBlockBuilder', () => {
+  it('Adds a function block', () => {
+    const builder = new GreenButtonFunctionBlockBuilder()
+
+    builder.addFunctionBlock(1)
+    builder.addFunctionBlock(10)
+
+    const functionBlockString = `_${builder.toString()}_`
+
+    assert.ok(functionBlockString.includes('_1_'))
+    assert.ok(!functionBlockString.includes('_2_'))
+  })
+
+  it('Adds a function block by name', () => {
+    const builder = new GreenButtonFunctionBlockBuilder()
+
+    builder.addFunctionBlockByName('Common')
+
+    const functionBlockString = `_${builder.toString()}_`
+
+    assert.ok(functionBlockString.includes('_1_'))
+    assert.ok(!functionBlockString.includes('_2_'))
+  })
+
+  it('Removes a function block', () => {
+    const builder = new GreenButtonFunctionBlockBuilder()
+
+    builder.addFunctionBlock(1)
+    assert.ok(`_${builder.toString()}_`.includes('_1_'))
+
+    builder.removeFunctionBlock(1)
+    assert.ok(!`_${builder.toString()}_`.includes('_1_'))
+  })
+
+  it('Initializes builder by string', () => {
+    const builder = new GreenButtonFunctionBlockBuilder('1_10')
+
+    const functionBlockString = `_${builder.toString()}_`
+
+    assert.ok(functionBlockString.includes('_1_'))
+    assert.ok(!functionBlockString.includes('_2_'))
   })
 })
