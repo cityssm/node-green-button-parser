@@ -1,5 +1,3 @@
-import 'core-js'
-
 import xml2js from 'xml2js'
 
 import { updateGreenButtonContent } from './contentUpdaters.js'

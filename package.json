@@ -3,7 +3,7 @@
   "version": "0.8.0",
   "type": "module",
   "engines": {
-    "node": "^14.13.1 || >=16.0.0"
+    "node": ">=18.0.0"
   },
   "description": "Parse Green Button formatted energy consumption feeds into JSON.",
   "keywords": [
@@ -41,15 +41,14 @@
     "url": "https://github.com/cityssm/node-green-button-parser/issues"
   },
   "dependencies": {
-    "core-js": "^3.33.0",
     "xml2js": "^0.6.2"
   },
   "devDependencies": {
-    "@types/core-js": "^2.5.6",
-    "@types/mocha": "^10.0.2",
-    "@types/node": "^20.8.4",
-    "@types/xml2js": "^0.4.12",
-    "eslint": "^8.51.0",
-    "eslint-config-cityssm": "^0.4.0"
+    "@types/core-js": "^2.5.8",
+    "@types/mocha": "^10.0.4",
+    "@types/node": "^20.9.0",
+    "@types/xml2js": "^0.4.14",
+    "eslint": "^8.53.0",
+    "eslint-config-cityssm": "^1.0.0"
   }
 }
