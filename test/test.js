@@ -26,6 +26,12 @@ describe('greenButtonParser', () => {
         const authorizationEntries = getEntriesByContentType(greenButtonJson, 'Authorization');
         assert.ok(authorizationEntries.length > 0);
     });
+    it('Parses cc_customer_13.xml (Over 25 MB)', async () => {
+        const xml = fs.readFileSync('./test/data/cc_customer_13.xml');
+        const greenButtonJson = await atomToGreenButtonJson(xml);
+        const localTimeParameters = getEntriesByContentType(greenButtonJson, 'LocalTimeParameters');
+        assert.ok(localTimeParameters.length > 0);
+    });
 });
 describe('GreenButtonFunctionBlockBuilder', () => {
     it('Adds a function block', () => {

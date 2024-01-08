@@ -66,6 +66,20 @@ describe('greenButtonParser', () => {
 
     assert.ok(authorizationEntries.length > 0)
   })
+
+  it('Parses cc_customer_13.xml (Over 25 MB)', async () => {
+    const xml = fs.readFileSync('./test/data/cc_customer_13.xml')
+    const greenButtonJson = await atomToGreenButtonJson(
+      xml as unknown as string
+    )
+
+    const localTimeParameters = getEntriesByContentType(
+      greenButtonJson,
+      'LocalTimeParameters'
+    )
+
+    assert.ok(localTimeParameters.length > 0)
+  })
 })
 
 describe('GreenButtonFunctionBlockBuilder', () => {
