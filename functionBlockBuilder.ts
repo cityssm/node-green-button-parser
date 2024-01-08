@@ -100,7 +100,7 @@ function getFunctionBlockByName(
 }
 
 export class GreenButtonFunctionBlockBuilder {
-  #functionBlocks = new Set<keyof typeof availableFunctionBlocks>()
+  readonly #functionBlocks = new Set<keyof typeof availableFunctionBlocks>()
 
   constructor(functionBlockString = '') {
     const functionBlockSplit = functionBlockString.startsWith('FB=')

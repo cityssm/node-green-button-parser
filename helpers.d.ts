@@ -25,6 +25,10 @@ export declare function getUsagePointEntryFromIntervalBlockEntry(greenButtonJson
 declare const _default: {
     getEntriesByContentType: typeof getEntriesByContentType;
     getEntriesByLink: typeof getEntriesByLink;
+    getMeterReadingEntryFromIntervalBlockEntry: typeof getMeterReadingEntryFromIntervalBlockEntry;
+    getReadingTypeEntryFromMeterReadingEntry: typeof getReadingTypeEntryFromMeterReadingEntry;
     getReadingTypeEntryFromIntervalBlockEntry: typeof getReadingTypeEntryFromIntervalBlockEntry;
+    getUsagePointEntryFromEntry: typeof getUsagePointEntryFromEntry;
+    getUsagePointEntryFromIntervalBlockEntry: typeof getUsagePointEntryFromIntervalBlockEntry;
 };
 export default _default;

@@ -1,7 +1,7 @@
 import type lookups from '../lookups.js';
-export type booleanString = 'true' | 'false';
-export type timestampNumber = number;
-export type urlString = `http://${string}` | `https://${string}`;
+export type GBBooleanString = 'true' | 'false';
+export type GBTimestampNumber = number;
+export type GBUrlString = `http://${string}` | `https://${string}`;
 export interface GreenButtonDuration {
     duration: number;
     start: number;
@@ -35,7 +35,7 @@ export interface GreenButtonStreetAddress {
         addressGeneral?: string;
         addressGeneral2?: string;
         addressGeneral3?: string;
-        withinTownLimits?: booleanString;
+        withinTownLimits?: GBBooleanString;
     };
     townDetail?: {
         code?: string;
@@ -70,16 +70,16 @@ export interface GreenButtonContactInfo {
 export interface GreenButtonSummaryMeasurement {
     powerOfTenMultiplier?: keyof typeof lookups.powerOfTenMultipliers;
     powerOfTenMultiplier_value?: (typeof lookups.powerOfTenMultipliers)[keyof typeof lookups.powerOfTenMultipliers];
-    timeStamp?: timestampNumber;
+    timeStamp?: GBTimestampNumber;
     uom?: keyof typeof lookups.unitsOfMeasurement;
     uom_value?: (typeof lookups.unitsOfMeasurement)[keyof typeof lookups.unitsOfMeasurement];
     value?: number;
-    readingTypeRef?: urlString;
+    readingTypeRef?: GBUrlString;
 }
 export interface GreenButtonCustomerAccountNotification {
     methodKind: keyof typeof lookups.notificationMethodKinds;
     methodKind_value: (typeof lookups.notificationMethodKinds)[keyof typeof lookups.notificationMethodKinds];
-    time: timestampNumber;
+    time: GBTimestampNumber;
     note: string;
     customerNotificationKind: string;
 }
@@ -87,9 +87,9 @@ export interface GreenButtonDemandResponseProgram {
     programName?: string;
     enrollmentStatus?: keyof typeof lookups.enrollmentStatuses;
     enrollmentStatus_value?: (typeof lookups.enrollmentStatuses)[keyof typeof lookups.enrollmentStatuses];
-    programDescription?: urlString;
+    programDescription?: GBUrlString;
     programDate?: {
-        programDate?: timestampNumber;
+        programDate?: GBTimestampNumber;
         programDateDescription?: string;
     };
     capacityReservationLevel?: GreenButtonSummaryMeasurement;
@@ -119,21 +119,21 @@ export interface GreenButtonTariffRider {
     riderType: string;
     enrollmentStatus: keyof typeof lookups.enrollmentStatuses;
     enrollmentStatus_value?: (typeof lookups.enrollmentStatuses)[keyof typeof lookups.enrollmentStatuses];
-    effectiveDate: timestampNumber;
+    effectiveDate: GBTimestampNumber;
 }
 export interface GreenButtonPNode {
     apnodeType: keyof typeof lookups.pnodeTypes;
     apnodeType_value?: (typeof lookups.pnodeTypes)[keyof typeof lookups.pnodeTypes];
     ref: string;
-    startEffectiveDate?: timestampNumber;
-    endEffectiveDate?: timestampNumber;
+    startEffectiveDate?: GBTimestampNumber;
+    endEffectiveDate?: GBTimestampNumber;
 }
 export interface GreenButtonAggregateNode {
     anodeType: keyof typeof lookups.anodeTypes;
     anodeType_value?: (typeof lookups.anodeTypes)[keyof typeof lookups.anodeTypes];
     ref: string;
-    startEffectiveDate?: timestampNumber;
-    endEffectiveDate?: timestampNumber;
+    startEffectiveDate?: GBTimestampNumber;
+    endEffectiveDate?: GBTimestampNumber;
 }
 export interface GreenButtonUsagePoint {
     roleFlags?: string;
@@ -152,14 +152,14 @@ export interface GreenButtonUsagePoint {
     };
     amiBillingReady?: keyof typeof lookups.amiBillingReadyStatuses;
     amiBillingReady_value?: (typeof lookups.amiBillingReadyStatuses)[keyof typeof lookups.amiBillingReadyStatuses];
-    checkBilling?: booleanString;
+    checkBilling?: GBBooleanString;
     connectionState?: keyof typeof lookups.connectionStates;
     connectionState_value?: (typeof lookups.connectionStates)[keyof typeof lookups.connectionStates];
     estimatedLoad?: GreenButtonSummaryMeasurement;
-    grounded?: booleanString;
-    isSdp?: booleanString;
-    isVirtual?: booleanString;
-    minimalUsageExpected?: booleanString;
+    grounded?: GBBooleanString;
+    isSdp?: GBBooleanString;
+    isVirtual?: GBBooleanString;
+    minimalUsageExpected?: GBBooleanString;
     nominalServiceVoltage?: GreenButtonSummaryMeasurement;
     outageRegion?: string;
     phaseCode?: keyof typeof lookups.phaseCodes;
@@ -183,7 +183,7 @@ export interface GreenButtonCostAdditionalDetail {
     note: string;
     amount?: number;
     rounding?: number;
-    dateTime?: timestampNumber;
+    dateTime?: GBTimestampNumber;
     measurement?: GreenButtonSummaryMeasurement;
     unitCost?: GreenButtonSummaryMeasurement;
     itemPeriod?: GreenButtonSummaryMeasurement;

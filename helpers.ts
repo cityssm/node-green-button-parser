@@ -110,6 +110,12 @@ export function getEntriesByContentType(
   contentType: 'UsageSummary'
 ): GreenButtonEntryWithUsageSummaryContent[]
 
+/**
+ * Filters entries in a Green Button object to only include entries of a given content type.
+ * @param {GreenButtonJson} greenButtonJson Green Button object
+ * @param {GreenButtonContentType} contentType Content type
+ * @returns {GreenButtonEntry[]} A filtered list of Green Button entries
+ */
 export function getEntriesByContentType(
   greenButtonJson: GreenButtonJson,
   contentType: GreenButtonContentType
@@ -117,7 +123,7 @@ export function getEntriesByContentType(
   const entries: GreenButtonEntry[] = []
 
   for (const entry of greenButtonJson.entries) {
-    if (entry.content[contentType] !== undefined) {
+    if (Object.hasOwn(entry.content, contentType)) {
       entries.push(entry)
     }
   }
@@ -134,7 +140,7 @@ export function getEntriesByLink(
 
   for (const entry of greenButtonJson.entries) {
     if (
-      entry.links[relationship] !== undefined &&
+      Object.hasOwn(entry.links, relationship) &&
       ((typeof entry.links[relationship] === 'string' &&
         entry.links[relationship] === link) ||
         entry.links[relationship]?.includes(link))
@@ -256,5 +262,9 @@ export function getUsagePointEntryFromIntervalBlockEntry(
 export default {
   getEntriesByContentType,
   getEntriesByLink,
-  getReadingTypeEntryFromIntervalBlockEntry
+  getMeterReadingEntryFromIntervalBlockEntry,
+  getReadingTypeEntryFromMeterReadingEntry,
+  getReadingTypeEntryFromIntervalBlockEntry,
+  getUsagePointEntryFromEntry,
+  getUsagePointEntryFromIntervalBlockEntry
 }

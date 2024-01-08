@@ -1,5 +1,5 @@
 import type lookups from '../lookups.js';
-import type * as objectTypes from './objectTypes.js';
+import type { GBUrlString, GreenButtonDuration, GBTimestampNumber, GreenButtonFunctionBlock, GBBooleanString, GreenButtonStatus, GreenButtonElectronicAddress, GreenButtonDemandResponseProgram, GreenButtonContactInfo, GreenButtonCustomerAccountNotification, GreenButtonIntervalReading, GreenButtonMeterMultiplier, GreenButtonStreetAddress, GreenButtonTelephoneNumber, GreenButtonPositionPoint, GreenButtonUsagePoint, GreenButtonSummaryMeasurement, GreenButtonCostAdditionalDetail, GreenButtonTariffRider } from './objectTypes.js';
 export interface GreenButtonJson {
     id: string;
     title: string;
@@ -43,11 +43,11 @@ export interface GreenButtonLinks {
 export interface ApplicationInformationContent {
     dataCustodianApplicationStatus: keyof typeof lookups.dataCustodianApplicationStatuses;
     dataCustodianApplicationStatusValue?: (typeof lookups.dataCustodianApplicationStatuses)[keyof typeof lookups.dataCustodianApplicationStatuses];
-    dataCustodianResourceEndpoint: objectTypes.urlString;
-    authorizationServerAuthorizationEndpoint: objectTypes.urlString;
-    authorizationServerTokenEndpoint: objectTypes.urlString;
-    redirect_uri: objectTypes.urlString;
-    thirdPartyNotifyUri: objectTypes.urlString;
+    dataCustodianResourceEndpoint: GBUrlString;
+    authorizationServerAuthorizationEndpoint: GBUrlString;
+    authorizationServerTokenEndpoint: GBUrlString;
+    redirect_uri: GBUrlString;
+    thirdPartyNotifyUri: GBUrlString;
     client_id: string;
     client_secret: string;
     registration_access_token: string;
@@ -59,20 +59,20 @@ export interface ApplicationInformationContent {
     thirdPartyApplicationUse?: keyof typeof lookups.thirdPartyApplicationUses;
     thirdPartyApplicationUse_value?: (typeof lookups.thirdPartyApplicationUses)[keyof typeof lookups.thirdPartyApplicationUses];
     thirdPartyPhone?: string;
-    authorizationServerUri?: objectTypes.urlString;
-    authorizationServerRegistrationEndpoint?: objectTypes.urlString;
-    dataCustodianBulkRequestURI: objectTypes.urlString;
-    thirdPartyScopeSelectionScreenURI: objectTypes.urlString;
-    thirdPartyUserPortalScreenURI?: objectTypes.urlString;
-    logo_uri?: objectTypes.urlString;
+    authorizationServerUri?: GBUrlString;
+    authorizationServerRegistrationEndpoint?: GBUrlString;
+    dataCustodianBulkRequestURI: GBUrlString;
+    thirdPartyScopeSelectionScreenURI: GBUrlString;
+    thirdPartyUserPortalScreenURI?: GBUrlString;
+    logo_uri?: GBUrlString;
     client_name: string;
-    client_uri?: objectTypes.urlString;
-    tos_uri?: objectTypes.urlString;
-    policy_uri?: objectTypes.urlString;
+    client_uri?: GBUrlString;
+    tos_uri?: GBUrlString;
+    policy_uri?: GBUrlString;
     software_id: string;
     software_version: string;
-    client_id_issued_at: objectTypes.timestampNumber;
-    client_secret_expires_at: objectTypes.timestampNumber;
+    client_id_issued_at: GBTimestampNumber;
+    client_secret_expires_at: GBTimestampNumber;
     contacts?: string[];
     token_endpoint_auth_method: string;
     scope: string[];
@@ -80,43 +80,43 @@ export interface ApplicationInformationContent {
     grant_types_values?: Array<(typeof lookups.grantTypes)[keyof typeof lookups.grantTypes]>;
     response_types: keyof typeof lookups.responseTypes;
     response_types_value?: (typeof lookups.responseTypes)[keyof typeof lookups.responseTypes];
-    registration_client_uri: objectTypes.urlString;
+    registration_client_uri: GBUrlString;
     dataCustodianId: string;
-    dataCustodianScopeSelectionScreenURI: objectTypes.urlString;
+    dataCustodianScopeSelectionScreenURI: GBUrlString;
 }
 export interface AuthorizationContent {
-    authorizedPeriod?: objectTypes.GreenButtonDuration;
-    publishedPeriod?: objectTypes.GreenButtonDuration;
+    authorizedPeriod?: GreenButtonDuration;
+    publishedPeriod?: GreenButtonDuration;
     status: keyof typeof lookups.authorizationStatuses;
     status_value?: (typeof lookups.authorizationStatuses)[keyof typeof lookups.authorizationStatuses];
-    expires_at: objectTypes.timestampNumber;
+    expires_at: GBTimestampNumber;
     grant_type?: keyof typeof lookups.grantTypes;
     grant_type_value?: (typeof lookups.grantTypes)[keyof typeof lookups.grantTypes];
     scope: string;
-    scope_functionBlock: objectTypes.GreenButtonFunctionBlock;
+    scope_functionBlock: GreenButtonFunctionBlock;
     token_type: keyof typeof lookups.tokenTypes;
     token_type_value: (typeof lookups.tokenTypes)[keyof typeof lookups.tokenTypes];
     error?: keyof typeof lookups.authorizationErrors;
     error_value?: (typeof lookups.authorizationErrors)[keyof typeof lookups.authorizationErrors];
     error_description?: string;
-    error_uri?: objectTypes.urlString;
-    resourceURI: objectTypes.urlString;
-    authorizationURI: objectTypes.urlString;
-    customerResourceURI: objectTypes.urlString;
+    error_uri?: GBUrlString;
+    resourceURI: GBUrlString;
+    authorizationURI: GBUrlString;
+    customerResourceURI: GBUrlString;
 }
 export interface BatchListContent {
-    resources: objectTypes.urlString[];
+    resources: GBUrlString[];
 }
 export interface CustomerContent {
     kind?: keyof typeof lookups.customerKinds;
     kind_value?: (typeof lookups.customerKinds)[keyof typeof lookups.customerKinds];
     specialNeed?: string;
-    vip?: objectTypes.booleanString;
+    vip?: GBBooleanString;
     pucNumber?: string;
-    status?: objectTypes.GreenButtonStatus;
+    status?: GreenButtonStatus;
     priority?: {
         value?: string;
-        dateTime?: objectTypes.timestampNumber;
+        dateTime?: GBTimestampNumber;
         remark?: string;
         reason?: string;
     };
@@ -126,48 +126,48 @@ export interface CustomerContent {
 export interface CustomerAccountContent {
     type?: string;
     authorName?: string;
-    createdDateTime?: objectTypes.timestampNumber;
-    lastModifiedDateTime?: objectTypes.timestampNumber;
+    createdDateTime?: GBTimestampNumber;
+    lastModifiedDateTime?: GBTimestampNumber;
     revisionNumber?: string;
-    electronicAddress?: objectTypes.GreenButtonElectronicAddress;
+    electronicAddress?: GreenButtonElectronicAddress;
     subject?: string;
     title?: string;
-    docStatus?: objectTypes.GreenButtonStatus;
-    status?: objectTypes.GreenButtonStatus;
+    docStatus?: GreenButtonStatus;
+    status?: GreenButtonStatus;
     comment?: string;
     billingCycle?: string;
     budgetBill?: string;
     lastBillAmount?: number;
-    notifications?: objectTypes.GreenButtonCustomerAccountNotification[];
-    contactInfo?: objectTypes.GreenButtonContactInfo;
+    notifications?: GreenButtonCustomerAccountNotification[];
+    contactInfo?: GreenButtonContactInfo;
     accountId?: string;
 }
 export interface CustomerAgreementContent {
     type?: string;
     authorName?: string;
-    createdDateTime?: objectTypes.timestampNumber;
-    lastModifiedDateTime?: objectTypes.timestampNumber;
+    createdDateTime?: GBTimestampNumber;
+    lastModifiedDateTime?: GBTimestampNumber;
     revisionNumber?: string;
-    electronicAddress?: objectTypes.GreenButtonElectronicAddress;
+    electronicAddress?: GreenButtonElectronicAddress;
     subject?: string;
     title?: string;
-    docStatus?: objectTypes.GreenButtonStatus;
-    status?: objectTypes.GreenButtonStatus;
+    docStatus?: GreenButtonStatus;
+    status?: GreenButtonStatus;
     comment?: string;
-    signDate?: objectTypes.timestampNumber;
-    validityInterval?: objectTypes.GreenButtonDuration;
+    signDate?: GBTimestampNumber;
+    validityInterval?: GreenButtonDuration;
     loadMgmt?: string;
-    isPrePay?: objectTypes.booleanString;
-    shutOffDateTime?: objectTypes.timestampNumber;
-    DemandResponseProgram?: objectTypes.GreenButtonDemandResponseProgram[];
-    PricingStructures?: objectTypes.urlString[];
+    isPrePay?: GBBooleanString;
+    shutOffDateTime?: GBTimestampNumber;
+    DemandResponseProgram?: GreenButtonDemandResponseProgram[];
+    PricingStructures?: GBUrlString[];
     currency?: keyof typeof lookups.currencies;
     currency_value?: (typeof lookups.currencies)[keyof typeof lookups.currencies];
-    futureStatus?: objectTypes.GreenButtonStatus;
+    futureStatus?: GreenButtonStatus;
     agreementId?: string;
 }
 export interface ElectricPowerQualitySummaryContent {
-    summaryInterval: objectTypes.GreenButtonDuration;
+    summaryInterval: GreenButtonDuration;
     flickerPlt?: number;
     flickerPst?: number;
     harmonicVoltage?: number;
@@ -182,8 +182,8 @@ export interface ElectricPowerQualitySummaryContent {
     tempOvervoltage?: number;
 }
 export interface IntervalBlockContent {
-    interval: objectTypes.GreenButtonDuration;
-    IntervalReading?: objectTypes.GreenButtonIntervalReading[];
+    interval: GreenButtonDuration;
+    IntervalReading?: GreenButtonIntervalReading[];
 }
 export interface LocalTimeParametersContent {
     dstEndRule: string;
@@ -197,29 +197,29 @@ export interface MeterContent {
     serialNumber?: string;
     lotNumber?: string;
     purchasePrice?: string;
-    critical?: objectTypes.booleanString;
-    electronicAddress?: objectTypes.GreenButtonElectronicAddress;
+    critical?: GBBooleanString;
+    electronicAddress?: GreenButtonElectronicAddress;
     lifecycle?: {
-        manufacturedDate?: objectTypes.timestampNumber;
-        purchaseDate?: objectTypes.timestampNumber;
-        receivedDate?: objectTypes.timestampNumber;
-        installationDate?: objectTypes.timestampNumber;
-        removalDate?: objectTypes.timestampNumber;
-        retiredDate?: objectTypes.timestampNumber;
+        manufacturedDate?: GBTimestampNumber;
+        purchaseDate?: GBTimestampNumber;
+        receivedDate?: GBTimestampNumber;
+        installationDate?: GBTimestampNumber;
+        removalDate?: GBTimestampNumber;
+        retiredDate?: GBTimestampNumber;
     };
     acceptanceTest?: {
         type?: string;
-        success?: objectTypes.booleanString;
-        dateTime?: objectTypes.timestampNumber;
+        success?: GBBooleanString;
+        dateTime?: GBTimestampNumber;
     };
     initialCondition?: string;
     initialLossOfLife?: number;
-    isVirtual?: objectTypes.booleanString;
-    isPan?: objectTypes.booleanString;
+    isVirtual?: GBBooleanString;
+    isPan?: GBBooleanString;
     installCode?: string;
     amrSystem?: string;
     formNumber?: string;
-    MeterMultipliers?: objectTypes.GreenButtonMeterMultiplier[];
+    MeterMultipliers?: GreenButtonMeterMultiplier[];
     intervalLength?: number;
 }
 export interface MeterReadingContent {
@@ -258,19 +258,19 @@ export interface ReadingTypeContent {
 }
 export interface ServiceLocationContent {
     type?: string;
-    mainAddress?: objectTypes.GreenButtonStreetAddress;
-    secondaryAddress?: objectTypes.GreenButtonStreetAddress;
-    phone1?: objectTypes.GreenButtonTelephoneNumber;
-    phone2?: objectTypes.GreenButtonTelephoneNumber;
-    electronicAddress?: objectTypes.GreenButtonElectronicAddress;
+    mainAddress?: GreenButtonStreetAddress;
+    secondaryAddress?: GreenButtonStreetAddress;
+    phone1?: GreenButtonTelephoneNumber;
+    phone2?: GreenButtonTelephoneNumber;
+    electronicAddress?: GreenButtonElectronicAddress;
     geoInfoReference?: string;
     direction?: string;
-    status?: objectTypes.GreenButtonStatus;
-    positionPoints?: objectTypes.GreenButtonPositionPoint[];
+    status?: GreenButtonStatus;
+    positionPoints?: GreenButtonPositionPoint[];
     accessMethod?: string;
     siteAccessProblem?: string;
-    needsInspection?: objectTypes.booleanString;
-    UsagePoints?: objectTypes.GreenButtonUsagePoint[];
+    needsInspection?: GBBooleanString;
+    UsagePoints?: GreenButtonUsagePoint[];
     outageBlock?: string;
 }
 export interface ServiceStatusContent {
@@ -278,42 +278,42 @@ export interface ServiceStatusContent {
     currentStatus_value?: (typeof lookups.currentStatuses)[keyof typeof lookups.currentStatuses];
 }
 export interface ServiceSupplierContent {
-    Organisation?: objectTypes.GreenButtonContactInfo;
+    Organisation?: GreenButtonContactInfo;
     kind?: keyof typeof lookups.serviceSupplierKinds;
     kind_value?: (typeof lookups.serviceSupplierKinds)[keyof typeof lookups.serviceSupplierKinds];
     issuerIdentificationNumber?: string;
-    effectiveDate?: objectTypes.timestampNumber;
+    effectiveDate?: GBTimestampNumber;
 }
-export interface UsagePointContent extends objectTypes.GreenButtonUsagePoint {
+export interface UsagePointContent extends GreenButtonUsagePoint {
 }
 export interface UsageSummaryContent {
-    billingPeriod: objectTypes.GreenButtonDuration;
-    statusTimeStamp: objectTypes.timestampNumber;
+    billingPeriod: GreenButtonDuration;
+    statusTimeStamp: GBTimestampNumber;
     billLastPeriod?: number;
     billToDate?: number;
     costAdditionalLastPeriod?: number;
-    costAdditionalDetailsLastPeriod?: objectTypes.GreenButtonCostAdditionalDetail[];
+    costAdditionalDetailsLastPeriod?: GreenButtonCostAdditionalDetail[];
     currency?: keyof typeof lookups.currencies;
     currency_value?: (typeof lookups.currencies)[keyof typeof lookups.currencies];
-    overallConsumptionLastPeriod?: objectTypes.GreenButtonSummaryMeasurement;
-    currentBillingPeriodOverAllConsumption?: objectTypes.GreenButtonSummaryMeasurement;
-    currentDayLastYearNetConsumption?: objectTypes.GreenButtonSummaryMeasurement;
-    currentDayNetConsumption?: objectTypes.GreenButtonSummaryMeasurement;
-    currentDayOverallConsumption?: objectTypes.GreenButtonSummaryMeasurement;
-    peakDemand?: objectTypes.GreenButtonSummaryMeasurement;
-    previousDayLastYearOverallConsumption?: objectTypes.GreenButtonSummaryMeasurement;
-    previousDayNetConsumption?: objectTypes.GreenButtonSummaryMeasurement;
-    previousDayOverallConsumption?: objectTypes.GreenButtonSummaryMeasurement;
+    overallConsumptionLastPeriod?: GreenButtonSummaryMeasurement;
+    currentBillingPeriodOverAllConsumption?: GreenButtonSummaryMeasurement;
+    currentDayLastYearNetConsumption?: GreenButtonSummaryMeasurement;
+    currentDayNetConsumption?: GreenButtonSummaryMeasurement;
+    currentDayOverallConsumption?: GreenButtonSummaryMeasurement;
+    peakDemand?: GreenButtonSummaryMeasurement;
+    previousDayLastYearOverallConsumption?: GreenButtonSummaryMeasurement;
+    previousDayNetConsumption?: GreenButtonSummaryMeasurement;
+    previousDayOverallConsumption?: GreenButtonSummaryMeasurement;
     qualityOfReading?: keyof typeof lookups.readingQualities;
     qualityOfReading_value?: (typeof lookups.readingQualities)[keyof typeof lookups.readingQualities];
-    ratchetDemand?: objectTypes.GreenButtonSummaryMeasurement;
-    ratchetDemandPeriod?: objectTypes.GreenButtonDuration;
+    ratchetDemand?: GreenButtonSummaryMeasurement;
+    ratchetDemandPeriod?: GreenButtonDuration;
     commodity?: keyof typeof lookups.commodities;
     commodity_value?: (typeof lookups.commodities)[keyof typeof lookups.commodities];
     tariffProfile?: string;
     readCycle?: string;
     tariffRiderRefs?: {
-        tariffRiderRef?: objectTypes.GreenButtonTariffRider[];
+        tariffRiderRef?: GreenButtonTariffRider[];
     };
     billingChargeSource?: {
         agencyName?: string;

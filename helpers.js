@@ -1,7 +1,7 @@
 export function getEntriesByContentType(greenButtonJson, contentType) {
     const entries = [];
     for (const entry of greenButtonJson.entries) {
-        if (entry.content[contentType] !== undefined) {
+        if (Object.hasOwn(entry.content, contentType)) {
             entries.push(entry);
         }
     }
@@ -10,7 +10,7 @@ export function getEntriesByContentType(greenButtonJson, contentType) {
 export function getEntriesByLink(greenButtonJson, link, relationship) {
     const entries = [];
     for (const entry of greenButtonJson.entries) {
-        if (entry.links[relationship] !== undefined &&
+        if (Object.hasOwn(entry.links, relationship) &&
             ((typeof entry.links[relationship] === 'string' &&
                 entry.links[relationship] === link) ||
                 entry.links[relationship]?.includes(link))) {
@@ -68,5 +68,9 @@ export function getUsagePointEntryFromIntervalBlockEntry(greenButtonJson, entryW
 export default {
     getEntriesByContentType,
     getEntriesByLink,
-    getReadingTypeEntryFromIntervalBlockEntry
+    getMeterReadingEntryFromIntervalBlockEntry,
+    getReadingTypeEntryFromMeterReadingEntry,
+    getReadingTypeEntryFromIntervalBlockEntry,
+    getUsagePointEntryFromEntry,
+    getUsagePointEntryFromIntervalBlockEntry
 };

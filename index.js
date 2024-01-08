@@ -1,7 +1,7 @@
 import { atomToGreenButtonJson } from './atomToGreenButtonJson.js';
 import { GreenButtonFunctionBlockBuilder } from './functionBlockBuilder.js';
-import * as helpers from './helpers.js';
-import * as lookups from './lookups.js';
+import helpers from './helpers.js';
+import lookups from './lookups.js';
 export default {
     atomToGreenButtonJson,
     GreenButtonFunctionBlockBuilder,
