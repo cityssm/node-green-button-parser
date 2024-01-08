@@ -42,7 +42,7 @@ jobs:
           ./codeclimate-test-reporter before-build
       
       - name: Run Coverage Testing
-        run: c8 --reporter=lcov --reporter=text --reporter=text-summary mocha --timeout 60000 --exit
+        run: c8 --reporter=lcov --reporter=text --reporter=text-summary mocha --timeout 60000 --slow -1 --exit
 
       - name: Code Climate (After)
         if: ${{ github.event_name != 'pull_request' && env.CC_TEST_REPORTER_ID != '' && matrix.node == 20 }}

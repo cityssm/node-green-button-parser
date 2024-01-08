@@ -29,7 +29,7 @@
     "./types/*.js": "./types/*.js"
   },
   "scripts": {
-    "test": "mocha --timeout 60000",
+    "test": "mocha --timeout 60000 --slow -1",
     "coverage": "c8 --reporter=lcov --reporter=text --reporter=text-summary mocha --timeout 60000 --exit"
   },
   "author": "The Corporation of the City of Sault Ste. Marie",
