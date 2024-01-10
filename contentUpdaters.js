@@ -1,3 +1,5 @@
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable import/no-named-as-default-member */
 import { accumulationBehaviours, authorizationErrors, authorizationStatuses, commodities, currencies, currentStatuses, customerKinds, dataCustodianApplicationStatuses, dataQualifiers, enrollmentStatuses, flowDirections, grantTypes, measuringPeriods, meterMultiplierKinds, notificationMethodKinds, phaseCodes, powerOfTenMultipliers, readingQualities, readingTypeKinds, responseTypes, serviceSupplierKinds, thirdPartyApplicationStatuses, thirdPartyApplicationTypes, thirdPartyApplicationUses, timeAttributes, unitsOfMeasurement } from './lookups.js';
 import { parseAuthorizationScope, updateCostAdditionalDetail, updateSummaryMeasurement, updateTariffRider, updateUsagePoint } from './objectUpdaters.js';
 import { ensureArray } from './utilities.js';
@@ -230,14 +232,18 @@ function updateUsageSummaryContent(content) {
     }
 }
 export function updateGreenButtonContent(entryContent) {
+    /* eslint-disable @typescript-eslint/no-explicit-any */
+    // Fix renamed EnergyUsageSummary
     if (entryContent.EnergyUsageSummary !== undefined) {
         entryContent.UsageSummary = entryContent.EnergyUsageSummary;
         delete entryContent.EnergyUsageSummary;
     }
+    // Fix renamed ElectricPowerUsageSummary
     if (entryContent.ElectricPowerUsageSummary !== undefined) {
         entryContent.UsageSummary = entryContent.ElectricPowerUsageSummary;
         delete entryContent.ElectricPowerUsageSummary;
     }
+    /* eslint-enable @typescript-eslint/no-explicit-any */
     updateApplicationInformationContent(entryContent.ApplicationInformation);
     updateAuthorizationContent(entryContent.Authorization);
     updateBatchListContent(entryContent.BatchList);

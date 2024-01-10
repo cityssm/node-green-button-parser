@@ -1,3 +1,6 @@
+/*
+ * Application Information
+ */
 export const dataCustodianApplicationStatuses = Object.freeze({
     1: 'Review',
     2: 'Production (Live)',
@@ -31,6 +34,9 @@ export const grantTypes = Object.freeze({
 export const responseTypes = Object.freeze({
     code: 'Code'
 });
+/*
+ * Authorization
+ */
 export const authorizationStatuses = Object.freeze({
     0: 'Revoked',
     1: 'Active',
@@ -53,6 +59,9 @@ export const authorizationErrors = Object.freeze({
     server_error: 'Server Error',
     temporarily_unavailable: 'Temporarily Unavailable'
 });
+/*
+ * Customer
+ */
 export const customerKinds = Object.freeze({
     residential: 'Residential customer',
     residentialAndCommercial: 'Residential and commercial customer',
@@ -70,6 +79,9 @@ export const customerKinds = Object.freeze({
     internalUse: 'An internal use customer',
     other: 'Other kind of customer'
 });
+/*
+ * Customer Account
+ */
 export const notificationMethodKinds = Object.freeze({
     call: 'Telephone call',
     email: 'Email message',
@@ -77,11 +89,17 @@ export const notificationMethodKinds = Object.freeze({
     other: 'Other',
     ivr: 'Interactive Voice Response system'
 });
+/*
+ * Customer Agreement
+ */
 export const enrollmentStatuses = Object.freeze({
     unenrolled: 'Currently not enrolled',
     enrolled: 'Currently enrolled',
     enrolledPending: 'Currently pending enrollment'
 });
+/*
+ * Interval Block
+ */
 export const readingQualities = Object.freeze({
     0: 'Valid',
     7: 'Manually edited',
@@ -98,6 +116,9 @@ export const readingQualities = Object.freeze({
     18: 'Verified',
     19: 'Revenue Quality'
 });
+/*
+ * Meter
+ */
 export const meterMultiplierKinds = Object.freeze({
     kH: 'Meter watt-hour constant',
     transformerRatio: "The ratio of a transformer's primary and secondary windings",
@@ -106,6 +127,9 @@ export const meterMultiplierKinds = Object.freeze({
     ctRatio: 'Current transformer ratio',
     ptRatio: 'Potential transformer ratio'
 });
+/*
+ * Reading Type
+ */
 export const accumulationBehaviours = Object.freeze({
     0: 'None',
     1: 'Bulk Quantity',
@@ -396,10 +420,16 @@ export const measuringPeriods = Object.freeze({
     76: 'Rolling Block 10 Min Interval 1 Min Sub Interval',
     77: 'Rolling Block 5 Min Interval 1 Min Sub Interval'
 });
+/*
+ * Service Status
+ */
 export const currentStatuses = Object.freeze({
     0: 'Unavailable',
     1: 'Normal'
 });
+/*
+ * Service Supplier
+ */
 export const serviceSupplierKinds = Object.freeze({
     utility: 'Delivers service to the customer',
     retailer: 'Sells service but does not delivery to the customer',
@@ -408,6 +438,9 @@ export const serviceSupplierKinds = Object.freeze({
     mdma: 'Meter Data Management Agent',
     msp: 'Meter Service Provider'
 });
+/*
+ * Usage Point
+ */
 export const serviceCategoryKinds = Object.freeze({
     0: 'Electricity',
     1: 'Gas',
@@ -463,6 +496,9 @@ export const anodeTypes = Object.freeze({
     ASR: 'Aggregated System Resource',
     ECA: 'Embedded Control Area'
 });
+/*
+ * Usage Summary
+ */
 export const costDetailItemKinds = Object.freeze({
     1: 'Energy Generation Fee',
     2: 'Energy Delivery Fee',
@@ -475,6 +511,9 @@ export const costDetailItemKinds = Object.freeze({
     9: 'Payment',
     10: 'Information'
 });
+/*
+ * Measurement
+ */
 export const powerOfTenMultipliers = Object.freeze({
     '-12': 'Pico',
     '-9': 'Nano',

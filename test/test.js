@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import fs from 'node:fs';
 import { getEntriesByContentType, getReadingTypeEntryFromIntervalBlockEntry, getUsagePointEntryFromIntervalBlockEntry } from '../helpers.js';
-import { atomToGreenButtonJson, GreenButtonFunctionBlockBuilder } from '../index.js';
+import { GreenButtonFunctionBlockBuilder, atomToGreenButtonJson } from '../index.js';
 describe('greenButtonParser', () => {
     it('Parses namespace.xml, should strip off namespace prefixes', async () => {
         const xml = fs.readFileSync('./test/data/namespace.xml');

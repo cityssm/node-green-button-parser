@@ -7,8 +7,8 @@ import {
   getUsagePointEntryFromIntervalBlockEntry
 } from '../helpers.js'
 import {
-  atomToGreenButtonJson,
-  GreenButtonFunctionBlockBuilder
+  GreenButtonFunctionBlockBuilder,
+  atomToGreenButtonJson
 } from '../index.js'
 
 describe('greenButtonParser', () => {

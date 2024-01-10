@@ -102,7 +102,9 @@ export interface GreenButtonIntervalReading {
     ReadingQuality?: Array<keyof typeof lookups.readingQualities>;
     ReadingQuality_values: Array<(typeof lookups.readingQualities)[keyof typeof lookups.readingQualities]>;
     consumptionTier?: number;
+    /** Time of Use Code */
     tou?: number;
+    /** Critical Peak Period */
     cpp?: number;
 }
 export interface GreenButtonMeterMultiplier {
@@ -157,6 +159,7 @@ export interface GreenButtonUsagePoint {
     connectionState_value?: (typeof lookups.connectionStates)[keyof typeof lookups.connectionStates];
     estimatedLoad?: GreenButtonSummaryMeasurement;
     grounded?: GBBooleanString;
+    /** Is Service Delivery Point */
     isSdp?: GBBooleanString;
     isVirtual?: GBBooleanString;
     minimalUsageExpected?: GBBooleanString;
@@ -190,59 +193,224 @@ export interface GreenButtonCostAdditionalDetail {
 }
 export interface GreenButtonFunctionBlock {
     functionBlocks: number[];
+    /**
+     * FB=1
+     */
     common: boolean;
+    /**
+     * FB=2
+     */
     downloadMyData: boolean;
+    /**
+     * FB=3
+     */
     connectMyData: boolean;
+    /**
+     * FB=4
+     */
     intervalMetering: boolean;
+    /**
+     * FB=5
+     */
     intervalElectricityMetering: boolean;
+    /**
+     * FB=6
+     */
     demandElectricityMetering: boolean;
+    /**
+     * FB=7
+     */
     netMetering: boolean;
+    /**
+     * FB=8
+     */
     forwardAndReverseMetering: boolean;
+    /**
+     * FB=9
+     */
     registerValues: boolean;
+    /**
+     * FB=10
+     */
     gas: boolean;
+    /**
+     * FB=11
+     */
     water: boolean;
+    /**
+     * FB=12
+     */
     costOfIntervalData: boolean;
+    /**
+     * FB=13
+     */
     securityAndPrivacyClasses: boolean;
+    /**
+     * FB=15
+     */
     usageSummary: boolean;
+    /**
+     * FB=16
+     */
     usageSummaryWithCost: boolean;
+    /**
+     * FB=17
+     */
     powerQualitySummary: boolean;
+    /**
+     * FB=18
+     */
     multipleUsagePoints: boolean;
+    /**
+     * FB=19
+     */
     partialUpdateData: boolean;
+    /**
+     * FB=27
+     */
     usageSummaryWithDemandsAndPreviousDayAttributes: boolean;
+    /**
+     * FB=28
+     */
     usageSummaryCostsForCurrentBillingPeriod: boolean;
+    /**
+     * FB=29
+     */
     temperatureIntervalMetering: boolean;
+    /**
+     * FB=30
+     */
     commonUserExperience: boolean;
+    /**
+     * FB=31
+     */
     authorizationAndAuthentication: boolean;
+    /**
+     * FB=32
+     */
     resourceLevelRest: boolean;
+    /**
+     * FB=33
+     */
     managementRestServices: boolean;
+    /**
+     * FB=34
+     */
     sftpForBulk: boolean;
+    /**
+     * FB=35
+     */
     restForBulk: boolean;
+    /**
+     * FB=36
+     */
     thirdPartyDynamicRegistration: boolean;
+    /**
+     * FB=37
+     */
     queryParameters: boolean;
+    /**
+     * FB=38
+     */
     onDemandRequests: boolean;
+    /**
+     * FB=39
+     */
     pushModel: boolean;
+    /**
+     * FB=40
+     */
     offlineAuthorization: boolean;
+    /**
+     * FB=41
+     */
     manageApplicationInformationResource: boolean;
+    /**
+     * FB=44
+     */
     manageAuthorizationResource: boolean;
+    /**
+     * FB=49
+     */
     retailCustomerManagementRest: boolean;
+    /**
+     * FB=50
+     */
     retailCustomerResourceLevelRest: boolean;
+    /**
+     * FB=51
+     */
     retailCustomerCommon: boolean;
+    /**
+     * FB=52
+     */
     retailCustomerDownloadMyData: boolean;
+    /**
+     * FB=53
+     */
     retailCustomerConnectMyData: boolean;
+    /**
+     * FB=54
+     */
     retailCustomerBasicInformation: boolean;
+    /**
+     * FB=55
+     */
     retailCustomerDemographicInformation: boolean;
+    /**
+     * FB=56
+     */
     retailCustomerBillingInformation: boolean;
+    /**
+     * FB=57
+     */
     retailCustomerAccountAgreementInformation: boolean;
+    /**
+     * FB=58
+     */
     retailCustomerServiceLocationInformation: boolean;
+    /**
+     * FB=59
+     */
     retailCustomerServiceSupplierInformation: boolean;
+    /**
+     * FB=60
+     */
     retailCustomerMeterInformation: boolean;
+    /**
+     * FB=61
+     */
     retailCustomerEndDeviceInformation: boolean;
+    /**
+     * FB=62
+     */
     retailCustomerProgramDateIdMappingsInformation: boolean;
+    /**
+     * FB=64
+     */
     retailCustomerSecurityAndPrivacy: boolean;
+    /**
+     * FB=65
+     */
     retailCustomerAuthorizationAndAuthentication: boolean;
+    /**
+     * FB=66
+     */
     sftpForRetailCustomerBulk: boolean;
+    /**
+     * FB=67
+     */
     restForRetailCustomerBulk: boolean;
+    /**
+     * FB=68
+     */
     retailCustomerQueryParameters: boolean;
+    /**
+     * FB=69
+     */
     retailCustomerPushModel: boolean;
+    /**
+     * FB=70
+     */
     retailCustomerOfflineAuthorization: boolean;
 }

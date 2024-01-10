@@ -12,6 +12,9 @@ declare const availableFunctionBlocks: Readonly<{
     11: "Water";
     12: "Cost of Interval Data";
     13: "Security and Privacy Classes";
+    /**
+     * @deprecated replaced by FB 31
+     */
     14: "Authorization and Authentication";
     15: "Usage Summary";
     16: "Usage Summary with Cost";
@@ -34,8 +37,17 @@ declare const availableFunctionBlocks: Readonly<{
     40: "Offline Authorization";
     41: "Manage ApplicationInformation Resource";
     44: "Manage Authorization Resource";
+    /**
+     * @deprecated replaced by FB 51
+     */
     46: "Core Retail Customer";
+    /**
+     * @deprecated replaced by FB 67
+     */
     47: "REST for Retail Customer Bulk";
+    /**
+     * @deprecated replaced by FB 66
+     */
     48: "SFTP for Retail Customer Bulk";
     49: "Retail Customer Management REST";
     50: "Retail Customer Resource Level REST";

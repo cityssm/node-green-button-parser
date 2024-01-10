@@ -1,5 +1,5 @@
 import type lookups from '../lookups.js';
-import type { GBUrlString, GreenButtonDuration, GBTimestampNumber, GreenButtonFunctionBlock, GBBooleanString, GreenButtonStatus, GreenButtonElectronicAddress, GreenButtonDemandResponseProgram, GreenButtonContactInfo, GreenButtonCustomerAccountNotification, GreenButtonIntervalReading, GreenButtonMeterMultiplier, GreenButtonStreetAddress, GreenButtonTelephoneNumber, GreenButtonPositionPoint, GreenButtonUsagePoint, GreenButtonSummaryMeasurement, GreenButtonCostAdditionalDetail, GreenButtonTariffRider } from './objectTypes.js';
+import type { GBBooleanString, GBTimestampNumber, GBUrlString, GreenButtonContactInfo, GreenButtonCostAdditionalDetail, GreenButtonCustomerAccountNotification, GreenButtonDemandResponseProgram, GreenButtonDuration, GreenButtonElectronicAddress, GreenButtonFunctionBlock, GreenButtonIntervalReading, GreenButtonMeterMultiplier, GreenButtonPositionPoint, GreenButtonStatus, GreenButtonStreetAddress, GreenButtonSummaryMeasurement, GreenButtonTariffRider, GreenButtonTelephoneNumber, GreenButtonUsagePoint } from './objectTypes.js';
 export interface GreenButtonJson {
     id: string;
     title: string;

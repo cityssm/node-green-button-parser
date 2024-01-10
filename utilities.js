@@ -1,4 +1,5 @@
 const numberRegExp = /^-?(?:\d*\.)?\d+$/;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function cleanContentJson(contentJson) {
     delete contentJson.$;
     if (Object.keys(contentJson).length === 1 && contentJson._ !== undefined) {
@@ -50,6 +51,7 @@ export function getFirstXmlString(xmlProperty) {
     }
     return first._;
 }
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function ensureArray(object, objectKey) {
     if (object[objectKey] !== undefined && !Array.isArray(object[objectKey])) {
         object[objectKey] = [object[objectKey]];

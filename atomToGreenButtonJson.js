@@ -4,6 +4,11 @@ import { atomLinksToGreenButtonLinks, cleanContentJson, getFirstXmlString } from
 const parserOptions = {
     tagNameProcessors: [xml2js.processors.stripPrefix]
 };
+/**
+ * Parses a string of Green Button XML into a JavaScript object.
+ * @param {string} atomXml A string of valid Green Button XML.
+ * @returns {GreenButtonJson} Green Button object
+ */
 export async function atomToGreenButtonJson(atomXml) {
     const atomJson = (await xml2js.parseStringPromise(atomXml, parserOptions));
     let greenButtonFeed;
@@ -20,6 +25,7 @@ export async function atomToGreenButtonJson(atomXml) {
             entries: []
         };
         atomJsonEntries = [atomJson.entry];
+        // eslint-disable-next-line unicorn/no-negated-condition
     }
     else if (atomJson.feed !== undefined) {
         greenButtonFeed = {
