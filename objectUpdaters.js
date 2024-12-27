@@ -1,5 +1,3 @@
-// eslint-disable-next-line eslint-comments/disable-enable-pair
-/* eslint-disable import/no-named-as-default-member */
 import { amiBillingReadyStatuses, anodeTypes, connectionStates, costDetailItemKinds, enrollmentStatuses, phaseCodes, pnodeTypes, powerOfTenMultipliers, serviceCategoryKinds, unitsOfMeasurement } from './lookups.js';
 import { ensureArray } from './utilities.js';
 export function updateSummaryMeasurement(measurement) {

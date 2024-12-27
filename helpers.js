@@ -1,5 +1,3 @@
-// eslint-disable-next-line eslint-comments/disable-enable-pair
-/* eslint-disable @typescript-eslint/indent */
 /**
  * Filters entries in a Green Button object to only include entries of a given content type.
  * @param {GreenButtonJson} greenButtonJson Green Button object
