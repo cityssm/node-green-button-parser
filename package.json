@@ -50,7 +50,7 @@
     "@types/node": "^22.10.2",
     "@types/xml2js": "^0.4.14",
     "eslint": "^9.17.0",
-    "eslint-config-cityssm": "^18.1.2",
+    "eslint-config-cityssm": "^19.0.0",
     "prettier-config-cityssm": "^1.0.0"
   }
 }
